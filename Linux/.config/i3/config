@@ -280,7 +280,6 @@ bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 bindsym XF86AudioMute exec amixer sset Master toggle
 
-assign [class="firefox"] $ws11
 assign [class="Gnome-terminal"] $ws3
 
 exec setxkbmap -option caps:swapescape
