@@ -20,7 +20,12 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "black" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
+				javascriptreact = { "prettier" },
 			},
+			default_formatter = "prettier",
 			log_level = vim.log.levels.DEBUG,
 		})
 
