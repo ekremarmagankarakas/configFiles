@@ -282,11 +282,39 @@ bindsym XF86AudioMute exec amixer sset Master toggle
 
 assign [class="Gnome-terminal"] $ws3
 
-exec setxkbmap -option caps:swapescape
+exec_always setxkbmap -option caps:swapescape
+exec --no-startup-id xset dpms 1200 1200 1200
 
-bindsym $mod+m exec xrandr --output eDP --off --output eDP-1 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DP-1-0.5 --mode 1920x1080 --pos 0x360 --rotate normal --output DP-1-0.6 --primary --mode 3440x1440 --pos 1920x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+# bindsym $mod+m exec xrandr --output eDP --off --output eDP-1 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DP-1-0.5 --mode 1920x1080 --pos 0x360 --rotate normal --output DP-1-0.6 --primary --mode 3440x1440 --pos 1920x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+bindsym $mod+m exec xrandr \
+--output eDP --off \
+--output eDP-1 --off \
+--output DisplayPort-3 --off \
+--output DisplayPort-4 --off \
+--output DisplayPort-5 --off \
+--output DisplayPort-6 --off \
+--output DisplayPort-7 --off \
+--output DP-1-0.5 --mode 1920x1080 --rate 75 --pos 0x360 --rotate normal \
+--output DP-1-0.6 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal \
+--output DP-1-0 --off \
+--output DP-1-1 --off \
+--output DP-1-2 --off \
+--output HDMI-1-0 --off
 
 bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
 
 # Screenshot - Maim and Xclip needs to be installed
 bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/screenshots/screenshot_$NOW.png
+
+# Disable screensaver
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset s noblank
+exec_always --no-startup-id xset -dpms
+
+exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
+
+gaps inner 10px
+gaps outer 0
+
+exec nitrogen --no-startup-id --restore
+
