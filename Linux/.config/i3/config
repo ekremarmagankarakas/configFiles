@@ -265,6 +265,8 @@ bar {
 }
 
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
+bindsym $mod+shift+f exec nautilus
+bindsym $mod+shift+p exec ~/.config/picom/pause-picom-screenshot.sh
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -280,7 +282,7 @@ bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 bindsym XF86AudioMute exec amixer sset Master toggle
 
-assign [class="Gnome-terminal"] $ws3
+# assign [class="Gnome-terminal"] $ws3
 
 exec_always setxkbmap -option caps:swapescape
 exec --no-startup-id xset dpms 1200 1200 1200
