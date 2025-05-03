@@ -1,0 +1,35 @@
+{
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "workbench.statusBar.visible": true,
+    "editor.guides.indentation": false,
+    "workbench.editor.showTabs": "none",
+    
+    // Typography
+    "editor.fontSize": 12,
+    "editor.fontFamily": "'Hack Nerd Font'",
+    "editor.suggestFontSize": 12,
+    "editor.suggestLineHeight": 20,
+    "terminal.integrated.lineHeight": 1,
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontFamily": "'Hack Nerd Font'",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "extensions.ignoreRecommendations": true,
+    "vim.neovimConfigPath": "~/.config/nvim/init.lua",
+    "vim.neovimPath": "/opt/nvim-linux64/bin/nvim",
+    "vim.neovimUseConfigFile": true,
+    "vim.normalModeKeyBindings": [],
+    "keyboard.dispatch": "keyCode",
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.activityBar.location": "top",
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+}
