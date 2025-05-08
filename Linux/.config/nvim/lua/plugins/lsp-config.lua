@@ -143,6 +143,7 @@ return {
 			},
 		})
 
+		-- Toggle virtual text for diagnostics
 		local virtual_text_enabled = false
 
 		vim.keymap.set("n", "<leader>ee", function()
@@ -158,6 +159,24 @@ return {
 				vim.notify("Virtual text: DISABLED", vim.log.levels.WARN)
 			end
 		end, { noremap = true, silent = true, desc = "Toggle virtual text for diagnostics" })
+
+		-- Toggle suggestions
+		local cmp_enabled = true
+
+		vim.keymap.set("n", "<leader>ts", function()
+			cmp_enabled = not cmp_enabled
+
+			local cmp = require("cmp")
+			cmp.setup({
+				enabled = cmp_enabled,
+			})
+
+			if cmp_enabled then
+				vim.notify("Suggestions: ENABLED", vim.log.levels.INFO)
+			else
+				vim.notify("Suggestions: DISABLED", vim.log.levels.WARN)
+			end
+		end, { noremap = true, silent = true, desc = "Toggle nvim-cmp suggestions" })
 
 		-- notification setup
 		require("fidget").setup()
@@ -217,8 +236,15 @@ return {
 						on_attach = on_attach,
 						settings = {
 							ltex = {
+								checkFrequency = "save",
 								language = "en-US",
 								enabled = { "markdown", "text", "tex" },
+								disabledRules = {
+									["en"] = { "MORFOLOGIK_RULE_EN" },
+									["en-GB"] = { "MORFOLOGIK_RULE_EN_GB" },
+									["en-US"] = { "MORFOLOGIK_RULE_EN_US" },
+									["de"] = { "MORFOLOGIK_RULE_DE_DE" },
+								},
 							},
 						},
 					})
