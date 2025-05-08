@@ -143,8 +143,26 @@ return {
 			},
 		})
 
-		-- Other setups
-		require("fidget").setup({})
+		local virtual_text_enabled = false
+
+		vim.keymap.set("n", "<leader>ee", function()
+			virtual_text_enabled = not virtual_text_enabled
+
+			vim.diagnostic.config({
+				virtual_text = virtual_text_enabled,
+			})
+
+			if virtual_text_enabled then
+				vim.notify("Virtual text: ENABLED", vim.log.levels.INFO)
+			else
+				vim.notify("Virtual text: DISABLED", vim.log.levels.WARN)
+			end
+		end, { noremap = true, silent = true, desc = "Toggle virtual text for diagnostics" })
+
+		-- notification setup
+		require("fidget").setup()
+
+		-- Mason setup
 		require("mason").setup()
 
 		-- Mason LSPConfig handlers
@@ -188,6 +206,19 @@ return {
 								diagnostics = {
 									globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
 								},
+							},
+						},
+					})
+				end,
+
+				ltex = function()
+					require("lspconfig").ltex.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						settings = {
+							ltex = {
+								language = "en-US",
+								enabled = { "markdown", "text", "tex" },
 							},
 						},
 					})

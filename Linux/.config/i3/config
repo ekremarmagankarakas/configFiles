@@ -321,7 +321,7 @@ gaps outer 0
 
 # Set the wallpaper. Use only one of the following lines.
 #exec nitrogen --no-startup-id --restore
-exec_always feh --bg-fill ~/Pictures/Wallpapers/wallpaper2.jpg
+exec_always feh --bg-fill ~/Pictures/Wallpapers/wallpaper.png
 
 
 # Istanbul Home Configs
@@ -349,4 +349,4 @@ workspace 18 output $lm
 workspace 19 output $lm
 workspace 20 output $lm
 
-bindsym $mod+i exec xrandr --output eDP --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --primary --mode 2560x1440 --pos 0x0 --rotate normal
+bindsym $mod+i exec xrandr --output eDP --mode 1920x1080 --pos 2560x360 --rotate normal --output eDP-1 --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --primary --mode 2560x1440 --pos 0x0 --rotate normal
