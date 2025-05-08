@@ -178,26 +178,26 @@ bindsym Mod1+Shift+0 move container to workspace number $ws20
 set $fm DP-1-0.6
 set $sm DP-1-0.5
 
-workspace 1 output $fm
-workspace 2 output $fm
-workspace 3 output $fm
-workspace 4 output $fm
-workspace 5 output $fm
-workspace 6 output $fm
-workspace 7 output $fm
-workspace 8 output $fm
-workspace 9 output $fm
-workspace 10 output $fm
-workspace 11 output $sm
-workspace 12 output $sm
-workspace 13 output $sm
-workspace 14 output $sm
-workspace 15 output $sm
-workspace 16 output $sm
-workspace 17 output $sm
-workspace 18 output $sm
-workspace 19 output $sm
-workspace 20 output $sm
+#workspace 1 output $fm
+#workspace 2 output $fm
+#workspace 3 output $fm
+#workspace 4 output $fm
+#workspace 5 output $fm
+#workspace 6 output $fm
+#workspace 7 output $fm
+#workspace 8 output $fm
+#workspace 9 output $fm
+#workspace 10 output $fm
+#workspace 11 output $sm
+#workspace 12 output $sm
+#workspace 13 output $sm
+#workspace 14 output $sm
+#workspace 15 output $sm
+#workspace 16 output $sm
+#workspace 17 output $sm
+#workspace 18 output $sm
+#workspace 19 output $sm
+#workspace 20 output $sm
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -321,5 +321,32 @@ gaps outer 0
 
 # Set the wallpaper. Use only one of the following lines.
 #exec nitrogen --no-startup-id --restore
-exec_always feh --bg-fill ~/Pictures/Wallpapers/wallpaper.png
+exec_always feh --bg-fill ~/Pictures/Wallpapers/wallpaper2.jpg
 
+
+# Istanbul Home Configs
+set $im HDMI-1-0
+set $lm eDP
+
+workspace 1 output $im
+workspace 2 output $im
+workspace 3 output $im
+workspace 4 output $im
+workspace 5 output $im
+workspace 6 output $im
+workspace 7 output $im
+workspace 8 output $im
+workspace 9 output $im
+workspace 10 output $im
+workspace 11 output $lm
+workspace 12 output $lm
+workspace 13 output $lm
+workspace 14 output $lm
+workspace 15 output $lm
+workspace 16 output $lm
+workspace 17 output $lm
+workspace 18 output $lm
+workspace 19 output $lm
+workspace 20 output $lm
+
+bindsym $mod+i exec xrandr --output eDP --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --primary --mode 2560x1440 --pos 0x0 --rotate normal

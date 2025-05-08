@@ -21,5 +21,13 @@
   "enkia.tokyo-night",
   "catppuccin.catppuccin-vsc",
   "ms-vscode.cpptools",
+  "equimper.react-native-react-redux",
+  "be5invis.vscode-custom-css",
+  "bradlc.vscode-tailwindcss",
+  "msjsdiag.vscode-react-native",
+  "dsznajder.es7-react-js-snippets",
+  "pkief.material-icon-theme",
+  "mikaelkristiansson87.react-theme-vscode",
+  "ms-vscode.vscode-typescript-next",
   "github.copilot"
 ]
