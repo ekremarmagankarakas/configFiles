@@ -17,7 +17,6 @@
   "kisstkondoros.vscode-gutter-preview",
   "github.copilot-chat",
   "enkia.tokyo-night",
-  "catppuccin.catppuccin-vsc",
   "ms-vscode.cpptools",
   "equimper.react-native-react-redux",
   "be5invis.vscode-custom-css",
@@ -30,5 +29,6 @@
   "ms-python.debugpy",
   "github.copilot",
   "ms-python.python",
-  "ms-toolsai.jupyter"
+  "ms-toolsai.jupyter",
+  "catppuccin.catppuccin-vsc"
 ]
