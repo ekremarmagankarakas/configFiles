@@ -5,6 +5,7 @@ vim.cmd("set shiftwidth=2")
 vim.cmd("set mouse=a")
 vim.cmd("set wrap")
 vim.cmd("set linebreak")
+vim.opt.splitright = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 

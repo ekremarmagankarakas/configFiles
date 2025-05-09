@@ -239,12 +239,6 @@ return {
 								checkFrequency = "save",
 								language = "en-US",
 								enabled = { "markdown", "text", "tex" },
-								disabledRules = {
-									["en"] = { "MORFOLOGIK_RULE_EN" },
-									["en-GB"] = { "MORFOLOGIK_RULE_EN_GB" },
-									["en-US"] = { "MORFOLOGIK_RULE_EN_US" },
-									["de"] = { "MORFOLOGIK_RULE_DE_DE" },
-								},
 							},
 						},
 					})
