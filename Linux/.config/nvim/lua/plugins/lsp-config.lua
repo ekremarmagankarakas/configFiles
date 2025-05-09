@@ -19,11 +19,22 @@ return {
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "black" },
+				python = { "autopep8" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
 				javascriptreact = { "prettier" },
+			},
+			formatters = {
+				autopep8 = {
+					prepend_args = { "--indent-size", "2" },
+				},
+				prettier = {
+					prepend_args = { "--tab-width", "2", "--use-tabs", "false" },
+				},
+				stylua = {
+					prepend_args = { "--indent-width", "2" },
+				},
 			},
 			default_formatter = "prettier",
 			log_level = vim.log.levels.DEBUG,
@@ -45,12 +56,8 @@ return {
 		-- Autocompletion setup
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			cmp_lsp.default_capabilities()
-		)
+		local capabilities =
+			vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
 		-- LSP keymaps (only when LSP attaches)
 		local on_attach = function(client, bufnr)
@@ -239,6 +246,28 @@ return {
 								checkFrequency = "save",
 								language = "en-US",
 								enabled = { "markdown", "text", "tex" },
+							},
+						},
+					})
+				end,
+
+				["pylsp"] = function()
+					require("lspconfig").pylsp.setup({
+						capabilities = capabilities,
+						on_attach = on_attach,
+						settings = {
+							pylsp = {
+								plugins = {
+									pycodestyle = {
+										ignore = { "E501", "E126" }, -- Ignore line length errors
+										maxLineLength = 999, -- Set a very high value
+										indentSize = 2, -- Use 2-space indentation
+									},
+									flake8 = {
+										ignore = { "E501" }, -- Also ignore in flake8 if it's used
+										maxLineLength = 999,
+									},
+								},
 							},
 						},
 					})

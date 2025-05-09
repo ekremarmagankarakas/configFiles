@@ -12,8 +12,6 @@
   "charliermarsh.ruff",
   "tomoki1207.pdf",
   "mechatroner.rainbow-csv",
-  "ms-python.debugpy",
-  "ms-python.python",
   "ms-python.vscode-pylance",
   "ms-toolsai.jupyter",
   "kisstkondoros.vscode-gutter-preview",
@@ -29,5 +27,8 @@
   "pkief.material-icon-theme",
   "mikaelkristiansson87.react-theme-vscode",
   "ms-vscode.vscode-typescript-next",
-  "github.copilot"
+  "ms-python.debugpy",
+  "github.copilot",
+  "ms-python.python",
+  "ms-toolsai.jupyter"
 ]
