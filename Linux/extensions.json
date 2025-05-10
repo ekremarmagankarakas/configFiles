@@ -25,10 +25,10 @@
   "dsznajder.es7-react-js-snippets",
   "pkief.material-icon-theme",
   "mikaelkristiansson87.react-theme-vscode",
-  "ms-vscode.vscode-typescript-next",
   "ms-python.debugpy",
   "github.copilot",
   "ms-python.python",
   "ms-toolsai.jupyter",
-  "catppuccin.catppuccin-vsc"
+  "catppuccin.catppuccin-vsc",
+  "ms-vscode.vscode-typescript-next"
 ]

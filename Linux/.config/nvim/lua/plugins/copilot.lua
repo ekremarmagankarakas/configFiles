@@ -1,67 +1,22 @@
 return {
-	"zbirenbaum/copilot.lua",
-	cmd = "Copilot",
-	build = ":Copilot auth",
-	event = "InsertEnter",
-	opts = {
-		suggestion = {
-			enabled = true,
-			auto_trigger = true,
-			debounce = 75,
-			keymap = {
-				accept = "<Tab>",
-				accept_word = "<C-w>",
-				accept_line = "<C-l>",
-				next = "<C-n>",
-				prev = "<C-p>",
-				dismiss = "<C-]>",
-			},
-			layout = {
-				align = "top",
-				wrap = true,
-			},
-		},
-		panel = {
-			enabled = false,
-		},
-	},
+	"github/copilot.vim",
 	config = function()
-		-- Setup Copilot normally
-		require("copilot").setup({
-			suggestion = {
-				enabled = true,
-				auto_trigger = true,
-				debounce = 75,
-				keymap = {
-					accept = "<Tab>",
-					accept_word = "<C-w>",
-					accept_line = "<C-l>",
-					next = "<C-n>",
-					prev = "<C-p>",
-					dismiss = "<C-]>",
-				},
-				layout = {
-					align = "top",
-					wrap = true,
-				},
-			},
-			panel = {
-				enabled = false,
-			},
-		})
+		vim.g.copilot_enabled = true -- start enabled by default
 
-		-- 🔥 Copilot toggle keymap
-		local copilot_enabled = true
-		vim.keymap.set("n", "<leader>tg", function()
-			copilot_enabled = not copilot_enabled
-
-			if copilot_enabled then
-				vim.cmd("Copilot enable")
-				vim.notify("Copilot: ENABLED", vim.log.levels.INFO)
-			else
+		-- Define toggle function
+		vim.api.nvim_create_user_command("CopilotToggle", function()
+			if vim.g.copilot_enabled then
 				vim.cmd("Copilot disable")
-				vim.notify("Copilot: DISABLED", vim.log.levels.WARN)
+				vim.g.copilot_enabled = false
+				vim.notify("GitHub Copilot Disabled", vim.log.levels.INFO)
+			else
+				vim.cmd("Copilot enable")
+				vim.g.copilot_enabled = true
+				vim.notify("GitHub Copilot Enabled", vim.log.levels.INFO)
 			end
-		end, { noremap = true, silent = true, desc = "Toggle GitHub Copilot" })
+		end, {})
+
+		-- Map <leader>tg to toggle Copilot
+		vim.keymap.set("n", "<leader>tg", "<cmd>CopilotToggle<CR>", { desc = "Toggle GitHub Copilot" })
 	end,
 }
