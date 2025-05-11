@@ -105,6 +105,14 @@ return {
 			vim.notify("Virtual text: " .. (virtual_text_enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
 		end, { noremap = true, silent = true, desc = "Toggle virtual text for diagnostics" })
 
+		-- Toggle underline
+		local underline_enabled = true
+		vim.keymap.set("n", "<leader>leu", function()
+			underline_enabled = not underline_enabled
+			vim.diagnostic.config({ underline = underline_enabled })
+			vim.notify("Underline: " .. (underline_enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
+		end, { noremap = true, silent = true, desc = "Toggle underline for diagnostics" })
+
 		-- Toggle completion
 		local cmp_enabled = true
 		vim.keymap.set("n", "<leader>ltc", function()
@@ -238,7 +246,7 @@ return {
 							pylsp = {
 								plugins = {
 									pycodestyle = {
-										ignore = { "E501", "E126" },
+										ignore = { "E501", "E126", "E712" },
 										maxLineLength = 999,
 										indentSize = 2,
 									},

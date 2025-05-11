@@ -30,13 +30,6 @@ return {
 		},
 		opts = {
 			model = "gpt-4o",
-			sticky = {
-				"#files:`**/*.html`",
-				"#files:`**/*.jsx`",
-				"#files:`**/*.js`",
-				"#files:`**/*.py`",
-				"#files:`**/*.css`",
-			},
 			window = {
 				layout = "vertical",
 				width = 0.3,

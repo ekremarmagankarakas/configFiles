@@ -1,34 +1,31 @@
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+
+-- Add the #f snippet as an autosnippet for all filetypes
+ls.add_snippets("all", {
+	s("#f", {
+		t("#files:`**/*."),
+		i(1),
+		t("`"),
+	}),
+})
+
+ls.add_snippets("all", {
+	s("#fd", {
+		t({
+			"#files:`**/*.py`",
+			"#files:`**/*.js`",
+			"#files:`**/*.jsx`",
+			"#files:`**/*.html`",
+			"#files:`**/*.css`",
+		}),
+	}),
+})
+
 return {
-	{
-		"L3MON4D3/LuaSnip",
-		-- follow latest release.
-		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-		-- install jsregexp (optional!).
-		build = "make install_jsregexp",
-
-		dependencies = { "rafamadriz/friendly-snippets" },
-
-		config = function()
-			local ls = require("luasnip")
-			ls.filetype_extend("javascript", { "jsdoc" })
-
-			--- TODO: What is expand?
-			vim.keymap.set({ "i" }, "<C-s>e", function()
-				ls.expand()
-			end, { silent = true })
-
-			vim.keymap.set({ "i", "s" }, "<C-s>;", function()
-				ls.jump(1)
-			end, { silent = true })
-			vim.keymap.set({ "i", "s" }, "<C-s>,", function()
-				ls.jump(-1)
-			end, { silent = true })
-
-			vim.keymap.set({ "i", "s" }, "<C-E>", function()
-				if ls.choice_active() then
-					ls.change_choice(1)
-				end
-			end, { silent = true })
-		end,
-	},
+	"L3MON4D3/LuaSnip",
+	version = "v2.*", -- latest major version
+	build = "make install_jsregexp",
 }
