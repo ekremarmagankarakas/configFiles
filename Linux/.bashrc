@@ -117,13 +117,25 @@ if ! shopt -oq posix; then
 fi
 
 
+# Android Studio Config
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Golang
 export PATH=$PATH:/usr/local/go/bin
+
+# Starship config
 eval "$(starship init bash)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# TAB completion for terminal
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
+
+# Nvim config
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export EDITOR=/opt/nvim-linux64/bin/nvim

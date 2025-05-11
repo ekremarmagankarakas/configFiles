@@ -33,6 +33,6 @@
   "undotree": { "branch": "master", "commit": "b951b87b46c34356d44aa71886aecf9dd7f5788a" },
   "vim-css-color": { "branch": "master", "commit": "14fd934cdd9ca1ac0e53511094e612eb9bace373" },
   "vim-fugitive": { "branch": "master", "commit": "4a745ea72fa93bb15dd077109afbb3d1809383f2" },
-  "visual_studio_code": { "branch": "master", "commit": "ff7fd467e6c82bd1e062d64f60428cf36b0e99c6" },
+  "vscode.nvim": { "branch": "main", "commit": "5769f298af4abf371528b25623fecb1e069c858c" },
   "zen-mode.nvim": { "branch": "main", "commit": "863f150ca321b3dd8aa1a2b69b5f411a220e144f" }
 }

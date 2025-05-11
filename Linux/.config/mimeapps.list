@@ -1,0 +1,14 @@
+[Default Applications]
+image/jpeg=org.gnome.eog.desktop
+text/html=firefox_firefox.desktop
+x-scheme-handler/http=firefox_firefox.desktop
+x-scheme-handler/https=firefox_firefox.desktop
+x-scheme-handler/about=firefox_firefox.desktop
+x-scheme-handler/unknown=firefox_firefox.desktop
+application/pdf=firefox_firefox.desktop
+image/png=org.gnome.eog.desktop
+text/plain=kitty.desktop
+
+[Added Associations]
+image/jpeg=display-im6.q16.desktop;org.gnome.eog.desktop;
+image/png=org.gnome.eog.desktop;
