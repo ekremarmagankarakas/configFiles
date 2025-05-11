@@ -7,8 +7,8 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>")
-		vim.keymap.set("n", "<C-t>", ":Neotree toggle<CR>")
+		vim.keymap.set("n", "<leader>nn", ":Neotree filesystem reveal left<CR>")
+		vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>")
 		require("neo-tree").setup({
 			filesystem = {
 				filtered_items = {

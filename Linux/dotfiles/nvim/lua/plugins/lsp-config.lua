@@ -49,7 +49,7 @@ return {
 		})
 
 		-- Manual format keybinding
-		vim.keymap.set("n", "<leader>gf", function()
+		vim.keymap.set("n", "<leader>lf", function()
 			require("conform").format()
 		end, { noremap = true, silent = true, desc = "Format file" })
 
@@ -63,10 +63,10 @@ return {
 		local on_attach = function(client, bufnr)
 			local opts = { noremap = true, silent = true, buffer = bufnr }
 			-- Hover documentation
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.hover, opts)
 
 			-- Go to definition (gd) in vsplit
-			vim.keymap.set("n", "gd", function()
+			vim.keymap.set("n", "<leader>lgd", function()
 				vim.lsp.buf_request(
 					0,
 					"textDocument/definition",
@@ -84,7 +84,7 @@ return {
 			end, opts)
 
 			-- Go to implementation (gi) in vsplit
-			vim.keymap.set("n", "gi", function()
+			vim.keymap.set("n", "<leader>lgi", function()
 				vim.lsp.buf_request(
 					0,
 					"textDocument/implementation",
@@ -102,13 +102,13 @@ return {
 			end, opts)
 
 			-- Rename symbol
-			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+			vim.keymap.set("n", "<leader>lrn", vim.lsp.buf.rename, opts)
 
 			-- Code actions
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+			vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, opts)
 
 			-- Open diagnostics in a floating window
-			vim.keymap.set("n", "<leader>e", function()
+			vim.keymap.set("n", "<leader>le", function()
 				vim.diagnostic.open_float(nil, { focusable = false })
 			end, { noremap = true, silent = true, buffer = bufnr })
 		end
@@ -153,7 +153,7 @@ return {
 		-- Toggle virtual text for diagnostics
 		local virtual_text_enabled = false
 
-		vim.keymap.set("n", "<leader>ee", function()
+		vim.keymap.set("n", "<leader>lee", function()
 			virtual_text_enabled = not virtual_text_enabled
 
 			vim.diagnostic.config({
@@ -167,10 +167,10 @@ return {
 			end
 		end, { noremap = true, silent = true, desc = "Toggle virtual text for diagnostics" })
 
-		-- Toggle suggestions
+		-- Toggle completions
 		local cmp_enabled = true
 
-		vim.keymap.set("n", "<leader>ts", function()
+		vim.keymap.set("n", "<leader>ltc", function()
 			cmp_enabled = not cmp_enabled
 
 			local cmp = require("cmp")

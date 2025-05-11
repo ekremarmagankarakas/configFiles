@@ -17,6 +17,6 @@ return {
 		end, {})
 
 		-- Map <leader>tg to toggle Copilot
-		vim.keymap.set("n", "<leader>tg", "<cmd>CopilotToggle<CR>", { desc = "Toggle GitHub Copilot" })
+		vim.keymap.set("n", "<leader>gt", "<cmd>CopilotToggle<CR>", { desc = "Toggle GitHub Copilot" })
 	end,
 }
