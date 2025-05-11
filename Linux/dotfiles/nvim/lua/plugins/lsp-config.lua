@@ -2,20 +2,28 @@ return {
 	"neovim/nvim-lspconfig",
 	version = "*",
 	dependencies = {
-		"stevearc/conform.nvim",
+		-- LSP and Mason
 		"williamboman/mason.nvim",
 		{ "williamboman/mason-lspconfig.nvim", commit = "1a31f824b9cd5bc6f342fc29e9a53b60d74af245" },
+		"j-hui/fidget.nvim",
+
+		-- Formatting
+		"stevearc/conform.nvim",
+
+		-- Completion
+		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		"hrsh7th/nvim-cmp",
 		"l3mon4d3/luasnip",
 		"saadparwaiz1/cmp_luasnip",
-		"j-hui/fidget.nvim",
 	},
+
 	config = function()
-		-- Conform setup for formatting
+		--------------------------------------------------------------------------
+		-- Formatting Setup (Conform)
+		--------------------------------------------------------------------------
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -26,15 +34,9 @@ return {
 				javascriptreact = { "prettier" },
 			},
 			formatters = {
-				autopep8 = {
-					prepend_args = { "--indent-size", "2" },
-				},
-				prettier = {
-					prepend_args = { "--tab-width", "2", "--use-tabs", "false" },
-				},
-				stylua = {
-					prepend_args = { "--indent-width", "2" },
-				},
+				autopep8 = { prepend_args = { "--indent-size", "2" } },
+				prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
+				stylua = { prepend_args = { "--indent-width", "2" } },
 			},
 			default_formatter = "prettier",
 			log_level = vim.log.levels.DEBUG,
@@ -53,18 +55,82 @@ return {
 			require("conform").format()
 		end, { noremap = true, silent = true, desc = "Format file" })
 
-		-- Autocompletion setup
+		--------------------------------------------------------------------------
+		-- Completion Setup (nvim-cmp)
+		--------------------------------------------------------------------------
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
+
+		cmp.setup({
+			snippet = {
+				expand = function(args)
+					require("luasnip").lsp_expand(args.body)
+				end,
+			},
+			mapping = cmp.mapping.preset.insert({
+				["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+				["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+				["<C-Space>"] = cmp.mapping.complete(),
+			}),
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "luasnip" },
+			}, {
+				{ name = "buffer" },
+			}),
+		})
+
+		--------------------------------------------------------------------------
+		-- Diagnostic Settings
+		--------------------------------------------------------------------------
+		vim.diagnostic.config({
+			virtual_text = false,
+			underline = true,
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				prefix = "",
+			},
+		})
+
+		-- Toggle virtual text
+		local virtual_text_enabled = false
+		vim.keymap.set("n", "<leader>lee", function()
+			virtual_text_enabled = not virtual_text_enabled
+			vim.diagnostic.config({ virtual_text = virtual_text_enabled })
+			vim.notify("Virtual text: " .. (virtual_text_enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
+		end, { noremap = true, silent = true, desc = "Toggle virtual text for diagnostics" })
+
+		-- Toggle completion
+		local cmp_enabled = true
+		vim.keymap.set("n", "<leader>ltc", function()
+			cmp_enabled = not cmp_enabled
+			cmp.setup({ enabled = cmp_enabled })
+			vim.notify("Suggestions: " .. (cmp_enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
+		end, { noremap = true, silent = true, desc = "Toggle nvim-cmp suggestions" })
+
+		--------------------------------------------------------------------------
+		-- LSP Setup
+		--------------------------------------------------------------------------
 		local capabilities =
 			vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
-		-- LSP keymaps (only when LSP attaches)
-		local on_attach = function(client, bufnr)
+		local on_attach = function(_, bufnr)
 			local opts = { noremap = true, silent = true, buffer = bufnr }
-			-- Hover documentation
-			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.hover, opts)
 
+			-- Keymaps
+			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.hover, opts)
+			vim.keymap.set("n", "<leader>lrn", vim.lsp.buf.rename, opts)
+			vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, opts)
+			vim.keymap.set("n", "<leader>le", function()
+				vim.diagnostic.open_float(nil, { focusable = false })
+			end, opts)
+
+			-- Definitions and Implementations in split
 			-- Go to definition (gd) in vsplit
 			vim.keymap.set("n", "<leader>lgd", function()
 				vim.lsp.buf_request(
@@ -100,98 +166,14 @@ return {
 					end
 				)
 			end, opts)
-
-			-- Rename symbol
-			vim.keymap.set("n", "<leader>lrn", vim.lsp.buf.rename, opts)
-
-			-- Code actions
-			vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, opts)
-
-			-- Open diagnostics in a floating window
-			vim.keymap.set("n", "<leader>le", function()
-				vim.diagnostic.open_float(nil, { focusable = false })
-			end, { noremap = true, silent = true, buffer = bufnr })
 		end
 
-		-- Completion behavior
-		local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-		cmp.setup({
-			snippet = {
-				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
-				end,
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				["<C-Space>"] = cmp.mapping.complete(),
-			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-			}, {
-				{ name = "buffer" },
-			}),
-		})
-
-		-- Diagnostic settings
-		vim.diagnostic.config({
-			virtual_text = false, -- no typing errors next to code
-			underline = true, -- underline errors
-			float = {
-				focusable = false,
-				style = "minimal",
-				border = "rounded",
-				source = "always",
-				header = "",
-				prefix = "",
-			},
-		})
-
-		-- Toggle virtual text for diagnostics
-		local virtual_text_enabled = false
-
-		vim.keymap.set("n", "<leader>lee", function()
-			virtual_text_enabled = not virtual_text_enabled
-
-			vim.diagnostic.config({
-				virtual_text = virtual_text_enabled,
-			})
-
-			if virtual_text_enabled then
-				vim.notify("Virtual text: ENABLED", vim.log.levels.INFO)
-			else
-				vim.notify("Virtual text: DISABLED", vim.log.levels.WARN)
-			end
-		end, { noremap = true, silent = true, desc = "Toggle virtual text for diagnostics" })
-
-		-- Toggle completions
-		local cmp_enabled = true
-
-		vim.keymap.set("n", "<leader>ltc", function()
-			cmp_enabled = not cmp_enabled
-
-			local cmp = require("cmp")
-			cmp.setup({
-				enabled = cmp_enabled,
-			})
-
-			if cmp_enabled then
-				vim.notify("Suggestions: ENABLED", vim.log.levels.INFO)
-			else
-				vim.notify("Suggestions: DISABLED", vim.log.levels.WARN)
-			end
-		end, { noremap = true, silent = true, desc = "Toggle nvim-cmp suggestions" })
-
-		-- notification setup
+		--------------------------------------------------------------------------
+		-- Plugin Setups
+		--------------------------------------------------------------------------
 		require("fidget").setup()
-
-		-- Mason setup
 		require("mason").setup()
 
-		-- Mason LSPConfig handlers
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
 			handlers = {
@@ -202,11 +184,10 @@ return {
 					})
 				end,
 
-				-- Special setup for Zig LSP
+				-- Custom LSP handlers
 				zls = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.zls.setup({
-						root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+					require("lspconfig").zls.setup({
+						root_dir = require("lspconfig.util").root_pattern(".git", "build.zig", "zls.json"),
 						settings = {
 							zls = {
 								enable_inlay_hints = true,
@@ -220,10 +201,8 @@ return {
 					vim.g.zig_fmt_autosave = 0
 				end,
 
-				-- Special setup for Lua LSP
-				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
+				lua_ls = function()
+					require("lspconfig").lua_ls.setup({
 						capabilities = capabilities,
 						on_attach = on_attach,
 						settings = {
@@ -251,7 +230,7 @@ return {
 					})
 				end,
 
-				["pylsp"] = function()
+				pylsp = function()
 					require("lspconfig").pylsp.setup({
 						capabilities = capabilities,
 						on_attach = on_attach,
@@ -259,12 +238,12 @@ return {
 							pylsp = {
 								plugins = {
 									pycodestyle = {
-										ignore = { "E501", "E126" }, -- Ignore line length errors
-										maxLineLength = 999, -- Set a very high value
-										indentSize = 2, -- Use 2-space indentation
+										ignore = { "E501", "E126" },
+										maxLineLength = 999,
+										indentSize = 2,
 									},
 									flake8 = {
-										ignore = { "E501" }, -- Also ignore in flake8 if it's used
+										ignore = { "E501" },
 										maxLineLength = 999,
 									},
 								},
