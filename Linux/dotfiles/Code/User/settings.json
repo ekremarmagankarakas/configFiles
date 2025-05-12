@@ -1,7 +1,6 @@
 {
     "editor.minimap.enabled": false,
     "editor.stickyScroll.enabled": false,
-    "workbench.colorTheme": "Catppuccin Macchiato",
     "workbench.statusBar.visible": true,
     "editor.guides.indentation": false,
     "workbench.editor.showTabs": "none",

@@ -266,7 +266,7 @@ bar {
 
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 bindsym $mod+shift+p exec ~/.config/picom/pause-picom-screenshot.sh
-bindsym $mod+Shift+f exec nautilus --new-window
+bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+b exec firefox
 
 # Media player controls

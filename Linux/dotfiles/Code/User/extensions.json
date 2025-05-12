@@ -15,7 +15,6 @@
   "ms-python.vscode-pylance",
   "ms-toolsai.jupyter",
   "kisstkondoros.vscode-gutter-preview",
-  "github.copilot-chat",
   "enkia.tokyo-night",
   "ms-vscode.cpptools",
   "equimper.react-native-react-redux",
@@ -30,5 +29,6 @@
   "ms-python.python",
   "ms-toolsai.jupyter",
   "catppuccin.catppuccin-vsc",
-  "ms-vscode.vscode-typescript-next"
+  "ms-vscode.vscode-typescript-next",
+  "github.copilot-chat"
 ]
