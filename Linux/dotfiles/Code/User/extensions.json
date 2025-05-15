@@ -29,6 +29,6 @@
   "ms-python.python",
   "ms-toolsai.jupyter",
   "catppuccin.catppuccin-vsc",
-  "ms-vscode.vscode-typescript-next",
-  "github.copilot-chat"
+  "github.copilot-chat",
+  "ms-vscode.vscode-typescript-next"
 ]

@@ -233,6 +233,7 @@ return {
 								checkFrequency = "save",
 								language = "en-US",
 								enabled = { "markdown", "text", "tex" },
+								disabledRules = { ["en-US"] = { "WHITESPACE_RULE" } },
 							},
 						},
 					})
