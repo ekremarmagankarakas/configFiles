@@ -13,6 +13,7 @@ vim.g.maplocalleader = "\\"
 vim.g.python_recommended_style = 0
 
 vim.keymap.set("v", "<leader>y", '"+y', {})
+vim.keymap.set("v", "<leader>x", '"+d', {})
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", {})
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {})
 
