@@ -20,3 +20,19 @@ vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {})
 vim.keymap.set("n", "<leader>ss", function()
 	vim.opt.spell = not vim.opt.spell:get()
 end, { desc = "Toggle spell checking" })
+
+local toggle_jk = false
+
+vim.keymap.set("n", "<leader>jk", function()
+	if toggle_jk then
+		vim.keymap.set("n", "j", "j", { remap = false, silent = true })
+		vim.keymap.set("n", "k", "k", { remap = false, silent = true })
+		toggle_jk = false
+		print("Switched to normal j/k")
+	else
+		vim.keymap.set("n", "j", "gj", { remap = false, silent = true })
+		vim.keymap.set("n", "k", "gk", { remap = false, silent = true })
+		toggle_jk = true
+		print("Switched to gj/gk")
+	end
+end, { silent = true })
