@@ -28,27 +28,28 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "autopep8" },
+        cpp = { "clang-format" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
 				javascriptreact = { "prettier" },
 			},
 			formatters = {
-				autopep8 = { prepend_args = { "--indent-size", "2" } },
-				prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
-				stylua = { prepend_args = { "--indent-width", "2" } },
+				autopep8 = { prepend_args = { "--indent-size", "4" } },
+				prettier = { prepend_args = { "--tab-width", "4", "--use-tabs", "false" } },
+				stylua = { prepend_args = { "--indent-width", "4" } },
 			},
 			default_formatter = "prettier",
 			log_level = vim.log.levels.DEBUG,
 		})
 
 		-- Auto-format on save
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			callback = function()
-				require("conform").format()
-			end,
-		})
+		-- vim.api.nvim_create_autocmd("BufWritePre", {
+		-- 	pattern = "*",
+		-- 	callback = function()
+		-- 		require("conform").format()
+		-- 	end,
+		-- })
 
 		-- Manual format keybinding
 		vim.keymap.set("n", "<leader>lf", function()
@@ -74,7 +75,7 @@ return {
 				["<C-Space>"] = cmp.mapping.complete(),
 			}),
 			sources = cmp.config.sources({
-				{ name = "copilot" },
+				-- { name = "copilot" }, # CMP for copilot
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 			}, {
@@ -250,7 +251,7 @@ return {
 									pycodestyle = {
 										ignore = { "E501", "E126", "E712" },
 										maxLineLength = 999,
-										indentSize = 2,
+										indentSize = 4,
 									},
 									flake8 = {
 										ignore = { "E501" },

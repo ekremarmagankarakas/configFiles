@@ -325,8 +325,11 @@ exec_always feh --bg-fill ~/Pictures/Wallpapers/black.png
 
 
 # Istanbul Home Configs
-set $im HDMI-1-0
-set $lm eDP
+# set $im HDMI-1-0
+# set $lm eDP
+
+set $lm HDMI-1-0
+set $im eDP-1
 
 workspace 1 output $im
 workspace 2 output $im

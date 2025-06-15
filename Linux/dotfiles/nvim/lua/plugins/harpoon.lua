@@ -13,7 +13,7 @@ return {
 			harpoon:list():add()
 		end, { desc = "Harpoon Add File" })
 
-		vim.keymap.set("n", "<leader>hr", function()
+		vim.keymap.set("n", "<leader>hd", function()
 			harpoon:list():remove()
 		end, { desc = "Harpoon Remove File" })
 
