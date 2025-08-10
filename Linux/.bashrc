@@ -139,3 +139,7 @@ bind 'TAB:menu-complete'
 # Nvim config
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export EDITOR=/opt/nvim-linux64/bin/nvim
+
+# Gemini CLI env
+# [ -f "$HOME/.gemini_env" ] && source "$HOME/.gemini_env"
+export GPG_TTY=$(tty)

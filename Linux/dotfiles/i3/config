@@ -175,29 +175,38 @@ bindsym Mod1+Shift+8 move container to workspace number $ws18
 bindsym Mod1+Shift+9 move container to workspace number $ws19
 bindsym Mod1+Shift+0 move container to workspace number $ws20
 
+# Boston Home Config
 set $fm DP-1-0.6
 set $sm DP-1-0.5
 
-#workspace 1 output $fm
-#workspace 2 output $fm
-#workspace 3 output $fm
-#workspace 4 output $fm
-#workspace 5 output $fm
-#workspace 6 output $fm
-#workspace 7 output $fm
-#workspace 8 output $fm
-#workspace 9 output $fm
-#workspace 10 output $fm
-#workspace 11 output $sm
-#workspace 12 output $sm
-#workspace 13 output $sm
-#workspace 14 output $sm
-#workspace 15 output $sm
-#workspace 16 output $sm
-#workspace 17 output $sm
-#workspace 18 output $sm
-#workspace 19 output $sm
-#workspace 20 output $sm
+# Istanbul Home Configs
+# set $fm HDMI-1-0
+# set $sm eDP
+
+# NeXT Config
+#set $fm DP-1-0.5
+#set $sm DP-1-0.6
+
+workspace 1 output $fm
+workspace 2 output $fm
+workspace 3 output $fm
+workspace 4 output $fm
+workspace 5 output $fm
+workspace 6 output $fm
+workspace 7 output $fm
+workspace 8 output $fm
+workspace 9 output $fm
+workspace 10 output $fm
+workspace 11 output $sm
+workspace 12 output $sm
+workspace 13 output $sm
+workspace 14 output $sm
+workspace 15 output $sm
+workspace 16 output $sm
+workspace 17 output $sm
+workspace 18 output $sm
+workspace 19 output $sm
+workspace 20 output $sm
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -286,24 +295,6 @@ bindsym XF86AudioMute exec amixer sset Master toggle
 
 exec_always setxkbmap -option caps:swapescape
 
-# bindsym $mod+m exec xrandr --output eDP --off --output eDP-1 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DP-1-0.5 --mode 1920x1080 --pos 0x360 --rotate normal --output DP-1-0.6 --primary --mode 3440x1440 --pos 1920x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
-bindsym $mod+m exec xrandr \
---output eDP --off \
---output eDP-1 --off \
---output DisplayPort-3 --off \
---output DisplayPort-4 --off \
---output DisplayPort-5 --off \
---output DisplayPort-6 --off \
---output DisplayPort-7 --off \
---output DP-1-0.5 --mode 1920x1080 --rate 75 --pos 0x360 --rotate normal \
---output DP-1-0.6 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal \
---output DP-1-0 --off \
---output DP-1-1 --off \
---output DP-1-2 --off \
---output HDMI-1-0 --off
-
-bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
-
 # Screenshot - Maim and Xclip needs to be installed
 bindsym Print exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim --format png --select > ~/screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/screenshots/screenshot_$NOW.png
 
@@ -323,33 +314,16 @@ gaps outer 0
 ##exec nitrogen --no-startup-id --restore
 exec_always feh --bg-fill ~/Pictures/Wallpapers/black.png
 
+# Boston Home Config
+bindsym $mod+m exec xrandr --output eDP --off --output eDP-1 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DP-1-0.5 --mode 1920x1080 --rate 75 --pos 0x360 --rotate normal --output DP-1-0.6 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
 
-# Istanbul Home Configs
-# set $im HDMI-1-0
-# set $lm eDP
+# Monitor only
+bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
 
-set $lm HDMI-1-0
-set $im eDP-1
-
-workspace 1 output $im
-workspace 2 output $im
-workspace 3 output $im
-workspace 4 output $im
-workspace 5 output $im
-workspace 6 output $im
-workspace 7 output $im
-workspace 8 output $im
-workspace 9 output $im
-workspace 10 output $im
-workspace 11 output $lm
-workspace 12 output $lm
-workspace 13 output $lm
-workspace 14 output $lm
-workspace 15 output $lm
-workspace 16 output $lm
-workspace 17 output $lm
-workspace 18 output $lm
-workspace 19 output $lm
-workspace 20 output $lm
-
+# Istanbul Home Config
 bindsym $mod+i exec xrandr --output eDP --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --mode 2560x1440 --pos 0x0 --rotate normal
+
+# NeXT Config
+bindsym $mod+o exec xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DP-1-0.5 --primary --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1-0.6 --mode 3840x2160 --pos 4480x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+
+
