@@ -29,5 +29,6 @@
   "ms-toolsai.jupyter",
   "github.copilot-chat",
   "ms-python.python",
+  "github.copilot-chat",
   "ms-vscode.vscode-typescript-next"
 ]

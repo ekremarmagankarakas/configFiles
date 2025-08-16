@@ -16,6 +16,7 @@ vim.keymap.set("v", "<leader>y", '"+y', {})
 vim.keymap.set("v", "<leader>x", '"+d', {})
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", {})
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {})
+vim.keymap.set("n", "<leader>h", ":split<CR>", {})
 
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
@@ -25,6 +26,8 @@ vim.keymap.set("n", "<leader>t", "<cmd>split | term<CR>", { desc = "Open termina
 vim.keymap.set("n", "<leader>gt", ":Copilot toggle<CR>", {})
 vim.keymap.set("n", "<leader>gd", ":Copilot disable<CR>", {})
 vim.keymap.set("n", "<leader>ge", ":Copilot enable<CR>", {})
+
+vim.keymap.set("n", "<leader>mt", ":Markview toggle<CR>", { desc = "Toggle Markview" })
 
 local toggle_jk = false
 vim.keymap.set("n", "<leader>jk", function()

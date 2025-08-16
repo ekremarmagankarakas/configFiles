@@ -176,16 +176,16 @@ bindsym Mod1+Shift+9 move container to workspace number $ws19
 bindsym Mod1+Shift+0 move container to workspace number $ws20
 
 # Boston Home Config
-set $fm DP-1-0.6
-set $sm DP-1-0.5
+#set $fm DP-1-0.6
+#set $sm DP-1-0.5
 
 # Istanbul Home Configs
 # set $fm HDMI-1-0
 # set $sm eDP
 
 # NeXT Config
-#set $fm DP-1-0.5
-#set $sm DP-1-0.6
+set $fm DP-1-0.5
+set $sm DP-1-0.6
 
 workspace 1 output $fm
 workspace 2 output $fm

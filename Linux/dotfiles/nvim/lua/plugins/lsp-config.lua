@@ -24,20 +24,59 @@ return {
 		--------------------------------------------------------------------------
 		-- Formatting Setup (Conform)
 		--------------------------------------------------------------------------
-		require("conform").setup({
+		local conform = require("conform")
+		local util = require("conform.util")
+		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "autopep8" },
-        cpp = { "clang-format" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
-				javascriptreact = { "prettier" },
+				python = { "ruff_fix", "ruff_format" },
+				cpp = { "clang-format" },
+				javascript = { "eslint_d", "prettier" },
+				typescript = { "eslint_d", "prettier" },
+				typescriptreact = { "eslint_d", "prettier" },
+				javascriptreact = { "eslint_d", "prettier" },
 			},
 			formatters = {
-				autopep8 = { prepend_args = { "--indent-size", "4" } },
-				prettier = { prepend_args = { "--tab-width", "4", "--use-tabs", "false" } },
+				ruff_fix = {
+					command = "ruff",
+					args = { "check", "--fix", "--stdin-filename", "$FILENAME", "-" },
+					stdin = true,
+				},
+				ruff_format = {
+					command = "ruff",
+					args = { "format", "--stdin-filename", "$FILENAME" },
+					stdin = true,
+				},
+				prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
 				stylua = { prepend_args = { "--indent-width", "4" } },
+				eslint_d = {
+					command = "eslint_d",
+					stdin = false,
+					args = {
+						"--fix",
+						"--stdin-filename",
+						"$FILENAME",
+						"$FILENAME",
+					},
+					-- Only run if an ESLint config exists
+					condition = function(ctx)
+						if vim.fn.executable("eslint_d") ~= 1 then
+							return false
+						end
+						return util.root_file({
+							".eslintrc",
+							".eslintrc.js",
+							".eslintrc.cjs",
+							".eslintrc.json",
+							"eslint.config.js",
+							"eslint.config.mjs",
+							"eslint.config.cjs",
+							"eslint.config.ts",
+							"eslint.config.mts",
+							"eslint.config.cts",
+						}, ctx.buf) ~= nil
+					end,
+				},
 			},
 			default_formatter = "prettier",
 			log_level = vim.log.levels.DEBUG,
@@ -126,11 +165,21 @@ return {
 		--------------------------------------------------------------------------
 		-- LSP Setup
 		--------------------------------------------------------------------------
-		local capabilities =
-			vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			cmp_lsp.default_capabilities()
+		)
 
-		local on_attach = function(_, bufnr)
+		local on_attach = function(client, bufnr)
 			local opts = { noremap = true, silent = true, buffer = bufnr }
+
+			-- Use Conform for formatting (disable LSP formatting where appropriate)
+			if client.name == "tsserver" or client.name == "pylsp" or client.name == "lua_ls" then
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
+			end
 
 			-- Keymaps
 			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.hover, opts)
@@ -161,20 +210,12 @@ return {
 
 			-- Go to implementation (gi) in vsplit
 			vim.keymap.set("n", "<leader>lgi", function()
-				vim.lsp.buf_request(
-					0,
-					"textDocument/implementation",
-					vim.lsp.util.make_position_params(),
-					function(err, result, ctx, config)
-						if result and not vim.tbl_isempty(result) then
-							vim.cmd("vsplit")
-							vim.cmd("wincmd l")
-							vim.lsp.util.jump_to_location(result[1], "utf-8")
-						else
-							vim.notify("No implementation found", vim.log.levels.INFO)
-						end
-					end
-				)
+				require("telescope.builtin").lsp_implementations()
+			end, opts)
+
+			-- References
+			vim.keymap.set("n", "<leader>lgr", function()
+				require("telescope.builtin").lsp_references()
 			end, opts)
 		end
 
@@ -248,15 +289,13 @@ return {
 						settings = {
 							pylsp = {
 								plugins = {
-									pycodestyle = {
-										ignore = { "E501", "E126", "E712" },
-										maxLineLength = 999,
-										indentSize = 4,
-									},
-									flake8 = {
-										ignore = { "E501" },
-										maxLineLength = 999,
-									},
+									pycodestyle = { enabled = false },
+									pyflakes = { enabled = false },
+									mccabe = { enabled = false },
+									flake8 = { enabled = false },
+									yapf = { enabled = false },
+									autopep8 = { enabled = false },
+									-- ruff = { enabled = true },
 								},
 							},
 						},

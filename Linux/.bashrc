@@ -142,4 +142,6 @@ export EDITOR=/opt/nvim-linux64/bin/nvim
 
 # Gemini CLI env
 # [ -f "$HOME/.gemini_env" ] && source "$HOME/.gemini_env"
+
+# Git GPG config
 export GPG_TTY=$(tty)
