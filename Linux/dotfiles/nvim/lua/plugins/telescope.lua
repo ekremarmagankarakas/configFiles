@@ -15,9 +15,10 @@ return {
 				},
 			})
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
+            vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
+			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
 			vim.keymap.set("n", "<leader>fa", function()
 				require("telescope.builtin").find_files({
 					prompt_title = "Search in Selected Dirs",
@@ -52,7 +53,7 @@ return {
 					hidden = true,
 					no_ignore = true,
 				})
-			end, {})
+			end, { desc = "Find Files in Selected Dirs" })
 
 			require("telescope").load_extension("ui-select")
 		end,

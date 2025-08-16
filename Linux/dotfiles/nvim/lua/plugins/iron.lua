@@ -24,8 +24,8 @@ return {
 				repl_open_cmd = view.split.vertical.rightbelow(50),
 			},
 			keymaps = {
-				toggle_repl = "<space>rr",
-				restart_repl = "<space>rR",
+				toggle_repl = "<space>srr",
+				restart_repl = "<space>srR",
 				send_motion = "<space>sc",
 				visual_send = "<space>sc",
 				send_file = "<space>sf",
@@ -35,13 +35,13 @@ return {
 				send_mark = "<space>sm",
 				send_code_block = "<space>sb",
 				send_code_block_and_move = "<space>sn",
-				mark_motion = "<space>mc",
-				mark_visual = "<space>mc",
-				remove_mark = "<space>md",
+				mark_motion = "<space>smc",
+				mark_visual = "<space>smc",
+				remove_mark = "<space>smd",
 				cr = "<space>s<cr>",
 				interrupt = "<space>s<space>",
 				exit = "<space>sq",
-				clear = "<space>cl",
+				clear = "<space>scl",
 			},
 			highlight = {
 				italic = true,
@@ -49,7 +49,7 @@ return {
 			ignore_blank_lines = true,
 		})
 
-		vim.keymap.set("n", "<space>rf", "<cmd>IronFocus<cr>")
-		vim.keymap.set("n", "<space>rh", "<cmd>IronHide<cr>")
+		vim.keymap.set("n", "<space>srf", "<cmd>IronFocus<cr>")
+		vim.keymap.set("n", "<space>srh", "<cmd>IronHide<cr>")
 	end,
 }

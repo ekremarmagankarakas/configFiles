@@ -181,42 +181,37 @@ return {
 				client.server_capabilities.documentRangeFormattingProvider = false
 			end
 
-			-- Keymaps
-			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.hover, opts)
-			vim.keymap.set("n", "<leader>lrn", vim.lsp.buf.rename, opts)
-			vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, opts)
-			vim.keymap.set("n", "<leader>le", function()
-				vim.diagnostic.open_float(nil, { focusable = false })
-			end, opts)
+			local function nmap(lhs, rhs, desc)
+				vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
+			end
 
-			-- Definitions and Implementations in split
-			-- Go to definition (gd) in vsplit
-			vim.keymap.set("n", "<leader>lgd", function()
+			nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
+			nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
+			nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
+			nmap("<leader>le", function()
+				vim.diagnostic.open_float(nil, { focusable = false })
+			end, "Diagnostics Float")
+			nmap("<leader>lgd", function()
 				vim.lsp.buf_request(
 					0,
 					"textDocument/definition",
 					vim.lsp.util.make_position_params(),
-					function(err, result, ctx, config)
+					function(_, result)
 						if result and not vim.tbl_isempty(result) then
-							vim.cmd("vsplit")
-							vim.cmd("wincmd l")
+							vim.cmd("vsplit | wincmd l")
 							vim.lsp.util.jump_to_location(result[1], "utf-8")
 						else
 							vim.notify("No definition found", vim.log.levels.INFO)
 						end
 					end
 				)
-			end, opts)
-
-			-- Go to implementation (gi) in vsplit
-			vim.keymap.set("n", "<leader>lgi", function()
+			end, "Definition (vsplit)")
+			nmap("<leader>lgi", function()
 				require("telescope.builtin").lsp_implementations()
-			end, opts)
-
-			-- References
-			vim.keymap.set("n", "<leader>lgr", function()
+			end, "Implementations")
+			nmap("<leader>lgr", function()
 				require("telescope.builtin").lsp_references()
-			end, opts)
+			end, "References")
 		end
 
 		--------------------------------------------------------------------------
