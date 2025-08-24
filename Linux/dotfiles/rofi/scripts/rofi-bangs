@@ -1,0 +1,234 @@
+#!/usr/bin/env bash
+# Save as: ~/.config/rofi/scripts/rofi-bangs
+# Make executable: chmod +x ~/.config/rofi/scripts/rofi-bangs
+
+set -euo pipefail
+
+LOG="$HOME/.cache/rofi-bangs.log"
+mkdir -p "$(dirname "$LOG")"
+
+log_msg() { echo "$(date '+%F %T'): $*" >> "$LOG"; }
+
+# --- terminal launcher (robust + detached) -----------------------------------
+term_cmd() {
+  if command -v kitty >/dev/null 2>&1; then
+    echo "kitty --hold"
+    return
+  fi
+  if command -v alacritty >/dev/null 2>&1; then
+    # no native hold; emulate with read at the end
+    echo "alacritty -e"
+    return
+  fi
+  if command -v xterm >/dev/null 2>&1; then
+    echo "xterm -hold -e"
+    return
+  fi
+  echo ""  # none found
+}
+
+run_in_term() {
+  local CMD="$1"
+  local T; T="$(term_cmd)"
+
+  if [ -z "$T" ]; then
+    # No GUI terminal; run detached in background as last resort
+    nohup bash -lc "$CMD" >/dev/null 2>&1 &
+    log_msg "[warn] no terminal found, ran detached: $CMD"
+    return
+  fi
+
+  # Detach from rofi process group so it can't block/freeze the session
+  if [[ "$T" == "kitty --hold" ]]; then
+    setsid -f nohup kitty --hold bash -lc "$CMD" >/dev/null 2>&1 &
+  elif [[ "$T" == "alacritty -e" ]]; then
+    setsid -f nohup alacritty -e bash -lc "$CMD; echo; read -p 'Press Enter to close…' _" >/dev/null 2>&1 &
+  else
+    # xterm
+    setsid -f nohup xterm -hold -e bash -lc "$CMD" >/dev/null 2>&1 &
+  fi
+}
+
+open_url() {
+  local URL="$1"
+  if [[ "$URL" =~ ^https?:// ]]; then
+    setsid -f nohup firefox "$URL" >/dev/null 2>&1 &
+  else
+    setsid -f nohup firefox "https://$URL" >/dev/null 2>&1 &
+  fi
+}
+
+urlencode() {
+  python3 - <<'PY' "$1"
+import sys, urllib.parse
+print(urllib.parse.quote(sys.argv[1]))
+PY
+}
+
+# ------------------------------------------------------------------------------
+
+log_msg "=== Script execution ==="
+log_msg "ROFI_RETV: ${ROFI_RETV:-unset}"
+log_msg "Arguments: '$*'"
+log_msg "Arg count: $#"
+
+# Display entries (initial mode)
+if [ "${ROFI_RETV:-0}" -eq 0 ]; then
+  log_msg "Displaying menu items"
+  cat << 'EOF'
+!s <query>       Search DuckDuckGo
+!u <url>         Open URL
+!b <cmd>         Run in terminal
+!e <file>        Edit file
+!o <path>        Open path
+!calc <expr>     Calculator
+!tmux            Tmux session
+!note            Take note
+!wifi on         Enable WiFi
+!wifi off        Disable WiFi
+!vol <percent>   Volume (0-150%)       
+!vol mute        Toggle mute
+!play            Play/pause
+!pause           Pause
+!next            Next track
+!prev            Previous track
+EOF
+  exit 0
+fi
+
+# Selection / custom input
+INPUT=""
+if [ $# -gt 0 ]; then
+  INPUT="$*"
+  log_msg "Got input from args: '$INPUT'"
+elif [ ! -t 0 ]; then
+  # some rofi builds send stdin
+  INPUT="$(cat || true)"
+  log_msg "Got input from stdin: '$(printf %q "$INPUT")'"
+fi
+
+[ -z "${INPUT// /}" ] && { log_msg "No input available"; exit 0; }
+
+log_msg "Processing input: '$INPUT'"
+
+case "$INPUT" in
+  "!s "* | "!s <query>       Search DuckDuckGo")
+    [[ "$INPUT" == *"<query>"* ]] && exit 0
+    QUERY="${INPUT#*!s }"
+    [ -n "$QUERY" ] && {
+      ENC="$(urlencode "$QUERY")"
+      open_url "https://duckduckgo.com/?q=${ENC}&ia=web"
+    }
+    ;;
+
+  "!u "* | "!u <url>         Open URL")
+    [[ "$INPUT" == *"<url>"* ]] && exit 0
+    URL="${INPUT#*!u }"
+    [ -n "$URL" ] && open_url "$URL"
+    ;;
+
+  "!b "* | "!b <cmd>         Run in terminal")
+    [[ "$INPUT" == *"<cmd>"* ]] && exit 0
+    CMD="${INPUT#*!b }"
+    log_msg "Running in terminal: $CMD"
+    [ -n "$CMD" ] && run_in_term "$CMD"
+    ;;
+
+  "!e "* | "!e <file>        Edit file")
+    [[ "$INPUT" == *"<file>"* ]] && exit 0
+    FILE="${INPUT#*!e }"
+    [ -n "$FILE" ] && run_in_term "$(command -v nvim >/dev/null 2>&1 && echo "nvim \"$FILE\"" || command -v vim >/dev/null 2>&1 && echo "vim \"$FILE\"" || echo "nano \"$FILE\"")"
+    ;;
+
+  "!o "* | "!o <path>        Open path")
+    [[ "$INPUT" == *"<path>"* ]] && exit 0
+    PATH_TO_OPEN="${INPUT#*!o }"
+    [ -n "$PATH_TO_OPEN" ] && setsid -f nohup xdg-open "$PATH_TO_OPEN" >/dev/null 2>&1 &
+    ;;
+
+  "!calc "* | "!calc <expr>     Calculator")
+    [[ "$INPUT" == *"<expr>"* ]] && exit 0
+    EXPR="${INPUT#*!calc }"
+    if [ -n "$EXPR" ]; then
+      RES="$(printf '%s\n' "$EXPR" | bc -l 2>/dev/null || true)"
+      if [ -n "$RES" ]; then
+        if [ -n "${WAYLAND_DISPLAY-}" ] && command -v wl-copy >/dev/null 2>&1; then
+          # Wayland: wl-copy returns quickly
+          printf '%s' "$RES" | wl-copy
+        elif command -v xclip >/dev/null 2>&1; then
+          # X11: detach xclip so rofi/script don't block
+          printf '%s' "$RES" | setsid -f nohup xclip -selection clipboard -in -loops 1 >/dev/null 2>&1 &
+        fi
+        setsid -f nohup notify-send "Calculator" "Result: $RES (copied)" >/dev/null 2>&1 &
+      fi
+    fi
+    ;;
+
+  "!tmux" | "!tmux            Tmux session")
+    run_in_term "tmux"
+    ;;
+
+  "!note" | "!note            Take note")
+    NOTE_FILE="$HOME/notes/$(date +%Y%m%d-%H%M%S).md"
+    mkdir -p "$(dirname "$NOTE_FILE")"
+    run_in_term "$(command -v nvim >/dev/null 2>&1 && echo "nvim \"$NOTE_FILE\"" || command -v vim >/dev/null 2>&1 && echo "vim \"$NOTE_FILE\"" || echo "nano \"$NOTE_FILE\"")"
+    ;;
+
+  "!wifi on" | "!wifi on         Enable WiFi")
+    command -v nmcli >/dev/null 2>&1 && nmcli radio wifi on
+    setsid -f nohup notify-send "WiFi" "Enabled" >/dev/null 2>&1 || true
+    ;;
+
+  "!wifi off" | "!wifi off        Disable WiFi")
+    command -v nmcli >/dev/null 2>&1 && nmcli radio wifi off
+    setsid -f nohup notify-send "WiFi" "Disabled" >/dev/null 2>&1 || true
+    ;;
+
+  "!vol <percent>" | "!vol "*)
+    if command -v pactl >/dev/null 2>&1; then
+      # Ignore the template row if it was selected
+      [[ "$INPUT" == *"<percent>"* ]] && exit 0
+
+      # Take the first token after "!vol"
+      ARG="${INPUT#*!vol }"
+      ARG="${ARG%% *}"
+
+      case "$ARG" in
+        mute)
+          pactl set-sink-mute @DEFAULT_SINK@ toggle
+          ;;
+        # 0..150 (optional %)
+        ''|*[!0-9%]*)
+          # malformed; do nothing
+          :
+          ;;
+        *)
+          # Strip optional % and clamp to 0..150
+          VAL="${ARG%%%}"
+          [ "$VAL" -lt 0 ]   && VAL=0
+          [ "$VAL" -gt 150 ] && VAL=150
+          pactl set-sink-volume @DEFAULT_SINK@ "${VAL}%"
+          setsid -f nohup notify-send "Volume" "${VAL}%" >/dev/null 2>&1 &
+          ;;
+      esac
+    fi
+    ;;
+
+  "!play" | "!pause" | "!next" | "!prev" | \
+  "!play            Play/pause" | "!pause           Pause" | "!next            Next track" | "!prev            Previous track")
+    if command -v playerctl >/dev/null 2>&1; then
+      case "$INPUT" in
+        *"!play"*)  playerctl play-pause ;;  # toggles play/pause
+        *"!pause"*) playerctl pause ;;
+        *"!next"*)  playerctl next ;;
+        *"!prev"*)  playerctl previous ;;
+      esac
+    fi
+    ;;
+
+  *)
+    log_msg "Unknown command: '$INPUT' (running as shell)"
+    setsid -f nohup bash -lc "$INPUT" >/dev/null 2>&1 &
+    ;;
+esac
+

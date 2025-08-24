@@ -52,6 +52,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show drun
 bindsym $mod+x exec rofi -show run
+bindsym $mod+Shift+d exec rofi -show bangs
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -176,16 +177,16 @@ bindsym Mod1+Shift+9 move container to workspace number $ws19
 bindsym Mod1+Shift+0 move container to workspace number $ws20
 
 # Boston Home Config
-#set $fm DP-1-0.6
-#set $sm DP-1-0.5
+set $fm DP-1-0
+set $sm eDP-1
 
 # Istanbul Home Configs
 # set $fm HDMI-1-0
 # set $sm eDP
 
 # NeXT Config
-set $fm DP-1-0.5
-set $sm DP-1-0.6
+# set $fm DP-1-0.5
+# set $sm eDP
 
 workspace 1 output $fm
 workspace 2 output $fm
@@ -315,10 +316,10 @@ gaps outer 0
 exec_always feh --bg-fill ~/Pictures/Wallpapers/black.png
 
 # Boston Home Config
-bindsym $mod+m exec xrandr --output eDP --off --output eDP-1 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DP-1-0.5 --mode 1920x1080 --rate 75 --pos 0x360 --rotate normal --output DP-1-0.6 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+bindsym $mod+m exec xrandr --output eDP-1 --mode 1920x1080 --rate 300 --pos 3440x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DP-1-0 --primary --mode 3440x1440 --rate 100 --pos 0x0 --rotate normal --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
 
 # Monitor only
-bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --rate 60 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
 
 # Istanbul Home Config
 bindsym $mod+i exec xrandr --output eDP --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --mode 2560x1440 --pos 0x0 --rotate normal
