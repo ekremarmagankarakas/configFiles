@@ -1,5 +1,6 @@
 configuration {
   modi: "window,run,drun,bangs:/home/ekrem-armagan-karakas/.config/rofi/scripts/rofi-bangs";
+  combi-modi: "bangs,drun";
 
   run-shell-command: "kitty -e bash -lc '{cmd}'";
 
@@ -8,6 +9,7 @@ configuration {
   display-window: "Windows:";
   display-bangs: "Bangs:";
 
+  matching: "regex";
   drun-display-format: "{icon} {name}";
   show-icons: true;
   icon-theme: "Papirus";

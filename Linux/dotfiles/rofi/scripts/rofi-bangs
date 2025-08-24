@@ -65,6 +65,47 @@ print(urllib.parse.quote(sys.argv[1]))
 PY
 }
 
+# --- keyboard backlight helper -----------------------------------------------
+set_kbd_brightness() {
+  # $1 = 0..100 (integer)
+  local VAL="$1"
+
+  # Try brightnessctl: detect device that contains kbd_backlight
+  if command -v brightnessctl >/dev/null 2>&1; then
+    local DEV
+    DEV="$(brightnessctl -l 2>/dev/null | awk -F"'" '/kbd_backlight/ {print $2; exit}')"
+    if [ -n "${DEV:-}" ]; then
+      brightnessctl -d "$DEV" set "${VAL}%"
+      return 0
+    fi
+    # Fallback: set all LEDs class devices (some systems expose only one kbd led)
+    if brightnessctl --class leds set "${VAL}%" >/dev/null 2>&1; then
+      return 0
+    fi
+  fi
+
+  # Alternative tool
+  if command -v kbdlight >/dev/null 2>&1; then
+    kbdlight -S "$VAL"
+    return 0
+  fi
+
+  # Sysfs fallback (requires permission via udev rules on many systems)
+  for D in /sys/class/leds/*kbd* /sys/class/leds/*::kbd_backlight; do
+    [ -d "$D" ] || continue
+    local MAX CUR
+    MAX="$(cat "$D/max_brightness" 2>/dev/null || true)"
+    [ -n "$MAX" ] || continue
+    CUR=$(( VAL * MAX / 100 ))
+    if printf '%s' "$CUR" > "$D/brightness" 2>/dev/null; then
+      return 0
+    fi
+  done
+
+  log_msg "[warn] no keyboard backlight device found or insufficient permission"
+  return 1
+}
+
 # ------------------------------------------------------------------------------
 
 log_msg "=== Script execution ==="
@@ -86,6 +127,8 @@ if [ "${ROFI_RETV:-0}" -eq 0 ]; then
 !note            Take note
 !wifi on         Enable WiFi
 !wifi off        Disable WiFi
+!br <percent>    Brightness (0-100%)
+!kbr <percent>   Keyboard light (0-100%)
 !vol <percent>   Volume (0-150%)       
 !vol mute        Toggle mute
 !play            Play/pause
@@ -184,26 +227,64 @@ case "$INPUT" in
     setsid -f nohup notify-send "WiFi" "Disabled" >/dev/null 2>&1 || true
     ;;
 
+  # Screen brightness: absolute percent 0..100 (optional %)
+  "!br <percent>" | "!br "*)
+    [[ "$INPUT" == *"<percent>"* ]] && exit 0
+    ARG="${INPUT#*!br }"
+    ARG="${ARG%% *}"
+    VAL="${ARG%%%}"
+    case "$VAL" in
+      ''|*[!0-9]*)
+        : ;;  # malformed
+      *)
+        [ "$VAL" -lt 0 ]   && VAL=0
+        [ "$VAL" -gt 100 ] && VAL=100
+        if command -v brightnessctl >/dev/null 2>&1; then
+          brightnessctl set "${VAL}%"
+        elif command -v xbacklight >/dev/null 2>&1; then
+          xbacklight -set "$VAL"
+        else
+          log_msg "[warn] no screen brightness tool (install brightnessctl or xbacklight)"
+        fi
+        setsid -f nohup notify-send "Brightness" "${VAL}%" >/dev/null 2>&1 || true
+        ;;
+    esac
+    ;;
+
+  # Keyboard backlight: absolute percent 0..100 (optional %)
+  "!kbr <percent>" | "!kbr "*)
+    [[ "$INPUT" == *"<percent>"* ]] && exit 0
+    ARG="${INPUT#*!kbr }"
+    ARG="${ARG%% *}"
+    VAL="${ARG%%%}"
+    case "$VAL" in
+      ''|*[!0-9]*)
+        : ;;  # malformed
+      *)
+        [ "$VAL" -lt 0 ]   && VAL=0
+        [ "$VAL" -gt 100 ] && VAL=100
+        if set_kbd_brightness "$VAL"; then
+          setsid -f nohup notify-send "Keyboard light" "${VAL}%" >/dev/null 2>&1 || true
+        else
+          setsid -f nohup notify-send "Keyboard light" "Not available" >/dev/null 2>&1 || true
+        fi
+        ;;
+    esac
+    ;;
+
+  # Volume: absolute percent 0..150 (optional %), or mute
   "!vol <percent>" | "!vol "*)
     if command -v pactl >/dev/null 2>&1; then
-      # Ignore the template row if it was selected
       [[ "$INPUT" == *"<percent>"* ]] && exit 0
-
-      # Take the first token after "!vol"
       ARG="${INPUT#*!vol }"
       ARG="${ARG%% *}"
-
       case "$ARG" in
         mute)
           pactl set-sink-mute @DEFAULT_SINK@ toggle
           ;;
-        # 0..150 (optional %)
         ''|*[!0-9%]*)
-          # malformed; do nothing
-          :
-          ;;
+          : ;;  # malformed
         *)
-          # Strip optional % and clamp to 0..150
           VAL="${ARG%%%}"
           [ "$VAL" -lt 0 ]   && VAL=0
           [ "$VAL" -gt 150 ] && VAL=150
