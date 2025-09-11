@@ -12,6 +12,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.python_recommended_style = 0
 
+vim.keymap.set("n", "<leader>sp", ":setlocal spell!<CR>", { desc = "Toggle spell check" })
+
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("v", "<leader>x", '"+d', { desc = "Cut to system clipboard" })
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })

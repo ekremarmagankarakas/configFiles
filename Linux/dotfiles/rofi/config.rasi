@@ -11,8 +11,15 @@ configuration {
 
   matching: "regex";
   drun-display-format: "{icon} {name}";
-  show-icons: true;
+  /* show-icons: true; */
   icon-theme: "Papirus";
+
+  /* Vim-style movement */
+  kb-row-select: "Alt+y";
+  kb-row-up:        "Up,alt+k,Control+p";
+  kb-row-down:      "Down,alt+j,Control+n";
+  kb-page-up:       "Page_Up,Control+b";
+  kb-page-down:     "Page_Down,Control+f";
 }
 
 @theme "/dev/null"

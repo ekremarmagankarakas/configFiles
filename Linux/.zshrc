@@ -121,3 +121,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Add ~/.local/bin to PATH for user-installed packages
 export PATH="$HOME/.local/bin:$PATH"
 
+export BROWSER='firefox'
+
