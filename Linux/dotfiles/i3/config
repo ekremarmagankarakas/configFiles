@@ -276,7 +276,7 @@ bar {
 
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+b exec firefox
+bindsym $mod+Shift+b exec firefox -P
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -316,7 +316,7 @@ gaps outer 0
 exec_always feh --bg-fill ~/Pictures/Wallpapers/black.png
 
 # Boston Home Config
-bindsym $mod+m exec xrandr --output eDP --off --output eDP-1 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DP-1-0 --primary --mode 3440x1440 --rate 100 --pos 0x0 --rotate normal --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+bindsym $mod+m exec xrandr --output eDP-1 --mode 1920x1080 --rate 360 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DP-1-0 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
 
 # Monitor only
 bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --rate 60 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off

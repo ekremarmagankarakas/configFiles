@@ -94,9 +94,8 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Golang
 export PATH=$PATH:/usr/local/go/bin
 
-# Neovim
-export PATH="$PATH:/opt/nvim-linux64/bin"
-export EDITOR=/opt/nvim-linux64/bin/nvim
+export PATH="$PATH:/snap//bin/nvim"
+export EDITOR=/snap/bin/nvim
 
 # GPG
 export GPG_TTY=$(tty)
@@ -122,4 +121,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$HOME/.local/bin:$PATH"
 
 export BROWSER='firefox'
+
+alias clipcat="$HOME/Scripts/clipcat"
 
