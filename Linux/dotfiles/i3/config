@@ -186,7 +186,7 @@ bindsym Mod1+Shift+0 move container to workspace number $ws20
 
 # NeXT Config
 set $fm DP-1-0.5
-set $sm eDP-1
+set $sm eDP
 
 workspace 1 output $fm
 workspace 2 output $fm
@@ -325,6 +325,6 @@ bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --rate 60 --p
 bindsym $mod+i exec xrandr --output eDP --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --mode 2560x1440 --pos 0x0 --rotate normal
 
 # NeXT Config
-bindsym $mod+o exec xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DP-1-0.5 --primary --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1-0.6 --mode 3840x2160 --pos 4480x0 --rotate normal --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
+bindsym $mod+o exec xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off --output DP-1-0.5 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output DP-1-0.6 --mode 3840x2160 --pos 5760x0 --rotate normal
 
 

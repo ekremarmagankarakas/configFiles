@@ -123,4 +123,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export BROWSER='firefox'
 
 alias clipcat="$HOME/Scripts/clipcat"
+alias tn="$HOME/Scripts/tmux-cmd"
+
+eval $(thefuck --alias)
 
