@@ -27,3 +27,4 @@ require("lazy").setup({
 	},
 	checker = { enabled = false },
 })
+

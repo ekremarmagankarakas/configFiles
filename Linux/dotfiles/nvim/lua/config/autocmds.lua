@@ -4,3 +4,4 @@ vim.api.nvim_create_user_command("MarkdownToPdf", function()
 	vim.fn.system({ "pandoc", current_file, "-o", output_file })
 	print("Converted " .. current_file .. " to " .. output_file)
 end, { desc = "Convert current Markdown file to PDF" })
+

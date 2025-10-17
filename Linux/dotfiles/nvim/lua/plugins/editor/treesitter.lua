@@ -1,9 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-    dependencies = {
-        "OXY2DEV/markview.nvim",
-    },
+	dependencies = {
+		"OXY2DEV/markview.nvim",
+	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all"
@@ -16,8 +16,8 @@ return {
 				"rust",
 				"jsdoc",
 				"bash",
-                "latex",
-                "bibtex",
+				"latex",
+				"bibtex",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
