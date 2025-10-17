@@ -1,17 +1,3 @@
-vim.cmd("set number")
-vim.cmd("set relativenumber")
-vim.cmd("set tabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set expandtab")
-vim.cmd("set mouse=a")
-vim.cmd("set wrap")
-vim.cmd("set linebreak")
-vim.opt.splitright = true
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.g.python_recommended_style = 0
-
 vim.keymap.set("n", "<leader>sp", ":setlocal spell!<CR>", { desc = "Toggle spell check" })
 
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
@@ -31,6 +17,11 @@ vim.keymap.set("n", "<leader>ge", ":Copilot enable<CR>", { desc = "Enable GitHub
 
 vim.keymap.set("n", "<leader>mt", ":Markview toggle<CR>", { desc = "Toggle Markview" })
 
+-- Git integration via Telescope
+vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git Commits" })
+vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
+
 local toggle_jk = false
 vim.keymap.set("n", "<leader>jk", function()
 	if toggle_jk then
@@ -45,11 +36,3 @@ vim.keymap.set("n", "<leader>jk", function()
 		print("Switched to gj/gk")
 	end
 end, { silent = true, desc = "Toggle j/k and gj/gk" })
-
--- init.lua
-vim.api.nvim_create_user_command("MarkdownToPdf", function()
-  local current_file = vim.fn.expand("%:p")
-  local output_file = vim.fn.fnamemodify(current_file, ":r") .. ".pdf"
-  vim.fn.system({"pandoc", current_file, "-o", output_file})
-  print("Converted " .. current_file .. " to " .. output_file)
-end, {desc = "Convert current Markdown file to PDF"})
