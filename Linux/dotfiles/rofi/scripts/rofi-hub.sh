@@ -18,6 +18,9 @@ LABELS["locate"]="Search local files"
 COMMANDS["websearch"]="$HOME/.config/rofi/scripts/rofi-surfraw-websearch.sh"
 LABELS["websearch"]="Surfraw engine picker"
 
+COMMANDS["monitor"]="$HOME/.config/rofi/scripts/rofi-monitor-setup.sh"
+LABELS["monitor"]="Monitor setup"
+
 COMMANDS["bangs"]="rofi -show bangs"
 LABELS["bangs"]="Bangs (bangs)"
 

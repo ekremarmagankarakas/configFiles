@@ -176,17 +176,14 @@ bindsym Mod1+Shift+8 move container to workspace number $ws18
 bindsym Mod1+Shift+9 move container to workspace number $ws19
 bindsym Mod1+Shift+0 move container to workspace number $ws20
 
-# Boston Home Config
-# set $fm DP-1-0
-# set $sm eDP-1
+# Monitor setup keybindings
+bindsym $mod+m exec ~/.config/i3/scripts/monitor-setup.sh boston
+bindsym $mod+i exec ~/.config/i3/scripts/monitor-setup.sh istanbul
+bindsym $mod+o exec ~/.config/i3/scripts/monitor-setup.sh next
+bindsym $mod+n exec ~/.config/i3/scripts/monitor-setup.sh laptop
 
-# Istanbul Home Configs
-# set $fm HDMI-1-0
-# set $sm eDP
-
-# NeXT Config
-set $fm DP-1-0.5
-set $sm eDP
+set $fm DP-1-0
+set $sm eDP-1
 
 workspace 1 output $fm
 workspace 2 output $fm
@@ -314,17 +311,3 @@ gaps outer 0
 # Set the wallpaper. Use only one of the following lines.
 ##exec nitrogen --no-startup-id --restore
 exec_always feh --bg-fill ~/Pictures/Wallpapers/black.png
-
-# Boston Home Config
-bindsym $mod+m exec xrandr --output eDP-1 --mode 1920x1080 --rate 360 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DP-1-0 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
-
-# Monitor only
-bindsym $mod+n exec xrandr --output eDP --primary --mode 1920x1080 --rate 60 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DP-1-0.6 --off --output DP-1-0.5 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off
-
-# Istanbul Home Config
-bindsym $mod+i exec xrandr --output eDP --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 2560x360 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --mode 2560x1440 --pos 0x0 --rotate normal
-
-# NeXT Config
-bindsym $mod+o exec xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output HDMI-1-0 --off --output DP-1-0.5 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output DP-1-0.6 --mode 3840x2160 --pos 5760x0 --rotate normal
-
-
