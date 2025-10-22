@@ -13,8 +13,48 @@ prompt adam1
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+# ===== VIM MODE CONFIGURATION =====
+bindkey -v
+export KEYTIMEOUT=1
+
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  else
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() { echo -ne "\e[5 q"; }
+zle -N zle-line-init
+
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey -M vicmd 'k' up-line-or-beginning-search
+bindkey -M vicmd 'j' down-line-or-beginning-search
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+
+bindkey -M vicmd '/' history-incremental-search-backward
+bindkey -M vicmd '?' history-incremental-search-forward
+
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^h' backward-delete-char
+bindkey -M viins '^w' backward-kill-word
+bindkey -M viins '^a' beginning-of-line
+bindkey -M viins '^e' end-of-line
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M viins '\ey' autosuggest-accept
+# ===== END VIM MODE =====
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -59,7 +99,7 @@ alias ..='cd ..'
 alias g='git'
 alias ga='git add .'
 alias gb='git branch'
-alias gc='git commit -m'
+alias gc='git commit'
 alias gca='git commit -am'
 alias gd='git diff'
 alias gl='git log --oneline --graph --decorate --all'
@@ -77,10 +117,6 @@ alias dps='docker ps'
 alias dcu='docker compose up'
 alias dcub='docker compose up --build'
 alias dcd='docker compose down'
-
-# Change accept suggestion key to Alt-y
-bindkey -r '^E'
-bindkey '\ey' autosuggest-accept
 
 ### Environment variables
 # Android Studio

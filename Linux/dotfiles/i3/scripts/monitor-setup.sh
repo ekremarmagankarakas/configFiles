@@ -50,6 +50,9 @@ turn_off_output() {
 
 case "$1" in
     boston)
+        set_workspaces "DP-1-0" "$LAPTOP_DISPLAY"
+        sleep 1
+
         # Build xrandr command only for connected outputs
         XRANDR_CMD="xrandr --output $LAPTOP_DISPLAY --mode 1920x1080 --rate 360 --pos 0x0 --rotate normal \
                    --output DP-1-0 --primary --mode 3440x1440 --rate 100 --pos 1920x0 --rotate normal"
@@ -60,11 +63,12 @@ case "$1" in
         done
         
         eval "$XRANDR_CMD" 2>/dev/null
-        sleep 1
-        set_workspaces "DP-1-0" "$LAPTOP_DISPLAY"
         ;;
     
     istanbul)
+        set_workspaces "HDMI-1-0" "$LAPTOP_DISPLAY"
+        sleep 1
+
         XRANDR_CMD="xrandr --output $LAPTOP_DISPLAY --primary --mode 1920x1080 --pos 2560x360 --rotate normal \
                    --output HDMI-1-0 --mode 2560x1440 --pos 0x0 --rotate normal"
         
@@ -73,11 +77,12 @@ case "$1" in
         done
         
         eval "$XRANDR_CMD" 2>/dev/null
-        sleep 1
-        set_workspaces "HDMI-1-0" "$LAPTOP_DISPLAY"
         ;;
     
     next)
+        set_workspaces "DP-1-0.5" "$LAPTOP_DISPLAY"
+        sleep 1
+
         XRANDR_CMD="xrandr --output $LAPTOP_DISPLAY --mode 1920x1080 --pos 0x0 --rotate normal \
                    --output DP-1-0.5 --primary --mode 3840x2160 --pos 1920x0 --rotate normal \
                    --output DP-1-0.6 --mode 3840x2160 --pos 5760x0 --rotate normal"
@@ -87,11 +92,12 @@ case "$1" in
         done
         
         eval "$XRANDR_CMD" 2>/dev/null
-        sleep 1
-        set_workspaces "DP-1-0.5" "$LAPTOP_DISPLAY"
         ;;
     
     laptop)
+        set_workspaces "$LAPTOP_DISPLAY" "$LAPTOP_DISPLAY"
+        sleep 1
+
         # Turn off all external displays
         XRANDR_CMD="xrandr --output $LAPTOP_DISPLAY --primary --mode 1920x1080 --auto"
         
@@ -102,8 +108,6 @@ case "$1" in
         done
         
         eval "$XRANDR_CMD" 2>/dev/null
-        sleep 1
-        set_workspaces "$LAPTOP_DISPLAY" "$LAPTOP_DISPLAY"
         ;;
     
     *)

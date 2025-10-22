@@ -22,6 +22,9 @@ vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Gi
 vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
 vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
 
+-- DiffViewOpen
+vim.keymap.set("n", "<leader>dvo", ":DiffviewOpen ", { desc = "Diff View Open" })
+
 local toggle_jk = false
 vim.keymap.set("n", "<leader>jk", function()
 	if toggle_jk then

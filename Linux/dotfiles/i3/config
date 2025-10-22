@@ -182,7 +182,7 @@ bindsym $mod+i exec ~/.config/i3/scripts/monitor-setup.sh istanbul
 bindsym $mod+o exec ~/.config/i3/scripts/monitor-setup.sh next
 bindsym $mod+n exec ~/.config/i3/scripts/monitor-setup.sh laptop
 
-set $fm DP-1-0
+set $fm DP-1-0.5
 set $sm eDP-1
 
 workspace 1 output $fm
