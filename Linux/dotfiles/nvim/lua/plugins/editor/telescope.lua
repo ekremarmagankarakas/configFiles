@@ -1,24 +1,54 @@
 return {
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-	},
+	{ "stevearc/dressing.nvim", opts = {} },
+	{ "nvim-telescope/telescope-ui-select.nvim" },
+
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		branch = "master",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("telescope").setup({
+			local telescope = require("telescope")
+
+			telescope.setup({
+				defaults = {
+					sorting_strategy = "ascending",
+					layout_strategy = "horizontal",
+					layout_config = {
+						prompt_position = "top",
+						width = 0.95,
+						height = 0.95,
+						horizontal = {
+							preview_width = 0.6, -- preview on the right, larger
+						},
+					},
+					preview = { hide_on_startup = false },
+					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+				},
 				extensions = {
+					-- Make ui-select follow the same layout instead of dropdown
 					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
+						layout_strategy = "horizontal",
+						sorting_strategy = "ascending",
+						layout_config = {
+							prompt_position = "top",
+							width = 0.95,
+							height = 0.95,
+							horizontal = { preview_width = 0.6 },
+						},
 					},
 				},
 			})
+
+			telescope.load_extension("ui-select")
+
 			local builtin = require("telescope.builtin")
+
+			-- All these use the same default layout now
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
 			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
+			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word Under Cursor" })
 
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
@@ -33,10 +63,9 @@ return {
 			vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Quickfix List" })
 			vim.keymap.set("n", "<leader>fl", builtin.loclist, { desc = "Location List" })
 
-			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word Under Cursor" })
-
+			-- Multi root finder still uses the same layout, no need to pass layout again
 			vim.keymap.set("n", "<leader>fa", function()
-				require("telescope.builtin").find_files({
+				builtin.find_files({
 					prompt_title = "Search in Selected Dirs",
 					find_command = {
 						"find",
@@ -70,8 +99,6 @@ return {
 					no_ignore = true,
 				})
 			end, { desc = "Find Files in Selected Dirs" })
-
-			require("telescope").load_extension("ui-select")
 		end,
 	},
 }

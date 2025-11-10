@@ -84,10 +84,9 @@ case "$1" in
         sleep 1
 
         XRANDR_CMD="xrandr --output $LAPTOP_DISPLAY --mode 1920x1080 --pos 0x0 --rotate normal \
-                   --output DP-1-0.5 --primary --mode 3840x2160 --pos 1920x0 --rotate normal \
-                   --output DP-1-0.6 --mode 3840x2160 --pos 5760x0 --rotate normal"
+                   --output DP-1-0.5 --primary --mode 3840x2160 --pos 1920x0 --rotate normal"
         
-        for output in DisplayPort-1 DisplayPort-2 DisplayPort-3 DisplayPort-4 DisplayPort-5 DP-1-0 DP-1-1 DP-1-2 HDMI-1-0; do
+        for output in DisplayPort-1 DisplayPort-2 DisplayPort-3 DisplayPort-4 DisplayPort-5 DP-1-0 DP-1-1 DP-1-2 DP-1-0.6 HDMI-1-0; do
             XRANDR_CMD="$XRANDR_CMD $(turn_off_output $output)"
         done
         

@@ -9,7 +9,9 @@ vim.keymap.set("n", "<leader>hs", ":split<CR>", { desc = "Horizontal split" })
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
 
-vim.keymap.set("n", "<leader>t", "<cmd>split | term<CR>", { desc = "Open terminal" })
+vim.keymap.set("n", "<leader>t", function()
+  vim.cmd("belowright 15split | term")
+end, { desc = "Open terminal" })
 
 vim.keymap.set("n", "<leader>gt", ":Copilot toggle<CR>", { desc = "Toggle GitHub Copilot" })
 vim.keymap.set("n", "<leader>gd", ":Copilot disable<CR>", { desc = "Disable GitHub Copilot" })

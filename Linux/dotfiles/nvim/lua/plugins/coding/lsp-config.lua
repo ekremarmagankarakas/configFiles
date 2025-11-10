@@ -1,4 +1,4 @@
--- ./lua/plugins/lsp-config.lua  (Neovim 0.11+ / new API)
+-- lua/plugins/coding/lsp-config.lua
 return {
 	"neovim/nvim-lspconfig",
 	version = "*",
@@ -7,10 +7,9 @@ return {
 		{ "mason-org/mason.nvim", opts = {} },
 		{
 			"mason-org/mason-lspconfig.nvim",
-			-- IMPORTANT: drop old commit pin & handlers; use opts with automatic_enable
 			opts = {
 				ensure_installed = { "lua_ls", "pylsp", "ts_ls", "zls", "ltex" },
-				automatic_enable = true, -- uses vim.lsp.enable() for installed servers
+				automatic_enable = true,
 			},
 		},
 		"j-hui/fidget.nvim",
@@ -26,11 +25,15 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
+
+		-- Telescope (uses your global setup/layout)
+		{ "nvim-lua/plenary.nvim" },
+		{ "nvim-telescope/telescope.nvim" },
 	},
 
 	config = function()
 		--------------------------------------------------------------------------
-		-- Conform (kept as-is)
+		-- Conform
 		--------------------------------------------------------------------------
 		local conform = require("conform")
 		local util = require("conform.util")
@@ -89,7 +92,7 @@ return {
 		end, { noremap = true, silent = true, desc = "Format file" })
 
 		--------------------------------------------------------------------------
-		-- CMP (kept, minimal)
+		-- CMP
 		--------------------------------------------------------------------------
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
@@ -113,7 +116,7 @@ return {
 		})
 
 		--------------------------------------------------------------------------
-		-- Diagnostics + toggles (kept, with small enhancements)
+		-- Diagnostics
 		--------------------------------------------------------------------------
 		vim.diagnostic.config({
 			virtual_text = false,
@@ -153,16 +156,16 @@ return {
 		end, "Toggle nvim-cmp suggestions")
 
 		--------------------------------------------------------------------------
-		-- LSP (new API) ----------------------------------------------------------
+		-- LSP (Neovim 0.11 new API)
 		--------------------------------------------------------------------------
 		require("fidget").setup()
 
-		-- 1) Advertise cmp capabilities to ALL servers (wildcard)
+		-- Advertise cmp capabilities to all servers
 		vim.lsp.config("*", {
 			capabilities = cmp_lsp.default_capabilities(),
 		})
 
-		-- 2) Server-specific settings (new API)
+		-- Server specific
 		vim.lsp.config("lua_ls", {
 			settings = {
 				Lua = {
@@ -183,7 +186,11 @@ return {
 						flake8 = { enabled = false },
 						yapf = { enabled = false },
 						autopep8 = { enabled = false },
-						-- ruff via Conform (ruff_fix/ruff_format)
+                        pylsp_mypy = {
+                            enabled = true,
+                            live_mode = false,
+                            strict = false,
+                        },
 					},
 				},
 			},
@@ -201,7 +208,6 @@ return {
 		})
 
 		vim.lsp.config("zls", {
-			-- If you need to override root_dir, do it here; otherwise zls config provides defaults.
 			settings = {
 				zls = {
 					enable_inlay_hints = true,
@@ -211,14 +217,13 @@ return {
 			},
 		})
 
-		-- 3) Buffer-local keymaps & formatting policy when a client attaches
+		-- On attach: keymaps and formatting policy
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(ev)
 				local bufnr = ev.buf
 				local client = vim.lsp.get_client_by_id(ev.data.client_id)
-				local enc = (client and client.offset_encoding) or "utf-16"
 
-				-- Let Conform own formatting for these
+				-- Conform handles formatting for these
 				if
 					client
 					and (
@@ -236,6 +241,7 @@ return {
 					vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
 				end
 
+				-- Hover, rename, code action, diag float
 				nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
 				nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
 				nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
@@ -243,65 +249,25 @@ return {
 					vim.diagnostic.open_float(nil, { focusable = false })
 				end, "Diagnostics Float")
 
-				-- Definition in vsplit; Telescope if multiple; QF fallback
-				local function qf_from_locations(locs, title)
-					local items = vim.lsp.util.locations_to_items(locs, enc)
-					vim.fn.setqflist({}, " ", { title = title or "LSP results", items = items })
-					vim.cmd("copen")
-				end
-
-				local function open_definition_vsplit()
-					vim.lsp.buf_request(
-						bufnr,
-						"textDocument/definition",
-						vim.lsp.util.make_position_params(),
-						function(err, result)
-							if err then
-								vim.notify("LSP definition error: " .. (err.message or ""), vim.log.levels.ERROR)
-								return
-							end
-							if not result or (type(result) == "table" and vim.tbl_isempty(result)) then
-								vim.notify("No definition found", vim.log.levels.INFO)
-								return
-							end
-
-							local results = vim.tbl_islist(result) and result or { result }
-
-							if #results > 1 then
-								local ok_tb, tb = pcall(require, "telescope.builtin")
-								if ok_tb then
-									local themes = require("telescope.themes")
-									tb.lsp_definitions(themes.get_dropdown({}))
-									return
-								else
-									qf_from_locations(results, "LSP Definitions")
-									return
-								end
-							end
-
-							vim.cmd("vsplit | wincmd l")
-							vim.lsp.util.jump_to_location(results[1], enc)
-						end
-					)
-				end
-
-				nmap("<leader>lgd", open_definition_vsplit, "Definition (vsplit)")
-
-				-- Telescope implementations/references with graceful fallback
-				do
-					local ok_tb, tb = pcall(require, "telescope.builtin")
-					if ok_tb then
-						local dd = require("telescope.themes").get_dropdown
-						nmap("<leader>lgi", function()
-							tb.lsp_implementations(dd({}))
-						end, "Implementations (Telescope)")
-						nmap("<leader>lgr", function()
-							tb.lsp_references(dd({ include_declaration = false }))
-						end, "References (Telescope)")
-					else
-						nmap("<leader>lgi", vim.lsp.buf.implementation, "Implementations")
-						nmap("<leader>lgr", vim.lsp.buf.references, "References")
-					end
+				-- LSP pickers through Telescope (inherit global layout)
+				local ok_tb, tb = pcall(require, "telescope.builtin")
+				if ok_tb then
+					nmap("<leader>lgd", tb.lsp_definitions, "Go to Definition")
+					nmap("<leader>lgr", function()
+						tb.lsp_references({ include_declaration = false })
+					end, "References")
+					nmap("<leader>lgi", tb.lsp_implementations, "Implementations")
+					nmap("<leader>lgD", tb.lsp_type_definitions, "Type Definitions")
+					nmap("<leader>ls", tb.lsp_document_symbols, "Document Symbols")
+					nmap("<leader>lS", tb.lsp_workspace_symbols, "Workspace Symbols")
+				else
+					-- Fallbacks if Telescope is not present
+					nmap("<leader>lgd", vim.lsp.buf.definition, "Go to Definition")
+					nmap("<leader>lgr", function()
+						vim.lsp.buf.references({ include_declaration = false })
+					end, "References")
+					nmap("<leader>lgi", vim.lsp.buf.implementation, "Implementations")
+					nmap("<leader>lgD", vim.lsp.buf.type_definition, "Type Definitions")
 				end
 			end,
 		})

@@ -182,7 +182,7 @@ bindsym $mod+i exec ~/.config/i3/scripts/monitor-setup.sh istanbul
 bindsym $mod+o exec ~/.config/i3/scripts/monitor-setup.sh next
 bindsym $mod+n exec ~/.config/i3/scripts/monitor-setup.sh laptop
 
-set $fm DP-1-0.5
+set $fm DP-1-0
 set $sm eDP-1
 
 workspace 1 output $fm
@@ -273,7 +273,7 @@ bar {
 
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+b exec firefox -P
+bindsym $mod+Shift+b exec /home/ekrem-armagan-karakas/AppImages/zen_browser.appimage
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play

@@ -118,6 +118,9 @@ alias dcu='docker compose up'
 alias dcub='docker compose up --build'
 alias dcd='docker compose down'
 
+# Mason Alias
+alias mason-pip='~/.local/share/nvim/mason/packages/python-lsp-server/venv/bin/pip'
+
 ### Environment variables
 # Android Studio
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -156,9 +159,10 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Add ~/.local/bin to PATH for user-installed packages
 export PATH="$HOME/.local/bin:$PATH"
 
-export BROWSER='firefox'
+export BROWSER="/home/ekrem-armagan-karakas/AppImages/zen_browser.appimage"
+alias zen="/home/ekrem-armagan-karakas/AppImages/zen_browser.appimage"
 
-alias clipcat="$HOME/Scripts/clipcat"
 alias tn="$HOME/Scripts/tmux-cmd"
+alias clipcat="$HOME/Scripts/clipcat"
 
 eval $(thefuck --alias)
