@@ -1,0 +1,152 @@
+# Powerlevel10k instant prompt (top of file)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Prompt
+autoload -Uz promptinit
+promptinit
+prompt adam1
+
+setopt histignorealldups sharehistory
+
+# ===== VIM MODE =====
+bindkey -v
+export KEYTIMEOUT=1
+
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  else
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() { echo -ne "\e[5 q"; }
+zle -N zle-line-init
+
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey -M vicmd 'k' up-line-or-beginning-search
+bindkey -M vicmd 'j' down-line-or-beginning-search
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+
+bindkey -M vicmd '/' history-incremental-search-backward
+bindkey -M vicmd '?' history-incremental-search-forward
+
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^h' backward-delete-char
+bindkey -M viins '^w' backward-kill-word
+bindkey -M viins '^a' beginning-of-line
+bindkey -M viins '^e' end-of-line
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M viins '\ey' autosuggest-accept
+# ===== END VIM MODE =====
+
+# History
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+# Completion
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+### Aliases
+# macOS ls is BSD, use -G for color. If you install coreutils, you can switch to gls.
+alias ls='ls -G'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias grep='grep --color=auto'  # works with BSD grep on macOS 14+
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias ..='cd ..'
+
+# Git
+alias g='git'
+alias ga='git add .'
+alias gb='git branch'
+alias gc='git commit'
+alias gca='git commit -am'
+alias gd='git diff'
+alias gl='git log --oneline --graph --decorate --all'
+alias gp='git push'
+alias gpl='git pull'
+alias gs='git status'
+alias gcl='git clone'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gr='git restore'
+
+# Docker
+alias d='docker'
+alias dps='docker ps'
+alias dcu='docker compose up'
+alias dcub='docker compose up --build'
+alias dcd='docker compose down'
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Editor
+export EDITOR=/opt/homebrew/bin/nvim
+
+# Plugins installed via Homebrew
+# zsh-autosuggestions
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+# zsh-syntax-highlighting must be sourced at the end
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# fzf integration (after installing fzf and running its install script)
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+fi
+
+# Powerlevel10k from Homebrew
+if [ -f /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme ]; then
+  source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+fi
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# thefuck
+if command -v thefuck >/dev/null 2>&1; then
+  eval "$(thefuck --alias)"
+fi
+
+# export PATH="/Users/ekremarmagankarakas/Workspace/funlang/venv/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/ekremarmagankarakas/.antigravity/antigravity/bin:$PATH"
