@@ -8,7 +8,7 @@ return {
 		{
 			"mason-org/mason-lspconfig.nvim",
 			opts = {
-				ensure_installed = { "lua_ls", "pylsp", "ts_ls", "zls", "ltex" },
+				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex" },
 				automatic_enable = true,
 			},
 		},
@@ -26,36 +26,37 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 
-		-- Telescope (uses your global setup/layout)
+		-- Telescope
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-telescope/telescope.nvim" },
 	},
 
 	config = function()
 		--------------------------------------------------------------------------
-		-- Conform
+		-- Conform (Formatting Only)
 		--------------------------------------------------------------------------
 		local conform = require("conform")
 		local util = require("conform.util")
+
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "ruff_fix", "ruff_format" },
-				cpp = { "clang-format" },
+				python = { "ruff_format" },
+				cpp = { "clang_format" },
 				javascript = { "eslint_d", "prettier" },
 				typescript = { "eslint_d", "prettier" },
 				typescriptreact = { "eslint_d", "prettier" },
 				javascriptreact = { "eslint_d", "prettier" },
 			},
 			formatters = {
-				ruff_fix = {
-					command = "ruff",
-					args = { "check", "--fix", "--stdin-filename", "$FILENAME", "-" },
-					stdin = true,
-				},
 				ruff_format = {
 					command = "ruff",
 					args = { "format", "--stdin-filename", "$FILENAME" },
+					stdin = true,
+				},
+				clang_format = {
+					command = "clang-format",
+					args = { "--assume-filename", "$FILENAME" },
 					stdin = true,
 				},
 				prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
@@ -84,7 +85,6 @@ return {
 				},
 			},
 			default_formatter = "prettier",
-			log_level = vim.log.levels.DEBUG,
 		})
 
 		vim.keymap.set("n", "<leader>lf", function()
@@ -122,14 +122,10 @@ return {
 			virtual_text = false,
 			underline = true,
 			float = {
-				focusable = false,
-				style = "minimal",
 				border = "rounded",
 				source = "always",
-				header = "",
-				prefix = "",
-                max_width = 80,
-                wrap = true,
+				wrap = true,
+				max_width = 80,
 			},
 		})
 
@@ -157,47 +153,44 @@ return {
 			vim.notify("Suggestions: " .. (cmp_on and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
 		end, "Toggle nvim-cmp suggestions")
 
-		--------------------------------------------------------------------------
-		-- LSP (Neovim 0.11 new API)
-		--------------------------------------------------------------------------
+		----------------------------------------------------------------------
+		-- LSP core
+		----------------------------------------------------------------------
 		require("fidget").setup()
 
-		-- Advertise cmp capabilities to all servers
 		vim.lsp.config("*", {
 			capabilities = cmp_lsp.default_capabilities(),
 		})
 
-		-- Server specific
+		----------------------------------------------------------------------
+		-- Server configs
+		----------------------------------------------------------------------
+
+		-- Lua
 		vim.lsp.config("lua_ls", {
 			settings = {
 				Lua = {
-					runtime = { version = "Lua 5.1" },
+					runtime = { version = "LuaJIT" },
 					diagnostics = { globals = { "bit", "vim", "it", "describe", "before_each", "after_each" } },
 					workspace = { checkThirdParty = false },
 				},
 			},
 		})
 
-		vim.lsp.config("pylsp", {
+		-- Python
+		vim.lsp.config("pyright", {
 			settings = {
-				pylsp = {
-					plugins = {
-						pycodestyle = { enabled = false },
-						pyflakes = { enabled = false },
-						mccabe = { enabled = false },
-						flake8 = { enabled = false },
-						yapf = { enabled = false },
-						autopep8 = { enabled = false },
-                        pylsp_mypy = {
-                            enabled = true,
-                            live_mode = false,
-                            strict = false,
-                        },
+				python = {
+					analysis = {
+						typeCheckingMode = "standard",
+						autoSearchPaths = true,
+						useLibraryCodeForTypes = true,
 					},
 				},
 			},
 		})
 
+		-- LTEX
 		vim.lsp.config("ltex", {
 			settings = {
 				ltex = {
@@ -209,6 +202,7 @@ return {
 			},
 		})
 
+		-- Zig
 		vim.lsp.config("zls", {
 			settings = {
 				zls = {
@@ -219,22 +213,16 @@ return {
 			},
 		})
 
-		-- On attach: keymaps and formatting policy
+		----------------------------------------------------------------------
+		-- LSP attach behavior
+		----------------------------------------------------------------------
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(ev)
 				local bufnr = ev.buf
 				local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
 				-- Conform handles formatting for these
-				if
-					client
-					and (
-						client.name == "lua_ls"
-						or client.name == "pylsp"
-						or client.name == "ts_ls"
-						or client.name == "tsserver"
-					)
-				then
+				if client then
 					client.server_capabilities.documentFormattingProvider = false
 					client.server_capabilities.documentRangeFormattingProvider = false
 				end
@@ -250,7 +238,7 @@ return {
 				nmap("<leader>lef", function()
 					vim.diagnostic.open_float(nil, { focusable = false })
 				end, "Diagnostics Float")
-                nmap("<leader>le", function()
+				nmap("<leader>le", function()
 					local width = math.min(math.floor(vim.o.columns * 0.8), 100)
 					vim.diagnostic.open_float({
 						focusable = true,
@@ -264,7 +252,7 @@ return {
 				-- LSP pickers through Telescope (inherit global layout)
 				local ok_tb, tb = pcall(require, "telescope.builtin")
 				if ok_tb then
-                    if tb.diagnostics then
+					if tb.diagnostics then
 						nmap("<leader>lD", tb.diagnostics, "Diagnostics (Telescope)")
 					else
 						nmap("<leader>lD", function()

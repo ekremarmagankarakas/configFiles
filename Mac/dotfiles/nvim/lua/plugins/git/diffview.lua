@@ -10,11 +10,11 @@ return {
 		"DiffviewFileHistory",
 	},
 	keys = {
-		{ "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
-		{ "<leader>dc", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
-		{ "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "File History (all)" },
-		{ "<leader>df", "<cmd>DiffviewFileHistory %<cr>", desc = "File History (current)" },
-		{ "<leader>dt", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle File Panel" },
+		{ "<leader>gdo", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+		{ "<leader>gdc", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+		{ "<leader>gdh", "<cmd>DiffviewFileHistory<cr>", desc = "File History (all)" },
+		{ "<leader>gdf", "<cmd>DiffviewFileHistory %<cr>", desc = "File History (current)" },
+		{ "<leader>gdt", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle File Panel" },
 	},
 	config = function()
 		require("diffview").setup({

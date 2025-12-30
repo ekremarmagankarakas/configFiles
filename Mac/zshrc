@@ -115,6 +115,9 @@ alias dcu='docker compose up'
 alias dcub='docker compose up --build'
 alias dcd='docker compose down'
 
+# Scripts
+alias tn='tmux-cmd'
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # Editor

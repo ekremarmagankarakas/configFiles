@@ -13,19 +13,19 @@ vim.keymap.set("n", "<leader>t", function()
   vim.cmd("belowright 15split | term")
 end, { desc = "Open terminal" })
 
-vim.keymap.set("n", "<leader>gt", ":Copilot toggle<CR>", { desc = "Toggle GitHub Copilot" })
-vim.keymap.set("n", "<leader>gd", ":Copilot disable<CR>", { desc = "Disable GitHub Copilot" })
-vim.keymap.set("n", "<leader>ge", ":Copilot enable<CR>", { desc = "Enable GitHub Copilot" })
+vim.keymap.set("n", "<leader>gct", ":Copilot toggle<CR>", { desc = "Toggle GitHub Copilot" })
+vim.keymap.set("n", "<leader>gcd", ":Copilot disable<CR>", { desc = "Disable GitHub Copilot" })
+vim.keymap.set("n", "<leader>gce", ":Copilot enable<CR>", { desc = "Enable GitHub Copilot" })
 
 vim.keymap.set("n", "<leader>mt", ":Markview toggle<CR>", { desc = "Toggle Markview" })
 
 -- Git integration via Telescope
-vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git Commits" })
-vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gB", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
+vim.keymap.set("n", "<leader>gtc", "<cmd>Telescope git_commits<cr>", { desc = "Git Commits" })
+vim.keymap.set("n", "<leader>gts", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gtB", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
 
 -- DiffViewOpen
-vim.keymap.set("n", "<leader>dvo", ":DiffviewOpen ", { desc = "Diff View Open" })
+vim.keymap.set("n", "<leader>gdv", ":DiffviewOpen ", { desc = "Diff View Open" })
 
 local toggle_jk = false
 vim.keymap.set("n", "<leader>jk", function()
@@ -41,3 +41,9 @@ vim.keymap.set("n", "<leader>jk", function()
 		print("Switched to gj/gk")
 	end
 end, { silent = true, desc = "Toggle j/k and gj/gk" })
+
+-- Theme selector
+vim.keymap.set("n", "<leader>pt", function()
+	require("config.theme_picker").pick()
+end, { desc = "Pick theme" })
+
