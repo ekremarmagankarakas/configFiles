@@ -1,4 +1,3 @@
--- lua/plugins/coding/lsp-config.lua
 return {
 	"neovim/nvim-lspconfig",
 	version = "*",
@@ -114,44 +113,6 @@ return {
 				{ name = "luasnip" },
 			}, { { name = "buffer" } }),
 		})
-
-		--------------------------------------------------------------------------
-		-- Diagnostics
-		--------------------------------------------------------------------------
-		vim.diagnostic.config({
-			virtual_text = false,
-			underline = true,
-			float = {
-				border = "rounded",
-				source = "always",
-				wrap = true,
-				max_width = 80,
-			},
-		})
-
-		local function nn(lhs, rhs, desc)
-			vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc })
-		end
-
-		local vt_on, ul_on, cmp_on = false, true, true
-
-		nn("<leader>lee", function()
-			vt_on = not vt_on
-			vim.diagnostic.config({ virtual_text = vt_on })
-			vim.notify("Virtual text: " .. (vt_on and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
-		end, "Diagnostics: toggle virtual text")
-
-		nn("<leader>leu", function()
-			ul_on = not ul_on
-			vim.diagnostic.config({ underline = ul_on })
-			vim.notify("Underline: " .. (ul_on and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
-		end, "Diagnostics: toggle underline")
-
-		nn("<leader>ltc", function()
-			cmp_on = not cmp_on
-			cmp.setup({ enabled = cmp_on })
-			vim.notify("Suggestions: " .. (cmp_on and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
-		end, "Toggle nvim-cmp suggestions")
 
 		----------------------------------------------------------------------
 		-- LSP core

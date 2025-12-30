@@ -1,4 +1,3 @@
--- lua/plugins/coding/dap.lua
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
@@ -72,7 +71,7 @@ return {
 		end
 
 		----------------------------------------------------------------------
-		-- Keymaps (leader-based, no F-keys)
+		-- Keymaps
 		----------------------------------------------------------------------
 		local map = vim.keymap.set
 

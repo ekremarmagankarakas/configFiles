@@ -18,12 +18,7 @@ require("config")
 
 require("lazy").setup({
 	spec = {
-		{ import = "plugins.ui" },
-		{ import = "plugins.editor" },
-		{ import = "plugins.coding" },
-		{ import = "plugins.git" },
-		{ import = "plugins.tools" },
-		{ import = "plugins.lang" },
+		{ import = "plugins" },
 	},
 	checker = { enabled = false },
 })

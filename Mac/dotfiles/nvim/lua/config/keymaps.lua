@@ -1,22 +1,32 @@
+-- Toggle Spell Check
 vim.keymap.set("n", "<leader>sp", ":setlocal spell!<CR>", { desc = "Toggle spell check" })
 
+-- Yank
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("v", "<leader>x", '"+d', { desc = "Cut to system clipboard" })
+
+-- Clear search
 vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })
+
+-- Split
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>hs", ":split<CR>", { desc = "Horizontal split" })
 
+-- QuickFix Keymaps
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
 
+-- Open Terminal
 vim.keymap.set("n", "<leader>t", function()
   vim.cmd("belowright 15split | term")
 end, { desc = "Open terminal" })
 
+-- Copilot Toggle
 vim.keymap.set("n", "<leader>gct", ":Copilot toggle<CR>", { desc = "Toggle GitHub Copilot" })
 vim.keymap.set("n", "<leader>gcd", ":Copilot disable<CR>", { desc = "Disable GitHub Copilot" })
 vim.keymap.set("n", "<leader>gce", ":Copilot enable<CR>", { desc = "Enable GitHub Copilot" })
 
+-- Markview Toggle
 vim.keymap.set("n", "<leader>mt", ":Markview toggle<CR>", { desc = "Toggle Markview" })
 
 -- Git integration via Telescope
@@ -27,6 +37,7 @@ vim.keymap.set("n", "<leader>gtB", "<cmd>Telescope git_branches<cr>", { desc = "
 -- DiffViewOpen
 vim.keymap.set("n", "<leader>gdv", ":DiffviewOpen ", { desc = "Diff View Open" })
 
+-- Toggle jk
 local toggle_jk = false
 vim.keymap.set("n", "<leader>jk", function()
 	if toggle_jk then
