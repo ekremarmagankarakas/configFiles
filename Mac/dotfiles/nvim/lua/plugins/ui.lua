@@ -7,6 +7,8 @@ return {
 	{ "rebelot/kanagawa.nvim", lazy = false, priority = 1000 },
 	{ "projekt0n/github-nvim-theme", name = "github-theme", lazy = false, priority = 1000 },
 	{ "olimorris/onedarkpro.nvim", lazy = false, priority = 1000 },
+    { "Mofiqul/dracula.nvim", lazy = false, priority = 1000 },
+    { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
 
 	----------------------------------------------------------------------
 	-- Load Current Theme
