@@ -19,6 +19,12 @@ return {
 		local dapui = require("dapui")
 
 		----------------------------------------------------------------------
+		-- Global Toggles
+		----------------------------------------------------------------------
+		_G.DAP_JUST_MY_CODE = false
+		_G.DAP_USE_VSCODE_LAUNCH = false
+
+		----------------------------------------------------------------------
 		-- Mason Setup
 		----------------------------------------------------------------------
 		require("mason").setup()
@@ -33,13 +39,48 @@ return {
 		})
 
 		----------------------------------------------------------------------
+		-- Prepare Phase (shared by ALL entry points)
+		----------------------------------------------------------------------
+		local function dap_prepare()
+			if not _G.DAP_USE_VSCODE_LAUNCH then
+				return
+			end
+
+			if vim.fn.filereadable(".vscode/launch.json") == 1 then
+				require("dap.ext.vscode").load_launchjs(nil, {
+					lldb = { "c", "cpp", "rust" },
+					["pwa-node"] = { "javascript", "typescript", "typescriptreact" },
+					python = { "python" },
+				})
+			end
+		end
+
+		----------------------------------------------------------------------
 		-- Language Specific Setup
 		----------------------------------------------------------------------
 		-- Python (Mason path)
 		local debugpy_path = vim.fn.stdpath("data")
 			.. "/mason/packages/debugpy/venv/"
 			.. (vim.uv.os_uname().sysname == "Windows_NT" and "Scripts/python.exe" or "bin/python")
-		require("dap-python").setup(debugpy_path)
+
+		require("dap-python").setup(debugpy_path, {
+			justMyCode = function()
+				return _G.DAP_JUST_MY_CODE
+			end,
+		})
+
+		dap.configurations.python = {
+			{
+				type = "python",
+				request = "launch",
+				name = "Launch file",
+				program = "${file}",
+				console = "integratedTerminal",
+				justMyCode = function()
+					return _G.DAP_JUST_MY_CODE
+				end,
+			},
+		}
 
 		-- Go
 		require("dap-go").setup()
@@ -69,9 +110,16 @@ return {
 		dapui.setup()
 		require("nvim-dap-virtual-text").setup()
 
-		-- Auto open dap ui
-		dap.listeners.after.event_initialized["dapui_config"] = function()
+		dap.listeners.after.event_initialized["dapui_open"] = function()
 			dapui.open()
+		end
+
+		dap.listeners.before.event_terminated["dapui_close"] = function()
+			dapui.close()
+		end
+
+		dap.listeners.before.event_exited["dapui_close"] = function()
+			dapui.close()
 		end
 
 		----------------------------------------------------------------------
@@ -80,17 +128,13 @@ return {
 		local map = vim.keymap.set
 		local dappy = require("dap-python")
 
-		map("n", "<leader>dc", dap.continue, { desc = "DAP Continue" })
-		map("n", "<leader>dv", function()
-			if vim.fn.filereadable(".vscode/launch.json") == 1 then
-				require("dap.ext.vscode").load_launchjs(nil, {
-					lldb = { "c", "cpp", "rust" },
-					["pwa-node"] = { "typescript", "javascript" },
-					python = { "python" },
-				})
-			end
+		-- Core run (prepare → run)
+		map("n", "<leader>dc", function()
+			dap_prepare()
 			dap.continue()
-		end, { desc = "DAP Continue (with launch.json)" })
+		end, { desc = "DAP Prepare and Continue" })
+
+		-- Stepping
 		map("n", "<leader>dn", dap.step_over, { desc = "DAP Step Over" })
 		map("n", "<leader>di", dap.step_into, { desc = "DAP Step Into" })
 		map("n", "<leader>do", dap.step_out, { desc = "DAP Step Out" })
@@ -115,18 +159,29 @@ return {
 		map("n", "<leader>dr", dap.repl.toggle, { desc = "DAP Toggle REPL" })
 		map("n", "<leader>dq", dap.terminate, { desc = "DAP Terminate" })
 		map("n", "<leader>du", dapui.toggle, { desc = "DAP UI Toggle" })
-		map("n", "<leader>dU", dapui.open, { desc = "DAP UI Open" })
-		map("n", "<leader>dx", dapui.close, { desc = "DAP UI Close" })
 
 		-- 4. Python Specific (nvim-dap-python)
 		map("n", "<leader>ds", function()
+			dap_prepare()
 			dappy.test_method()
 		end, { desc = "Debug nearest Python test" })
 		map("n", "<leader>df", function()
+			dap_prepare()
 			dappy.test_class()
-		end, { desc = "Debug current Python test class" })
+		end, { desc = "Debug Python test class" })
 		map("v", "<leader>de", function()
+			dap_prepare()
 			dappy.debug_selection()
-		end, { desc = "Debug Selection" })
+		end, { desc = "Debug selection" })
+
+		-- Toggles
+		map("n", "<leader>dtj", function()
+			_G.DAP_JUST_MY_CODE = not _G.DAP_JUST_MY_CODE
+			vim.notify("DAP justMyCode = " .. tostring(_G.DAP_JUST_MY_CODE))
+		end, { desc = "Toggle justMyCode" })
+		map("n", "<leader>dtv", function()
+			_G.DAP_USE_VSCODE_LAUNCH = not _G.DAP_USE_VSCODE_LAUNCH
+			vim.notify("DAP VSCode launch.json = " .. tostring(_G.DAP_USE_VSCODE_LAUNCH))
+		end, { desc = "Toggle VS Code launch.json" })
 	end,
 }
