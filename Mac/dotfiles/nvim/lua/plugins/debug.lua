@@ -1,57 +1,67 @@
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
-		"mfussenegger/nvim-dap-python",
+		-- UI and Core Helpers
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
 		"theHamsta/nvim-dap-virtual-text",
+		"jay-babu/mason-nvim-dap.nvim",
+		"mason-org/mason.nvim",
+
+		-- Language Specific Helpers
+		"mfussenegger/nvim-dap-python", -- Python
+		"leoluz/nvim-dap-go", -- Go
+		"mxsdev/nvim-dap-vscode-js", -- JS/TS
+		"julianolf/nvim-dap-lldb", -- C/C++/Rust
 	},
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
-		local dappy = require("dap-python")
 
 		----------------------------------------------------------------------
-		-- Python interpreter resolution (venv / uv / poetry / fallback)
+		-- Mason Setup
 		----------------------------------------------------------------------
-		local function get_python_path()
-			local cwd = vim.fn.getcwd()
+		require("mason").setup()
+		require("mason-nvim-dap").setup({
+			ensure_installed = {
+				"debugpy",
+				"delve",
+				"js-debug-adapter",
+				"codelldb",
+			},
+			automatic_installation = true,
+		})
 
-			-- Project-local virtualenvs
-			local candidates = {
-				cwd .. "/.venv/bin/python",
-				cwd .. "/venv/bin/python",
+		----------------------------------------------------------------------
+		-- Language Specific Setup
+		----------------------------------------------------------------------
+		-- Python (Mason path)
+		local debugpy_path = vim.fn.stdpath("data")
+			.. "/mason/packages/debugpy/venv/"
+			.. (vim.uv.os_uname().sysname == "Windows_NT" and "Scripts/python.exe" or "bin/python")
+		require("dap-python").setup(debugpy_path)
+
+		-- Go
+		require("dap-go").setup()
+
+		-- C/C++/Rust (via CodeLLDB)
+		require("dap-lldb").setup()
+
+		-- JS/TS (Node)
+		require("dap-vscode-js").setup({
+			adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal" },
+		})
+		for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
+			dap.configurations[language] = {
+				{
+					type = "pwa-node",
+					request = "launch",
+					name = "Launch Current File",
+					program = "${file}",
+					cwd = "${workspaceFolder}",
+				},
 			}
-
-			for _, path in ipairs(candidates) do
-				if vim.fn.executable(path) == 1 then
-					return path
-				end
-			end
-
-			-- Poetry-managed virtualenv
-			if vim.fn.executable("poetry") == 1 then
-				local handle = io.popen("poetry env info -p 2>/dev/null")
-				if handle then
-					local result = handle:read("*a")
-					handle:close()
-					if result and result ~= "" then
-						local poetry_python = result:gsub("%s+", "") .. "/bin/python"
-						if vim.fn.executable(poetry_python) == 1 then
-							return poetry_python
-						end
-					end
-				end
-			end
-
-			-- Shell / system fallback
-			return "python"
 		end
-
-		----------------------------------------------------------------------
-		-- DAP Python
-		----------------------------------------------------------------------
-		dappy.setup(get_python_path())
 
 		----------------------------------------------------------------------
 		-- UI and virtual text
@@ -59,7 +69,7 @@ return {
 		dapui.setup()
 		require("nvim-dap-virtual-text").setup()
 
-        -- Auto open dap ui
+		-- Auto open dap ui
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()
 		end
@@ -68,9 +78,19 @@ return {
 		-- Keymaps
 		----------------------------------------------------------------------
 		local map = vim.keymap.set
+		local dappy = require("dap-python")
 
-		-- 1. Core Execution (Step & Navigation)
 		map("n", "<leader>dc", dap.continue, { desc = "DAP Continue" })
+		map("n", "<leader>dv", function()
+			if vim.fn.filereadable(".vscode/launch.json") == 1 then
+				require("dap.ext.vscode").load_launchjs(nil, {
+					lldb = { "c", "cpp", "rust" },
+					["pwa-node"] = { "typescript", "javascript" },
+					python = { "python" },
+				})
+			end
+			dap.continue()
+		end, { desc = "DAP Continue (with launch.json)" })
 		map("n", "<leader>dn", dap.step_over, { desc = "DAP Step Over" })
 		map("n", "<leader>di", dap.step_into, { desc = "DAP Step Into" })
 		map("n", "<leader>do", dap.step_out, { desc = "DAP Step Out" })
