@@ -198,7 +198,7 @@ return {
 				nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
 				nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
 				nmap("<leader>lef", function()
-					vim.diagnostic.open_float(nil, { focusable = false })
+					vim.diagnostic.open_float(nil, { focusable = true })
 				end, "Diagnostics Float")
 				nmap("<leader>le", function()
 					local width = math.min(math.floor(vim.o.columns * 0.8), 100)
