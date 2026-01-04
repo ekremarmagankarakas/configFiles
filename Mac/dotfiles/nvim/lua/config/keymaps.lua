@@ -22,7 +22,7 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item"
 
 -- Open Terminal
 vim.keymap.set("n", "<leader>t", function()
-  vim.cmd("belowright 15split | term")
+	vim.cmd("belowright 15split | term")
 end, { desc = "Open terminal" })
 
 -- Copilot Toggle
@@ -62,3 +62,8 @@ vim.keymap.set("n", "<leader>pt", function()
 	require("config.theme_picker").pick()
 end, { desc = "Pick theme" })
 
+-- Replace strings
+vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { desc = "Search & replace (global)" })
+vim.keymap.set("n", "<leader>sq", ":cdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left>", {
+	desc = "Search & replace in quickfix list",
+})
