@@ -31,7 +31,7 @@ vim.keymap.set("n", "<leader>gcd", ":Copilot disable<CR>", { desc = "Disable Git
 vim.keymap.set("n", "<leader>gce", ":Copilot enable<CR>", { desc = "Enable GitHub Copilot" })
 
 -- Markview Toggle
-vim.keymap.set("n", "<leader>mt", ":Markview toggle<CR>", { desc = "Toggle Markview" })
+vim.keymap.set("n", "<leader>sm", ":Markview toggle<CR>", { desc = "Toggle Markview" })
 
 -- Git integration via Telescope
 vim.keymap.set("n", "<leader>gtc", "<cmd>Telescope git_commits<cr>", { desc = "Git Commits" })
@@ -43,7 +43,7 @@ vim.keymap.set("n", "<leader>gdv", ":DiffviewOpen ", { desc = "Diff View Open" }
 
 -- Toggle jk
 local toggle_jk = false
-vim.keymap.set("n", "<leader>jk", function()
+vim.keymap.set("n", "<leader>sj", function()
 	if toggle_jk then
 		vim.keymap.set("n", "j", "j", { remap = false, silent = true })
 		vim.keymap.set("n", "k", "k", { remap = false, silent = true })
@@ -58,7 +58,7 @@ vim.keymap.set("n", "<leader>jk", function()
 end, { silent = true, desc = "Toggle j/k and gj/gk" })
 
 -- Theme selector
-vim.keymap.set("n", "<leader>pt", function()
+vim.keymap.set("n", "<leader>st", function()
 	require("config.theme_picker").pick()
 end, { desc = "Pick theme" })
 
