@@ -67,3 +67,20 @@ vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { desc = "Search 
 vim.keymap.set("n", "<leader>sq", ":cdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left>", {
 	desc = "Search & replace in quickfix list",
 })
+
+vim.keymap.set("n", "<leader>mb", function()
+	-- jump to opening ```python
+	vim.cmd([[silent! ?^```python]])
+
+	-- move to first line of code
+	vim.cmd("normal! j")
+
+	-- start visual line mode
+	vim.cmd("normal! V")
+
+	-- jump to closing ```
+	vim.cmd([[silent! /^```]])
+
+	-- move up to exclude closing fence
+	vim.cmd("normal! k")
+end, { desc = "Select python fenced block" })
