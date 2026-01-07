@@ -9,6 +9,11 @@ return {
 	{ "olimorris/onedarkpro.nvim", lazy = false, priority = 1000 },
     { "Mofiqul/dracula.nvim", lazy = false, priority = 1000 },
     { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+    { "Mofiqul/adwaita.nvim", lazy = false, priority = 1000 },
+    { "rose-pine/neovim", lazy = false, priority = 1000 },
+    { "sainnhe/gruvbox-material", lazy = false, priority = 1000 },
+    { "sainnhe/everforest", lazy = false, priority = 1000 },
+    { "scottmckendry/cyberdream.nvim", lazy = false, priority = 1000 },
 
 	----------------------------------------------------------------------
 	-- Load Current Theme
