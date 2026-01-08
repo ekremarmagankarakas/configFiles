@@ -156,6 +156,7 @@ return {
 					"bash",
 					"latex",
 					"bibtex",
+                    "r",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)

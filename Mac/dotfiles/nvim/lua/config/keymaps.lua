@@ -68,19 +68,21 @@ vim.keymap.set("n", "<leader>sq", ":cdo %s//gc | update<Left><Left><Left><Left><
 	desc = "Search & replace in quickfix list",
 })
 
+-- Molten keymaps
 vim.keymap.set("n", "<leader>mb", function()
-	-- jump to opening ```python
+	-- select the fenced block
 	vim.cmd([[silent! ?^```python]])
-
-	-- move to first line of code
 	vim.cmd("normal! j")
-
-	-- start visual line mode
 	vim.cmd("normal! V")
-
-	-- jump to closing ```
 	vim.cmd([[silent! /^```]])
-
-	-- move up to exclude closing fence
 	vim.cmd("normal! k")
 end, { desc = "Select python fenced block" })
+
+vim.keymap.set("n", "<leader>mc", function()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<leader>mb<leader>me<Esc>", true, false, true),
+    "m",
+    false
+  )
+end, { desc = "Run mb then me then Esc" })
+

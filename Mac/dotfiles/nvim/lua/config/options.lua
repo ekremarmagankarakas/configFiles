@@ -20,4 +20,3 @@ vim.g.maplocalleader = "\\"
 
 -- Python
 vim.g.python_recommended_style = 0
-

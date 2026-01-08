@@ -46,6 +46,8 @@ return {
 				typescript = { "eslint_d", "prettier" },
 				typescriptreact = { "eslint_d", "prettier" },
 				javascriptreact = { "eslint_d", "prettier" },
+				r = { "r_styler" },
+				rmd = { "r_styler" },
 			},
 			formatters = {
 				ruff_format = {
@@ -82,6 +84,15 @@ return {
 						}, ctx.buf) ~= nil
 					end,
 				},
+				r_styler = {
+					command = "Rscript",
+					args = {
+						"-e",
+						"styler::style_file(commandArgs(trailingOnly = TRUE)[1])",
+						"$FILENAME",
+					},
+					stdin = false,
+				},
 			},
 			default_formatter = "prettier",
 		})
@@ -111,7 +122,7 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
-                { name = "path" },
+				{ name = "path" },
 			}, { { name = "buffer" } }),
 		})
 
@@ -173,6 +184,29 @@ return {
 					warn_style = true,
 				},
 			},
+		})
+
+		-- R (installed via R, not Mason)
+		vim.lsp.config("r_language_server", {
+			cmd = { "R", "--slave", "-e", "languageserver::run()" },
+			filetypes = { "r", "rmd" },
+			root_dir = function(fname)
+				-- fname can be a buffer number or a path
+				if type(fname) == "number" then
+					fname = vim.api.nvim_buf_get_name(fname)
+				end
+
+				if not fname or fname == "" then
+					return vim.fn.getcwd()
+				end
+
+				local git = vim.fs.find(".git", { path = fname, upward = true })[1]
+				if git then
+					return vim.fs.dirname(git)
+				end
+
+				return vim.fn.getcwd()
+			end,
 		})
 
 		----------------------------------------------------------------------

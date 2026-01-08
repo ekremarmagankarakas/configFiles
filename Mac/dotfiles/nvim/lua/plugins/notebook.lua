@@ -55,9 +55,6 @@ return {
 		"3rd/image.nvim",
 		opts = {
 			backend = "kitty",
-			max_width = 100,
-			max_height = 12,
-			window_overlap_clear_enabled = true,
 		},
 	},
 }
