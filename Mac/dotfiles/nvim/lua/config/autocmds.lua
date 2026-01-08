@@ -1,3 +1,6 @@
+----------------------------------------------------------------------
+-- Markdown to PDF
+----------------------------------------------------------------------
 vim.api.nvim_create_user_command("MarkdownToPdf", function()
 	local current_file = vim.fn.expand("%:p")
 	local output_file = vim.fn.fnamemodify(current_file, ":r") .. ".pdf"
@@ -5,6 +8,9 @@ vim.api.nvim_create_user_command("MarkdownToPdf", function()
 	print("Converted " .. current_file .. " to " .. output_file)
 end, { desc = "Convert current Markdown file to PDF" })
 
+----------------------------------------------------------------------
+-- Trim Trailing Whitespace
+----------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufWritePre", {
 	desc = "Trim trailing whitespace",
 	callback = function()
@@ -17,18 +23,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 ----------------------------------------------------------------------
 -- R integration
 ----------------------------------------------------------------------
--- R lsp attach for r rmd filetypes
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "r", "rmd" },
-	callback = function(args)
-		vim.lsp.start({
-			name = "r_language_server",
-			cmd = { "R", "--slave", "-e", "languageserver::run()" },
-			root_dir = vim.fn.getcwd(),
-		})
-	end,
-})
-
 -- R convert to pdf and html
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "rmd",
