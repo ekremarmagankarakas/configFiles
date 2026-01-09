@@ -76,6 +76,7 @@ return {
 				name = "Launch file",
 				program = "${file}",
 				console = "integratedTerminal",
+				cwd = "${workspaceFolder}",
 				justMyCode = function()
 					return _G.DAP_JUST_MY_CODE
 				end,

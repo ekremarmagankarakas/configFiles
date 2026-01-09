@@ -8,7 +8,6 @@ return {
 			"mason-org/mason-lspconfig.nvim",
 			opts = {
 				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex" },
-				automatic_enable = true,
 			},
 		},
 		"j-hui/fidget.nvim",
@@ -126,6 +125,10 @@ return {
 			}, { { name = "buffer" } }),
 		})
 
+		-- Integrate autopairs with cmp
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
 		----------------------------------------------------------------------
 		-- LSP core
 		----------------------------------------------------------------------
@@ -141,6 +144,8 @@ return {
 
 		-- Lua
 		vim.lsp.config("lua_ls", {
+			filetypes = { "lua" },
+			root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", "stylua.toml", ".stylua.toml", ".git" },
 			settings = {
 				Lua = {
 					runtime = { version = "LuaJIT" },
@@ -152,6 +157,8 @@ return {
 
 		-- Python
 		vim.lsp.config("pyright", {
+			filetypes = { "python" },
+			root_markers = { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" },
 			settings = {
 				python = {
 					analysis = {
@@ -163,8 +170,16 @@ return {
 			},
 		})
 
+		-- TypeScript/JavaScript
+		vim.lsp.config("ts_ls", {
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+		})
+
 		-- LTEX
 		vim.lsp.config("ltex", {
+			filetypes = { "markdown", "text", "tex", "latex", "bib" },
+			root_markers = { ".git" },
 			settings = {
 				ltex = {
 					checkFrequency = "save",
@@ -177,6 +192,8 @@ return {
 
 		-- Zig
 		vim.lsp.config("zls", {
+			filetypes = { "zig", "zir" },
+			root_markers = { "zls.json", "build.zig", ".git" },
 			settings = {
 				zls = {
 					enable_inlay_hints = true,

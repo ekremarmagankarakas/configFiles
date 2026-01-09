@@ -13,6 +13,7 @@ vim.opt.mouse = "a"
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- Leaders
 vim.g.mapleader = " "
