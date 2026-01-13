@@ -71,12 +71,12 @@ vim.keymap.set("n", "<leader>sq", ":cdo %s//gc | update<Left><Left><Left><Left><
 -- Molten keymaps
 vim.keymap.set("n", "<leader>mb", function()
 	-- select the fenced block
-	vim.cmd([[silent! ?^```python]])
+	vim.cmd([[silent! ?^```]])
 	vim.cmd("normal! j")
 	vim.cmd("normal! V")
 	vim.cmd([[silent! /^```]])
 	vim.cmd("normal! k")
-end, { desc = "Select python fenced block" })
+end, { desc = "Select fenced block" })
 
 vim.keymap.set("n", "<leader>mc", function()
   vim.api.nvim_feedkeys(

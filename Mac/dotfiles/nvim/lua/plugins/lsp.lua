@@ -47,6 +47,8 @@ return {
 				javascriptreact = { "eslint_d", "prettier" },
 				r = { "r_styler" },
 				rmd = { "r_styler" },
+				tex = { "latexindent" },
+				latex = { "latexindent" },
 			},
 			formatters = {
 				ruff_format = {
@@ -91,6 +93,12 @@ return {
 						"$FILENAME",
 					},
 					stdin = false,
+				},
+				latexindent = {
+					command = "latexindent",
+					args = { "-" },
+					stdin = true,
+					timeout_ms = 4000,
 				},
 			},
 			default_formatter = "prettier",
@@ -158,7 +166,15 @@ return {
 		-- Python
 		vim.lsp.config("pyright", {
 			filetypes = { "python" },
-			root_markers = { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" },
+			root_markers = {
+				"pyrightconfig.json",
+				"pyproject.toml",
+				"setup.py",
+				"setup.cfg",
+				"requirements.txt",
+				"Pipfile",
+				".git",
+			},
 			settings = {
 				python = {
 					analysis = {
@@ -204,25 +220,22 @@ return {
 		})
 
 		-- R (installed via R, not Mason)
-		vim.lsp.config("r_language_server", {
-			cmd = { "R", "--slave", "-e", "languageserver::run()" },
-			filetypes = { "r", "rmd" },
-			root_dir = function(fname)
-				-- fname can be a buffer number or a path
-				if type(fname) == "number" then
-					fname = vim.api.nvim_buf_get_name(fname)
-				end
-
-				if not fname or fname == "" then
-					return vim.fn.getcwd()
-				end
-
-				local git = vim.fs.find(".git", { path = fname, upward = true })[1]
+		-- Use autocmd to explicitly start server since it's not managed by Mason
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = { "r", "rmd" },
+			callback = function()
+				-- Find git root or use cwd
+				local root_dir = vim.fn.getcwd()
+				local git = vim.fs.find(".git", { upward = true })[1]
 				if git then
-					return vim.fs.dirname(git)
+					root_dir = vim.fs.dirname(git)
 				end
 
-				return vim.fn.getcwd()
+				vim.lsp.start({
+					name = "r_language_server",
+					cmd = { "R", "--slave", "-e", "languageserver::run()" },
+					root_dir = root_dir,
+				})
 			end,
 		})
 
