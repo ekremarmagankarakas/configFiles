@@ -59,6 +59,11 @@ return {
 				i(2, "print(e)"),
 			}),
 
+			-- assert
+			s("assert", {
+				t('assert expected == actual, f"\\nActual\\n{actual}\\nExpected\\n{expected}"'),
+			}),
+
 			-- def (cursor ends at function name)
 			s("def", {
 				t("def "),
@@ -162,4 +167,3 @@ return {
 		})
 	end,
 }
-

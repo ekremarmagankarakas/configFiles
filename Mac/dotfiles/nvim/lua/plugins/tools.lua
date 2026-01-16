@@ -98,6 +98,25 @@ return {
 	},
 
 	----------------------------------------------------------------------
+	-- Vim Surround
+	----------------------------------------------------------------------
+	{
+		"tpope/vim-surround",
+		config = function()
+			-- Add surround: <leader>ps<motion><char>
+			vim.keymap.set("n", "<leader>ps", "<Plug>Ysurround", { desc = "Surround: add" })
+			-- Surround whole line: <leader>pS<char>
+			vim.keymap.set("n", "<leader>pS", "<Plug>Yssurround", { desc = "Surround: line" })
+			-- Delete surround: <leader>pd<char>
+			vim.keymap.set("n", "<leader>pd", "<Plug>Dsurround", { remap = true, desc = "Surround: delete" })
+			-- Change surround: <leader>pc<old><new>
+			vim.keymap.set("n", "<leader>pc", "<Plug>Csurround", { remap = true, desc = "Surround: change" })
+			-- Visual surround: select then <leader>ps<char>
+			vim.keymap.set("x", "<leader>ps", "<Plug>VSurround", { remap = true, desc = "Surround: visual add" })
+		end,
+	},
+
+	----------------------------------------------------------------------
 	-- Windows - Maximize
 	----------------------------------------------------------------------
 	{

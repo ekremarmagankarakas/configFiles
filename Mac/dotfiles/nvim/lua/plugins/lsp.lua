@@ -7,7 +7,7 @@ return {
 		{
 			"mason-org/mason-lspconfig.nvim",
 			opts = {
-				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex" },
+				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman" },
 			},
 		},
 		"j-hui/fidget.nvim",
@@ -217,6 +217,12 @@ return {
 					warn_style = true,
 				},
 			},
+		})
+
+		-- Marksman
+		vim.lsp.config("marksman", {
+			filetypes = { "markdown" },
+            root_markers = { ".git", ".marksman.toml", "index.md"}
 		})
 
 		-- R (installed via R, not Mason)
