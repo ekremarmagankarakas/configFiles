@@ -6,43 +6,74 @@ return {
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{
+				"<leader>ha",
+				function()
+					require("harpoon"):list():add()
+				end,
+				desc = "Harpoon: add file",
+			},
+			{
+				"<leader>hd",
+				function()
+					require("harpoon"):list():remove()
+				end,
+				desc = "Harpoon: remove file",
+			},
+			{
+				"<leader>hh",
+				function()
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
+				end,
+				desc = "Harpoon: quick menu",
+			},
+			{
+				"<leader>h1",
+				function()
+					require("harpoon"):list():select(1)
+				end,
+				desc = "Harpoon: file 1",
+			},
+			{
+				"<leader>h2",
+				function()
+					require("harpoon"):list():select(2)
+				end,
+				desc = "Harpoon: file 2",
+			},
+			{
+				"<leader>h3",
+				function()
+					require("harpoon"):list():select(3)
+				end,
+				desc = "Harpoon: file 3",
+			},
+			{
+				"<leader>h4",
+				function()
+					require("harpoon"):list():select(4)
+				end,
+				desc = "Harpoon: file 4",
+			},
+			{
+				"<leader>hp",
+				function()
+					require("harpoon"):list():prev()
+				end,
+				desc = "Harpoon: prev",
+			},
+			{
+				"<leader>hn",
+				function()
+					require("harpoon"):list():next()
+				end,
+				desc = "Harpoon: next",
+			},
+		},
 		config = function()
-			local harpoon = require("harpoon")
-
-			harpoon:setup()
-
-			vim.keymap.set("n", "<leader>ha", function()
-				harpoon:list():add()
-			end, { desc = "Harpoon Add File" })
-
-			vim.keymap.set("n", "<leader>hd", function()
-				harpoon:list():remove()
-			end, { desc = "Harpoon Remove File" })
-
-			vim.keymap.set("n", "<C-e>", function()
-				harpoon.ui:toggle_quick_menu(harpoon:list())
-			end, { desc = "Harpoon Quick Menu" })
-
-			vim.keymap.set("n", "<leader>h1", function()
-				harpoon:list():select(1)
-			end, { desc = "Harpoon File 1" })
-			vim.keymap.set("n", "<leader>h2", function()
-				harpoon:list():select(2)
-			end, { desc = "Harpoon File 2" })
-			vim.keymap.set("n", "<leader>h3", function()
-				harpoon:list():select(3)
-			end, { desc = "Harpoon File 3" })
-			vim.keymap.set("n", "<leader>h4", function()
-				harpoon:list():select(4)
-			end, { desc = "Harpoon File 4" })
-
-			vim.keymap.set("n", "<leader>hp", function()
-				harpoon:list():prev()
-			end, { desc = "Harpoon Prev" })
-
-			vim.keymap.set("n", "<leader>hn", function()
-				harpoon:list():next()
-			end, { desc = "Harpoon Next" })
+			require("harpoon"):setup()
 		end,
 	},
 
@@ -52,9 +83,18 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equivalent to setup({}) function
+		config = function()
+			require("nvim-autopairs").setup()
+
+			-- Integrate with nvim-cmp if present
+			local ok_cmp, cmp = pcall(require, "cmp")
+			if ok_cmp then
+				local ok_ap, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+				if ok_ap then
+					cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+				end
+			end
+		end,
 	},
 
 	----------------------------------------------------------------------
@@ -62,10 +102,9 @@ return {
 	----------------------------------------------------------------------
 	{
 		"mbbill/undotree",
-
-		config = function()
-			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
-		end,
+		keys = {
+			{ "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Undotree: toggle" },
+		},
 	},
 
 	----------------------------------------------------------------------
@@ -74,20 +113,33 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		opts = {},
 		keys = {
 			{
 				"<leader>?",
 				function()
 					require("which-key").show({ global = false })
 				end,
-				desc = "Buffer Local Keymaps (which-key)",
+				desc = "Which-key: buffer local keymaps",
 			},
 		},
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
+
+			wk.add({
+				{ "<leader>d", group = "debug" },
+				{ "<leader>f", group = "find" },
+				{ "<leader>g", group = "git" },
+				{ "<leader>h", group = "harpoon" },
+				{ "<leader>l", group = "lsp" },
+				{ "<leader>m", group = "molten" },
+				{ "<leader>n", group = "neo-tree" },
+				{ "<leader>p", group = "pairs/surround" },
+				{ "<leader>s", group = "settings" },
+				{ "<leader>w", group = "windows" },
+			})
+		end,
 	},
 
 	----------------------------------------------------------------------
@@ -102,18 +154,13 @@ return {
 	----------------------------------------------------------------------
 	{
 		"tpope/vim-surround",
-		config = function()
-			-- Add surround: <leader>ps<motion><char>
-			vim.keymap.set("n", "<leader>ps", "<Plug>Ysurround", { desc = "Surround: add" })
-			-- Surround whole line: <leader>pS<char>
-			vim.keymap.set("n", "<leader>pS", "<Plug>Yssurround", { desc = "Surround: line" })
-			-- Delete surround: <leader>pd<char>
-			vim.keymap.set("n", "<leader>pd", "<Plug>Dsurround", { remap = true, desc = "Surround: delete" })
-			-- Change surround: <leader>pc<old><new>
-			vim.keymap.set("n", "<leader>pc", "<Plug>Csurround", { remap = true, desc = "Surround: change" })
-			-- Visual surround: select then <leader>ps<char>
-			vim.keymap.set("x", "<leader>ps", "<Plug>VSurround", { remap = true, desc = "Surround: visual add" })
-		end,
+		keys = {
+			{ "<leader>ps", "<Plug>Ysurround", remap = true, desc = "Surround: add" },
+			{ "<leader>pS", "<Plug>Yssurround", remap = true, desc = "Surround: line" },
+			{ "<leader>pd", "<Plug>Dsurround", remap = true, desc = "Surround: delete" },
+			{ "<leader>pc", "<Plug>Csurround", remap = true, desc = "Surround: change" },
+			{ "<leader>ps", "<Plug>VSurround", mode = "x", remap = true, desc = "Surround: visual add" },
+		},
 	},
 
 	----------------------------------------------------------------------
@@ -122,9 +169,11 @@ return {
 	{
 		"anuvyklack/windows.nvim",
 		dependencies = "anuvyklack/middleclass",
+		keys = {
+			{ "<leader>wm", "<cmd>WindowsMaximize<cr>", silent = true, desc = "Windows: maximize" },
+		},
 		config = function()
 			require("windows").setup()
-			vim.keymap.set("n", "<leader>z", ":WindowsMaximize<CR>")
 		end,
 	},
 

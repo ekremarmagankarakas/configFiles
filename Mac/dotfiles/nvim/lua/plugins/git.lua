@@ -11,12 +11,26 @@ return {
 	----------------------------------------------------------------------
 	{
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-
-			vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})
-			vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})
-		end,
+		main = "gitsigns",
+		keys = {
+			{
+				"<leader>gp",
+				function()
+					require("gitsigns").preview_hunk()
+				end,
+				silent = true,
+				desc = "Git: preview hunk",
+			},
+			{
+				"<leader>gb",
+				function()
+					require("gitsigns").toggle_current_line_blame()
+				end,
+				silent = true,
+				desc = "Git: toggle blame",
+			},
+		},
+		opts = {},
 	},
 
 	----------------------------------------------------------------------
@@ -26,6 +40,11 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
+		keys = {
+			{ "<leader>gct", "<cmd>Copilot toggle<cr>", silent = true, desc = "Copilot: toggle" },
+			{ "<leader>gcd", "<cmd>Copilot disable<cr>", silent = true, desc = "Copilot: disable" },
+			{ "<leader>gce", "<cmd>Copilot enable<cr>", silent = true, desc = "Copilot: enable" },
+		},
 		config = function()
 			require("copilot").setup({
 				suggestion = {
@@ -41,6 +60,7 @@ return {
 			})
 		end,
 	},
+
 
 	----------------------------------------------------------------------
 	-- LazyGit

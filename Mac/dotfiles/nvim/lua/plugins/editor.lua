@@ -10,19 +10,33 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			vim.keymap.set("n", "<leader>nn", ":Neotree filesystem reveal left<CR>")
-			vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>")
-			require("neo-tree").setup({
-				filesystem = {
-					filtered_items = {
-						visible = true,
-						hide_dotfiles = false,
-						hide_gitignored = true,
-					},
+		main = "neo-tree",
+		keys = {
+			{ "<leader>nn", "<cmd>Neotree filesystem reveal left<cr>", silent = true, desc = "Neo-tree: reveal" },
+			{ "<leader>nt", "<cmd>Neotree toggle<cr>", silent = true, desc = "Neo-tree: toggle" },
+		},
+		opts = {
+			filesystem = {
+				filtered_items = {
+					visible = true,
+					hide_dotfiles = false,
+					hide_gitignored = true,
 				},
-			})
-		end,
+			},
+		},
+	},
+
+	----------------------------------------------------------------------
+	-- Markview
+	----------------------------------------------------------------------
+	{
+		"OXY2DEV/markview.nvim",
+		main = "markview",
+		cmd = { "Markview" },
+		keys = {
+			{ "<leader>sm", "<cmd>Markview toggle<cr>", silent = true, desc = "Markview: toggle" },
+		},
+		opts = {},
 	},
 
     ----------------------------------------------------------------------
@@ -36,6 +50,67 @@ return {
 			"nvim-telescope/telescope.nvim",
 			branch = "master",
 			dependencies = { "nvim-lua/plenary.nvim" },
+			keys = {
+				{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find: files" },
+				{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find: live grep" },
+				{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find: buffers" },
+				{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Find: oldfiles" },
+				{ "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find: word under cursor" },
+				{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find: help tags" },
+				{ "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Find: keymaps" },
+				{ "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Find: commands" },
+				{ "<leader>fC", "<cmd>Telescope command_history<cr>", desc = "Find: command history" },
+				{ "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find: in buffer" },
+				{ "<leader>fm", "<cmd>Telescope marks<cr>", desc = "Find: marks" },
+				{ "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "Find: jumplist" },
+				{ "<leader>fr", "<cmd>Telescope registers<cr>", desc = "Find: registers" },
+				{ "<leader>ft", "<cmd>Telescope treesitter<cr>", desc = "Find: treesitter" },
+				{ "<leader>f/", "<cmd>Telescope search_history<cr>", desc = "Find: search history" },
+				{ "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "Find: quickfix" },
+				{ "<leader>fl", "<cmd>Telescope loclist<cr>", desc = "Find: loclist" },
+				{ "<leader>gtc", "<cmd>Telescope git_commits<cr>", desc = "Git: commits (Telescope)" },
+				{ "<leader>gts", "<cmd>Telescope git_status<cr>", desc = "Git: status (Telescope)" },
+				{ "<leader>gtB", "<cmd>Telescope git_branches<cr>", desc = "Git: branches (Telescope)" },
+				{
+					"<leader>fa",
+					function()
+						require("telescope.builtin").find_files({
+							prompt_title = "Search in Selected Dirs",
+							find_command = {
+								"find",
+								vim.fn.expand("~/Workspace"),
+								vim.fn.expand("~/Northeastern"),
+								vim.fn.expand("~/Work"),
+								vim.fn.expand("~/.config/nvim"),
+								vim.fn.expand("~/.config/kitty"),
+								vim.fn.expand("~/.config/picom"),
+								vim.fn.expand("~/.config/rofi"),
+								vim.fn.expand("~/.config/starship"),
+								vim.fn.expand("~/.config/i3"),
+								vim.fn.expand("~/.config/i3ctl"),
+								vim.fn.expand("~/.config/securegit"),
+								"-type",
+								"f",
+								"-not",
+								"-path",
+								"*/node_modules/*",
+								"-not",
+								"-path",
+								"*/venv/*",
+								"-not",
+								"-path",
+								"*/.git/*",
+								"-not",
+								"-path",
+								"*/__pycache__/*",
+							},
+							hidden = true,
+							no_ignore = true,
+						})
+					end,
+					desc = "Find: selected dirs",
+				},
+			},
 			config = function()
 				local telescope = require("telescope")
 
@@ -70,65 +145,6 @@ return {
 				})
 
 				telescope.load_extension("ui-select")
-
-				local builtin = require("telescope.builtin")
-
-				-- All these use the same default layout now
-				vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
-				vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
-				vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
-				vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
-				vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word Under Cursor" })
-
-				vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
-				vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
-				vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
-				vim.keymap.set("n", "<leader>fC", builtin.command_history, { desc = "Command History" })
-				vim.keymap.set("n", "<leader>fs", builtin.current_buffer_fuzzy_find, { desc = "Search in Buffer" })
-				vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Marks" })
-				vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Jumplist" })
-				vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "Registers" })
-				vim.keymap.set("n", "<leader>ft", builtin.treesitter, { desc = "Treesitter Symbols" })
-				vim.keymap.set("n", "<leader>f/", builtin.search_history, { desc = "Search History" })
-				vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Quickfix List" })
-				vim.keymap.set("n", "<leader>fl", builtin.loclist, { desc = "Location List" })
-
-				-- Multi root finder still uses the same layout, no need to pass layout again
-				vim.keymap.set("n", "<leader>fa", function()
-					builtin.find_files({
-						prompt_title = "Search in Selected Dirs",
-						find_command = {
-							"find",
-							vim.fn.expand("~/Workspace"),
-							vim.fn.expand("~/Northeastern"),
-							vim.fn.expand("~/Work"),
-							vim.fn.expand("~/.config/nvim"),
-							vim.fn.expand("~/.config/kitty"),
-							vim.fn.expand("~/.config/picom"),
-							vim.fn.expand("~/.config/rofi"),
-							vim.fn.expand("~/.config/starship"),
-							vim.fn.expand("~/.config/i3"),
-							vim.fn.expand("~/.config/i3ctl"),
-							vim.fn.expand("~/.config/securegit"),
-							"-type",
-							"f",
-							"-not",
-							"-path",
-							"*/node_modules/*",
-							"-not",
-							"-path",
-							"*/venv/*",
-							"-not",
-							"-path",
-							"*/.git/*",
-							"-not",
-							"-path",
-							"*/__pycache__/*",
-						},
-						hidden = true,
-						no_ignore = true,
-					})
-				end, { desc = "Find Files in Selected Dirs" })
 			end,
 		},
 	},
@@ -139,9 +155,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		dependencies = {
-			"OXY2DEV/markview.nvim",
-		},
+		dependencies = {},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all"

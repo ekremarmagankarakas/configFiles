@@ -1,45 +1,29 @@
 -- Toggle Spell Check
-vim.keymap.set("n", "<leader>sp", ":setlocal spell!<CR>", { desc = "Toggle spell check" })
+vim.keymap.set("n", "<leader>sp", "<cmd>setlocal spell!<cr>", { silent = true, desc = "Toggle spell check" })
 
 -- Go Back Go Forward
-vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Jump back" })
-vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "Jump forward" })
+vim.keymap.set("n", "<leader>o", "<C-o>", { silent = true, desc = "Jump back" })
+vim.keymap.set("n", "<leader>i", "<C-i>", { silent = true, desc = "Jump forward" })
 
 -- Yank
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("v", "<leader>x", '"+d', { desc = "Cut to system clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { silent = true, desc = "Yank to system clipboard" })
+vim.keymap.set("v", "<leader>x", '"+d', { silent = true, desc = "Cut to system clipboard" })
 
 -- Clear search
-vim.keymap.set("n", "<leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })
+vim.keymap.set("n", "<leader>/", "<cmd>nohlsearch<cr>", { silent = true, desc = "Clear search highlight" })
 
 -- Split
-vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { desc = "Vertical split" })
-vim.keymap.set("n", "<leader>hs", ":split<CR>", { desc = "Horizontal split" })
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<cr>", { silent = true, desc = "Vertical split" })
+vim.keymap.set("n", "<leader>hs", "<cmd>split<cr>", { silent = true, desc = "Horizontal split" })
 
 -- QuickFix Keymaps
-vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
-vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<cr>", { silent = true, desc = "Quickfix: next" })
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<cr>", { silent = true, desc = "Quickfix: prev" })
 
 -- Open Terminal
 vim.keymap.set("n", "<leader>t", function()
 	vim.cmd("belowright 15split | term")
-end, { desc = "Open terminal" })
-
--- Copilot Toggle
-vim.keymap.set("n", "<leader>gct", ":Copilot toggle<CR>", { desc = "Toggle GitHub Copilot" })
-vim.keymap.set("n", "<leader>gcd", ":Copilot disable<CR>", { desc = "Disable GitHub Copilot" })
-vim.keymap.set("n", "<leader>gce", ":Copilot enable<CR>", { desc = "Enable GitHub Copilot" })
-
--- Markview Toggle
-vim.keymap.set("n", "<leader>sm", ":Markview toggle<CR>", { desc = "Toggle Markview" })
-
--- Git integration via Telescope
-vim.keymap.set("n", "<leader>gtc", "<cmd>Telescope git_commits<cr>", { desc = "Git Commits" })
-vim.keymap.set("n", "<leader>gts", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gtB", "<cmd>Telescope git_branches<cr>", { desc = "Git Branches" })
-
--- DiffViewOpen
-vim.keymap.set("n", "<leader>gdv", ":DiffviewOpen ", { desc = "Diff View Open" })
+end, { silent = true, desc = "Open terminal" })
 
 -- Toggle jk
 local toggle_jk = false
@@ -60,29 +44,15 @@ end, { silent = true, desc = "Toggle j/k and gj/gk" })
 -- Theme selector
 vim.keymap.set("n", "<leader>st", function()
 	require("config.theme_picker").pick()
-end, { desc = "Pick theme" })
+end, { silent = true, desc = "Theme: pick" })
 
 -- Replace strings
-vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { desc = "Search & replace (global)" })
-vim.keymap.set("n", "<leader>sq", ":cdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left>", {
-	desc = "Search & replace in quickfix list",
-})
+vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { silent = true, desc = "Search & replace (global)" })
+vim.keymap.set(
+	"n",
+	"<leader>sq",
+	":cdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left>",
+	{ silent = true, desc = "Search & replace (quickfix)" }
+)
 
--- Molten keymaps
-vim.keymap.set("n", "<leader>mb", function()
-	-- select the fenced block
-	vim.cmd([[silent! ?^```]])
-	vim.cmd("normal! j")
-	vim.cmd("normal! V")
-	vim.cmd([[silent! /^```]])
-	vim.cmd("normal! k")
-end, { desc = "Select fenced block" })
-
-vim.keymap.set("n", "<leader>mc", function()
-  vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes("<leader>mb<leader>me<Esc>", true, false, true),
-    "m",
-    false
-  )
-end, { desc = "Run mb then me then Esc" })
 

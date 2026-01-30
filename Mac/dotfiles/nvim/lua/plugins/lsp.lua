@@ -133,9 +133,13 @@ return {
 			}, { { name = "buffer" } }),
 		})
 
-		-- Integrate autopairs with cmp
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		local cmp_enabled = true
+		vim.keymap.set("n", "<leader>ltc", function()
+			cmp_enabled = not cmp_enabled
+			cmp.setup({ enabled = cmp_enabled })
+			vim.notify("Suggestions: " .. (cmp_enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
+		end, { silent = true, desc = "Completion: toggle suggestions" })
+
 
 		----------------------------------------------------------------------
 		-- LSP core
@@ -227,7 +231,10 @@ return {
 
 		-- R (installed via R, not Mason)
 		-- Use autocmd to explicitly start server since it's not managed by Mason
+		local r_lsp_group = vim.api.nvim_create_augroup("RLanguageServer", { clear = true })
+
 		vim.api.nvim_create_autocmd("FileType", {
+			group = r_lsp_group,
 			pattern = { "r", "rmd" },
 			callback = function()
 				-- Find git root or use cwd
@@ -248,7 +255,10 @@ return {
 		----------------------------------------------------------------------
 		-- LSP attach behavior
 		----------------------------------------------------------------------
+		local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachKeymaps", { clear = true })
+
 		vim.api.nvim_create_autocmd("LspAttach", {
+			group = lsp_attach_group,
 			callback = function(ev)
 				local bufnr = ev.buf
 				local client = vim.lsp.get_client_by_id(ev.data.client_id)

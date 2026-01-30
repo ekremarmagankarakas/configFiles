@@ -11,9 +11,23 @@ end, { desc = "Convert current Markdown file to PDF" })
 ----------------------------------------------------------------------
 -- Trim Trailing Whitespace
 ----------------------------------------------------------------------
+local trim_ws_group = vim.api.nvim_create_augroup("TrimTrailingWhitespace", { clear = true })
+
 vim.api.nvim_create_autocmd("BufWritePre", {
+	group = trim_ws_group,
 	desc = "Trim trailing whitespace",
-	callback = function()
+	callback = function(args)
+		local bufnr = args.buf
+		if vim.bo[bufnr].buftype ~= "" then
+			return
+		end
+
+		-- Keep intentional trailing spaces (e.g. Markdown hard line breaks)
+		local ft = vim.bo[bufnr].filetype
+		if ft == "markdown" or ft == "rmd" then
+			return
+		end
+
 		local view = vim.fn.winsaveview()
 		vim.cmd([[silent! %s/\s\+$//e]])
 		vim.fn.winrestview(view)
@@ -24,10 +38,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- R integration
 ----------------------------------------------------------------------
 -- R convert to pdf and html
+local rmd_group = vim.api.nvim_create_augroup("RmdIntegration", { clear = true })
+
 vim.api.nvim_create_autocmd("FileType", {
+	group = rmd_group,
 	pattern = "rmd",
-	callback = function()
-		local buf = vim.api.nvim_get_current_buf()
+	callback = function(args)
+		local buf = args.buf
 
 		local function render_rmd(format)
 			local file = vim.fn.expand("%:p")

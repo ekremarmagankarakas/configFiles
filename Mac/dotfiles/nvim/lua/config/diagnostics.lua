@@ -13,7 +13,6 @@ vim.diagnostic.config({
 -- Diagnostic state
 local vt_on = false
 local ul_on = true
-local cmp_on = true
 
 -- Toggle virtual text
 vim.keymap.set("n", "<leader>lee", function()
@@ -35,13 +34,4 @@ vim.keymap.set("n", "<leader>leu", function()
 	)
 end, { desc = "Diagnostics: toggle underline" })
 
--- Toggle completion
-vim.keymap.set("n", "<leader>ltc", function()
-	cmp_on = not cmp_on
-	require("cmp").setup({ enabled = cmp_on })
-	vim.notify(
-		"Suggestions: " .. (cmp_on and "ENABLED" or "DISABLED"),
-		vim.log.levels.INFO
-	)
-end, { desc = "Toggle nvim-cmp suggestions" })
 
