@@ -18,4 +18,3 @@ function M.save(theme)
 end
 
 return M
-

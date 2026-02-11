@@ -133,7 +133,6 @@ return {
 				{ "<leader>g", group = "git" },
 				{ "<leader>h", group = "harpoon" },
 				{ "<leader>l", group = "lsp" },
-				{ "<leader>m", group = "molten" },
 				{ "<leader>n", group = "neo-tree" },
 				{ "<leader>p", group = "pairs/surround" },
 				{ "<leader>s", group = "settings" },
@@ -150,16 +149,31 @@ return {
 	},
 
 	----------------------------------------------------------------------
-	-- Vim Surround
+	-- Nvim Surround (Lua rewrite of vim-surround)
 	----------------------------------------------------------------------
 	{
-		"tpope/vim-surround",
+		"kylechui/nvim-surround",
+		version = "*",
 		keys = {
-			{ "<leader>ps", "<Plug>Ysurround", remap = true, desc = "Surround: add" },
-			{ "<leader>pS", "<Plug>Yssurround", remap = true, desc = "Surround: line" },
-			{ "<leader>pd", "<Plug>Dsurround", remap = true, desc = "Surround: delete" },
-			{ "<leader>pc", "<Plug>Csurround", remap = true, desc = "Surround: change" },
-			{ "<leader>ps", "<Plug>VSurround", mode = "x", remap = true, desc = "Surround: visual add" },
+			{ "<leader>ps", desc = "Surround: add" },
+			{ "<leader>pS", desc = "Surround: line" },
+			{ "<leader>pd", desc = "Surround: delete" },
+			{ "<leader>pc", desc = "Surround: change" },
+			{ "<leader>pC", desc = "Surround: change (surrounding)" },
+			{ "<leader>ps", mode = "x", desc = "Surround: visual add" },
+		},
+		opts = {
+			keymaps = {
+				normal = "<leader>ps",
+				normal_cur = "<leader>pS",
+				normal_line = false,
+				normal_cur_line = false,
+				visual = "<leader>ps",
+				visual_line = false,
+				delete = "<leader>pd",
+				change = "<leader>pc",
+				change_line = "<leader>pC",
+			},
 		},
 	},
 
@@ -172,9 +186,7 @@ return {
 		keys = {
 			{ "<leader>wm", "<cmd>WindowsMaximize<cr>", silent = true, desc = "Windows: maximize" },
 		},
-		config = function()
-			require("windows").setup()
-		end,
+		opts = {},
 	},
 
 	----------------------------------------------------------------------

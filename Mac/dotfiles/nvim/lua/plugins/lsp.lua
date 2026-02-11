@@ -16,12 +16,11 @@ return {
 		"stevearc/conform.nvim",
 
 		-- Completion
-		"hrsh7th/nvim-cmp",
+		{ "hrsh7th/nvim-cmp", event = { "InsertEnter", "CmdlineEnter" } },
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 
 		-- Telescope
@@ -46,9 +45,11 @@ return {
 				typescriptreact = { "eslint_d", "prettier" },
 				javascriptreact = { "eslint_d", "prettier" },
 				r = { "r_styler" },
-				rmd = { "r_styler" },
 				tex = { "latexindent" },
 				latex = { "latexindent" },
+			},
+			default_format_opts = {
+				lsp_format = "fallback",
 			},
 			formatters = {
 				ruff_format = {
@@ -101,7 +102,6 @@ return {
 					timeout_ms = 4000,
 				},
 			},
-			default_formatter = "prettier",
 		})
 
 		vim.keymap.set("n", "<leader>lf", function()
@@ -133,13 +133,31 @@ return {
 			}, { { name = "buffer" } }),
 		})
 
+		-- Cmdline completion for "/" and "?" (search)
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		-- Cmdline completion for ":" (command)
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{ name = "cmdline" },
+			}),
+			matching = { disallow_symbol_nonprefix_matching = false },
+		})
+
 		local cmp_enabled = true
 		vim.keymap.set("n", "<leader>ltc", function()
 			cmp_enabled = not cmp_enabled
 			cmp.setup({ enabled = cmp_enabled })
 			vim.notify("Suggestions: " .. (cmp_enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
 		end, { silent = true, desc = "Completion: toggle suggestions" })
-
 
 		----------------------------------------------------------------------
 		-- LSP core
@@ -226,8 +244,11 @@ return {
 		-- Marksman
 		vim.lsp.config("marksman", {
 			filetypes = { "markdown" },
-            root_markers = { ".git", ".marksman.toml", "index.md"}
+			root_markers = { ".git", ".marksman.toml", "index.md" },
 		})
+
+		-- Enable all Mason-managed servers
+		vim.lsp.enable({ "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman" })
 
 		-- R (installed via R, not Mason)
 		-- Use autocmd to explicitly start server since it's not managed by Mason
@@ -235,7 +256,7 @@ return {
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = r_lsp_group,
-			pattern = { "r", "rmd" },
+			pattern = { "r" },
 			callback = function()
 				-- Find git root or use cwd
 				local root_dir = vim.fn.getcwd()
@@ -261,13 +282,6 @@ return {
 			group = lsp_attach_group,
 			callback = function(ev)
 				local bufnr = ev.buf
-				local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-				-- Conform handles formatting for these
-				if client then
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.documentRangeFormattingProvider = false
-				end
 
 				local function nmap(lhs, rhs, desc)
 					vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
@@ -279,16 +293,6 @@ return {
 				nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
 				nmap("<leader>lef", function()
 					vim.diagnostic.open_float(nil, { focusable = true })
-				end, "Diagnostics Float")
-				nmap("<leader>le", function()
-					local width = math.min(math.floor(vim.o.columns * 0.8), 100)
-					vim.diagnostic.open_float({
-						focusable = true,
-						max_width = width,
-						wrap = true,
-						border = "rounded",
-						source = "always",
-					})
 				end, "Diagnostics Float")
 
 				-- LSP pickers through Telescope (inherit global layout)

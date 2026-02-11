@@ -8,12 +8,28 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 
+-- Persistent undo
+vim.opt.undofile = true
+
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 -- UI
 vim.opt.mouse = "a"
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.termguicolors = true
+vim.opt.signcolumn = "yes"
+vim.opt.showmode = false
+vim.opt.scrolloff = 8
+vim.opt.completeopt = "menu,menuone,noselect"
+
+-- Timing
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
 
 -- Leaders
 vim.g.mapleader = " "

@@ -84,38 +84,54 @@ return {
 				{
 					"<leader>fa",
 					function()
+						local dirs = {
+							"~/Workspace",
+							"~/Northeastern",
+							"~/Work",
+							"~/.config/nvim",
+							"~/.config/kitty",
+							"~/.config/picom",
+							"~/.config/rofi",
+							"~/.config/starship",
+							"~/.config/i3",
+							"~/.config/i3ctl",
+							"~/.config/securegit",
+						}
+
+						-- Filter to only directories that exist
+						local search_dirs = {}
+						for _, dir in ipairs(dirs) do
+							local expanded = vim.fn.expand(dir)
+							if vim.fn.isdirectory(expanded) == 1 then
+								table.insert(search_dirs, expanded)
+							end
+						end
+
+						if #search_dirs == 0 then
+							vim.notify("No search directories found", vim.log.levels.WARN)
+							return
+						end
+
 						require("telescope.builtin").find_files({
 							prompt_title = "Search in Selected Dirs",
-							find_command = {
-								"find",
-								vim.fn.expand("~/Workspace"),
-								vim.fn.expand("~/Northeastern"),
-								vim.fn.expand("~/Work"),
-								vim.fn.expand("~/.config/nvim"),
-								vim.fn.expand("~/.config/kitty"),
-								vim.fn.expand("~/.config/picom"),
-								vim.fn.expand("~/.config/rofi"),
-								vim.fn.expand("~/.config/starship"),
-								vim.fn.expand("~/.config/i3"),
-								vim.fn.expand("~/.config/i3ctl"),
-								vim.fn.expand("~/.config/securegit"),
-								"-type",
-								"f",
-								"-not",
-								"-path",
-								"*/node_modules/*",
-								"-not",
-								"-path",
-								"*/venv/*",
-								"-not",
-								"-path",
-								"*/.git/*",
-								"-not",
-								"-path",
-								"*/__pycache__/*",
-							},
+							search_dirs = search_dirs,
 							hidden = true,
 							no_ignore = true,
+							find_command = {
+								"fd",
+								"--type",
+								"f",
+								"--hidden",
+								"--no-ignore",
+								"--exclude",
+								"node_modules",
+								"--exclude",
+								"venv",
+								"--exclude",
+								".git",
+								"--exclude",
+								"__pycache__",
+							},
 						})
 					end,
 					desc = "Find: selected dirs",

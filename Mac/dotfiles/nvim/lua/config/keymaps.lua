@@ -47,12 +47,10 @@ vim.keymap.set("n", "<leader>st", function()
 end, { silent = true, desc = "Theme: pick" })
 
 -- Replace strings
-vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { silent = true, desc = "Search & replace (global)" })
+vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { silent = false, desc = "Search & replace (global)" })
 vim.keymap.set(
 	"n",
 	"<leader>sq",
 	":cdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left>",
-	{ silent = true, desc = "Search & replace (quickfix)" }
+	{ silent = false, desc = "Search & replace (quickfix)" }
 )
-
-
