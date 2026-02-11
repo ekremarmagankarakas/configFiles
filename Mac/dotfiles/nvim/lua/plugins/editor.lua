@@ -1,5 +1,5 @@
 return {
-   	----------------------------------------------------------------------
+	----------------------------------------------------------------------
 	-- Neo-Tree
 	----------------------------------------------------------------------
 	{
@@ -23,6 +23,16 @@ return {
 					hide_gitignored = true,
 				},
 			},
+			window = {
+				mappings = {
+					-- "O" for "Open Externally" (PDFs, Browsers, etc.)
+					["O"] = function(state)
+						local node = state.tree:get_node()
+						local path = node:get_id()
+						vim.ui.open(path)
+					end,
+				},
+			},
 		},
 	},
 
@@ -39,7 +49,7 @@ return {
 		opts = {},
 	},
 
-    ----------------------------------------------------------------------
+	----------------------------------------------------------------------
 	-- Telescope
 	----------------------------------------------------------------------
 	{
@@ -170,7 +180,7 @@ return {
 					"bash",
 					"latex",
 					"bibtex",
-                    "r",
+					"r",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -189,7 +199,7 @@ return {
 					enable = true,
 					disable = function(lang, buf)
 						if lang == "html" then
-								return true
+							return true
 						end
 
 						local max_filesize = 100 * 1024 -- 100 KB

@@ -76,7 +76,7 @@ return {
 		lazy = false,
 	},
 
-	-- Image support for plots
+	-- Image support
 	{
 		"3rd/image.nvim",
 		opts = {

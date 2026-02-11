@@ -12,6 +12,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		main = "gitsigns",
+		lazy = false,
 		keys = {
 			{
 				"<leader>gp",
@@ -28,6 +29,14 @@ return {
 				end,
 				silent = true,
 				desc = "Git: toggle blame",
+			},
+			{
+				"<leader>gT",
+				function()
+					require("gitsigns").toggle_signs()
+				end,
+				silent = true,
+				desc = "Git: toggle signs",
 			},
 		},
 		opts = {},
@@ -60,7 +69,6 @@ return {
 			})
 		end,
 	},
-
 
 	----------------------------------------------------------------------
 	-- LazyGit

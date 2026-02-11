@@ -21,7 +21,7 @@ outer.bottom     = 5
 [mode.main.binding]
     # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
     alt-enter   = "exec-and-forget open -a 'kitty'"
-    alt-b       = "exec-and-forget open -a 'Zen'"
+    alt-b       = "exec-and-forget open -a 'Brave Browser'"
     alt-shift-f = "exec-and-forget open -a 'Commander One'"
 
     # i3 wraps focus by default
