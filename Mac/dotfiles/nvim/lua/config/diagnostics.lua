@@ -29,6 +29,13 @@ vim.keymap.set("n", "<leader>leu", function()
 	vim.notify("Underline: " .. (ul_on and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
 end, { desc = "Diagnostics: toggle underline" })
 
+-- Toggle inlay hints
+vim.keymap.set("n", "<leader>li", function()
+	local enabled = not vim.lsp.inlay_hint.is_enabled()
+	vim.lsp.inlay_hint.enable(enabled)
+	vim.notify("Inlay hints: " .. (enabled and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
+end, { desc = "LSP: toggle inlay hints" })
+
 -- Open diagnostic float
 vim.keymap.set("n", "<leader>lef", function()
 	vim.diagnostic.open_float(nil, { focusable = true })

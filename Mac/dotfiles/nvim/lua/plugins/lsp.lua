@@ -202,6 +202,7 @@ return {
 					runtime = { version = "LuaJIT" },
 					diagnostics = { globals = { "bit", "vim", "it", "describe", "before_each", "after_each" } },
 					workspace = { checkThirdParty = false },
+					hint = { enable = true },
 				},
 			},
 		})
@@ -255,6 +256,32 @@ return {
 		vim.lsp.config("ts_ls", {
 			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 			root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+			settings = {
+				typescript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+				javascript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+			},
 		})
 
 		-- LTEX
@@ -320,6 +347,15 @@ return {
 					},
 					staticcheck = true,
 					gofumpt = true,
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
 				},
 			},
 		})
