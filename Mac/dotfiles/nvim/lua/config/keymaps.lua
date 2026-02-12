@@ -46,6 +46,23 @@ vim.keymap.set("n", "<leader>st", function()
 	require("config.theme_picker").pick()
 end, { silent = true, desc = "Theme: pick" })
 
+-- Terminal: exit insert mode with Escape
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Terminal: exit insert mode" })
+
+-- Navigate between splits with Ctrl-hjkl
+vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true, desc = "Move to left split" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true, desc = "Move to below split" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true, desc = "Move to above split" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true, desc = "Move to right split" })
+
+-- Keep selection after indent/unindent
+vim.keymap.set("v", "<", "<gv", { silent = true, desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { silent = true, desc = "Indent right and reselect" })
+
+-- Center cursor after search navigation
+vim.keymap.set("n", "n", "nzzzv", { silent = true, desc = "Next search result (centered)" })
+vim.keymap.set("n", "N", "Nzzzv", { silent = true, desc = "Prev search result (centered)" })
+
 -- Replace strings
 vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { silent = false, desc = "Search & replace (global)" })
 vim.keymap.set(

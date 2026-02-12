@@ -145,15 +145,33 @@ return {
 				{ "<leader>p", group = "pairs/surround" },
 				{ "<leader>s", group = "settings" },
 				{ "<leader>w", group = "windows" },
+				{ "<leader>x", group = "trouble" },
 			})
 		end,
 	},
 
 	----------------------------------------------------------------------
-	-- Vim CSS Color
+	-- Nvim Colorizer
 	----------------------------------------------------------------------
 	{
-		"ap/vim-css-color",
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			filetypes = { "*" },
+			user_default_options = {
+				RGB = true,
+				RRGGBB = true,
+				names = false, -- disable named colors (e.g. "Blue")
+				RRGGBBAA = true,
+				rgb_fn = true,
+				hsl_fn = true,
+				css = true,
+				css_fn = true,
+				mode = "background", -- "background" | "foreground" | "virtualtext"
+				tailwind = false,
+				virtualtext = "■",
+			},
+		},
 	},
 
 	----------------------------------------------------------------------

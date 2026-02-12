@@ -50,6 +50,50 @@ return {
 	},
 
 	----------------------------------------------------------------------
+	-- Todo Comments
+	----------------------------------------------------------------------
+	{
+		"folke/todo-comments.nvim",
+		event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{
+				"]t",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Todo: next comment",
+			},
+			{
+				"[t",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Todo: prev comment",
+			},
+			{ "<leader>fT", "<cmd>TodoTelescope<cr>", desc = "Find: todo comments" },
+		},
+		opts = {},
+	},
+
+	----------------------------------------------------------------------
+	-- Trouble (better diagnostics/quickfix list)
+	----------------------------------------------------------------------
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		cmd = "Trouble",
+		keys = {
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Trouble: diagnostics" },
+			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Trouble: buffer diagnostics" },
+			{ "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Trouble: location list" },
+			{ "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Trouble: quickfix list" },
+			{ "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Trouble: symbols" },
+		},
+		opts = {},
+	},
+
+	----------------------------------------------------------------------
 	-- Telescope
 	----------------------------------------------------------------------
 	{
@@ -181,7 +225,9 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		dependencies = {},
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all"
@@ -205,6 +251,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"zig",
+					"python",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -244,7 +291,109 @@ return {
 					-- Instead of true it can also be a list of languages
 					additional_vim_regex_highlighting = { "markdown" },
 				},
+
+				-- Treesitter text objects
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true, -- automatically jump forward to matching textobj
+						keymaps = {
+							["af"] = { query = "@function.outer", desc = "Select outer function" },
+							["if"] = { query = "@function.inner", desc = "Select inner function" },
+							["ac"] = { query = "@class.outer", desc = "Select outer class" },
+							["ic"] = { query = "@class.inner", desc = "Select inner class" },
+							["aa"] = { query = "@parameter.outer", desc = "Select outer argument" },
+							["ia"] = { query = "@parameter.inner", desc = "Select inner argument" },
+							["ai"] = { query = "@conditional.outer", desc = "Select outer conditional" },
+							["ii"] = { query = "@conditional.inner", desc = "Select inner conditional" },
+							["al"] = { query = "@loop.outer", desc = "Select outer loop" },
+							["il"] = { query = "@loop.inner", desc = "Select inner loop" },
+						},
+					},
+					move = {
+						enable = true,
+						set_jumps = true, -- add to jumplist
+						goto_next_start = {
+							["]m"] = { query = "@function.outer", desc = "Next function start" },
+							["]]"] = { query = "@class.outer", desc = "Next class start" },
+							["]a"] = { query = "@parameter.inner", desc = "Next argument" },
+						},
+						goto_next_end = {
+							["]M"] = { query = "@function.outer", desc = "Next function end" },
+							["]["] = { query = "@class.outer", desc = "Next class end" },
+						},
+						goto_previous_start = {
+							["[m"] = { query = "@function.outer", desc = "Prev function start" },
+							["[["] = { query = "@class.outer", desc = "Prev class start" },
+							["[a"] = { query = "@parameter.inner", desc = "Prev argument" },
+						},
+						goto_previous_end = {
+							["[M"] = { query = "@function.outer", desc = "Prev function end" },
+							["[]"] = { query = "@class.outer", desc = "Prev class end" },
+						},
+					},
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>a"] = { query = "@parameter.inner", desc = "Swap with next argument" },
+						},
+						swap_previous = {
+							["<leader>A"] = { query = "@parameter.inner", desc = "Swap with prev argument" },
+						},
+					},
+				},
 			})
+
+			-- Set up textobjects keymaps manually (required for newer nvim-treesitter)
+			local ts_select = require("nvim-treesitter-textobjects.select")
+			local ts_move = require("nvim-treesitter-textobjects.move")
+			local ts_swap = require("nvim-treesitter-textobjects.swap")
+
+			-- Select
+			local select_maps = {
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+				["aa"] = "@parameter.outer",
+				["ia"] = "@parameter.inner",
+				["ai"] = "@conditional.outer",
+				["ii"] = "@conditional.inner",
+				["al"] = "@loop.outer",
+				["il"] = "@loop.inner",
+			}
+			for key, query in pairs(select_maps) do
+				vim.keymap.set({ "x", "o" }, key, function()
+					ts_select.select_textobject(query, "textobjects")
+				end, { desc = "TS: " .. query })
+			end
+
+			-- Move
+			local move_maps = {
+				["]m"] = { fn = ts_move.goto_next_start, query = "@function.outer", desc = "Next function start" },
+				["]M"] = { fn = ts_move.goto_next_end, query = "@function.outer", desc = "Next function end" },
+				["]]"] = { fn = ts_move.goto_next_start, query = "@class.outer", desc = "Next class start" },
+				["]["] = { fn = ts_move.goto_next_end, query = "@class.outer", desc = "Next class end" },
+				["]a"] = { fn = ts_move.goto_next_start, query = "@parameter.inner", desc = "Next argument" },
+				["[m"] = { fn = ts_move.goto_previous_start, query = "@function.outer", desc = "Prev function start" },
+				["[M"] = { fn = ts_move.goto_previous_end, query = "@function.outer", desc = "Prev function end" },
+				["[["] = { fn = ts_move.goto_previous_start, query = "@class.outer", desc = "Prev class start" },
+				["[]"] = { fn = ts_move.goto_previous_end, query = "@class.outer", desc = "Prev class end" },
+				["[a"] = { fn = ts_move.goto_previous_start, query = "@parameter.inner", desc = "Prev argument" },
+			}
+			for key, map in pairs(move_maps) do
+				vim.keymap.set({ "n", "x", "o" }, key, function()
+					map.fn(map.query, "textobjects")
+				end, { desc = map.desc })
+			end
+
+			-- Swap
+			vim.keymap.set("n", "<leader>a", function()
+				ts_swap.swap_next("@parameter.inner", "textobjects")
+			end, { desc = "Swap with next argument" })
+			vim.keymap.set("n", "<leader>A", function()
+				ts_swap.swap_previous("@parameter.inner", "textobjects")
+			end, { desc = "Swap with prev argument" })
 
 			local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 			treesitter_parser_config.templ = {

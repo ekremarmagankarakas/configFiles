@@ -23,7 +23,7 @@ Leader: `Space` | Local leader: `\`
 | `{` `}` | Previous / next blank line (paragraph) |
 | `%` | Jump to matching bracket |
 | `H` `M` `L` | Top / middle / bottom of screen |
-| `Ctrl-d` `Ctrl-u` | Half-page down / up |
+| `Ctrl-d` `Ctrl-u` | Half-page down / up (centered via neoscroll) |
 | `Ctrl-f` `Ctrl-b` | Full page down / up |
 | `Ctrl-o` `Ctrl-i` | Jump list back / forward |
 | `gd` | Go to local definition |
@@ -71,7 +71,7 @@ Leader: `Space` | Local leader: `\`
 | `V` | Line-wise visual |
 | `Ctrl-v` | Block visual |
 | `gv` | Reselect last visual selection |
-| `>` `<` | Indent / unindent selection |
+| `>` `<` | Indent / unindent selection (reselects) |
 | `=` | Auto-indent selection |
 
 ### Search & Substitute
@@ -79,7 +79,7 @@ Leader: `Space` | Local leader: `\`
 | Key | Description |
 |-----|-------------|
 | `/pattern` `?pattern` | Search forward / backward |
-| `n` `N` | Next / previous match |
+| `n` `N` | Next / previous match (centered) |
 | `*` `#` | Search word under cursor forward / backward |
 | `:s/old/new/g` | Substitute in current line |
 | `:%s/old/new/gc` | Substitute in file with confirm |
@@ -138,6 +138,11 @@ Leader: `Space` | Local leader: `\`
 | `<leader>st` | n | Theme picker |
 | `<leader>sr` | n | Search & replace (global, prompts) |
 | `<leader>sq` | n | Search & replace (quickfix list) |
+| `Esc` | t | Exit terminal insert mode |
+| `Ctrl-h` | n | Move to left split |
+| `Ctrl-j` | n | Move to below split |
+| `Ctrl-k` | n | Move to above split |
+| `Ctrl-l` | n | Move to right split |
 
 ### Neo-tree (`plugins/editor.lua`)
 
@@ -146,6 +151,53 @@ Leader: `Space` | Local leader: `\`
 | `<leader>nn` | n | Reveal file in Neo-tree |
 | `<leader>nt` | n | Toggle Neo-tree |
 | `O` | n | Open file externally (inside Neo-tree) |
+
+### Todo Comments (`plugins/editor.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `]t` | n | Jump to next TODO comment |
+| `[t` | n | Jump to prev TODO comment |
+| `<leader>fT` | n | Find TODO comments (Telescope) |
+
+### Trouble (`plugins/editor.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>xx` | n | Toggle all diagnostics |
+| `<leader>xX` | n | Toggle buffer diagnostics |
+| `<leader>xl` | n | Toggle location list |
+| `<leader>xq` | n | Toggle quickfix list |
+| `<leader>xs` | n | Toggle symbols |
+
+### Treesitter Text Objects (`plugins/editor.lua`)
+
+#### Select (use with `v`, `d`, `c`, `y`)
+
+| Key | Description |
+|-----|-------------|
+| `af` / `if` | Outer / inner function |
+| `ac` / `ic` | Outer / inner class |
+| `aa` / `ia` | Outer / inner argument |
+| `ai` / `ii` | Outer / inner conditional |
+| `al` / `il` | Outer / inner loop |
+
+#### Move
+
+| Key | Description |
+|-----|-------------|
+| `]m` / `[m` | Next / prev function start |
+| `]M` / `[M` | Next / prev function end |
+| `]]` / `[[` | Next / prev class start |
+| `][` / `[]` | Next / prev class end |
+| `]a` / `[a` | Next / prev argument |
+
+#### Swap
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>a` | n | Swap argument with next |
+| `<leader>A` | n | Swap argument with prev |
 
 ### Telescope (`plugins/editor.lua`)
 
@@ -336,14 +388,14 @@ Leader: `Space` | Local leader: `\`
 |-----|------|-------------|
 | `<leader>wm` | n | Maximize window |
 
-### Other (`plugins/tools.lua`)
+### Other (`plugins/tools.lua` & `plugins/editor.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
 | `<leader>u` | n | Toggle undotree |
 | `<leader>?l` | n | Which-key: buffer local keymaps |
 | `<leader>?g` | n | Which-key: global keymaps |
-| `<leader>sm` | n | Toggle Markview (markdown preview) |
+| `<leader>sm` | n | Toggle Markview (in-editor markdown) |
 
 ### Snippets (`plugins/snippets.lua`)
 
@@ -368,3 +420,4 @@ Leader: `Space` | Local leader: `\`
 | `<leader>p` | Pairs/Surround |
 | `<leader>s` | Settings |
 | `<leader>w` | Windows |
+| `<leader>x` | Trouble |

@@ -41,7 +41,7 @@ return {
 			respect_scrolloff = false,
 			cursor_scrolls_alone = true,
 		},
-	},
+    },
 
 	----------------------------------------------------------------------
 	-- Lualine
