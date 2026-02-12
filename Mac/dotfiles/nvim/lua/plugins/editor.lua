@@ -94,6 +94,21 @@ return {
 	},
 
 	----------------------------------------------------------------------
+	-- Flash (enhanced motions)
+	----------------------------------------------------------------------
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash: jump" },
+			{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash: treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Flash: remote" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Flash: treesitter search" },
+		},
+		opts = {},
+	},
+
+	----------------------------------------------------------------------
 	-- Telescope
 	----------------------------------------------------------------------
 	{
@@ -290,57 +305,6 @@ return {
 					-- Using this option may slow down your editor, and you may see some duplicate highlights.
 					-- Instead of true it can also be a list of languages
 					additional_vim_regex_highlighting = { "markdown" },
-				},
-
-				-- Treesitter text objects
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true, -- automatically jump forward to matching textobj
-						keymaps = {
-							["af"] = { query = "@function.outer", desc = "Select outer function" },
-							["if"] = { query = "@function.inner", desc = "Select inner function" },
-							["ac"] = { query = "@class.outer", desc = "Select outer class" },
-							["ic"] = { query = "@class.inner", desc = "Select inner class" },
-							["aa"] = { query = "@parameter.outer", desc = "Select outer argument" },
-							["ia"] = { query = "@parameter.inner", desc = "Select inner argument" },
-							["ai"] = { query = "@conditional.outer", desc = "Select outer conditional" },
-							["ii"] = { query = "@conditional.inner", desc = "Select inner conditional" },
-							["al"] = { query = "@loop.outer", desc = "Select outer loop" },
-							["il"] = { query = "@loop.inner", desc = "Select inner loop" },
-						},
-					},
-					move = {
-						enable = true,
-						set_jumps = true, -- add to jumplist
-						goto_next_start = {
-							["]m"] = { query = "@function.outer", desc = "Next function start" },
-							["]]"] = { query = "@class.outer", desc = "Next class start" },
-							["]a"] = { query = "@parameter.inner", desc = "Next argument" },
-						},
-						goto_next_end = {
-							["]M"] = { query = "@function.outer", desc = "Next function end" },
-							["]["] = { query = "@class.outer", desc = "Next class end" },
-						},
-						goto_previous_start = {
-							["[m"] = { query = "@function.outer", desc = "Prev function start" },
-							["[["] = { query = "@class.outer", desc = "Prev class start" },
-							["[a"] = { query = "@parameter.inner", desc = "Prev argument" },
-						},
-						goto_previous_end = {
-							["[M"] = { query = "@function.outer", desc = "Prev function end" },
-							["[]"] = { query = "@class.outer", desc = "Prev class end" },
-						},
-					},
-					swap = {
-						enable = true,
-						swap_next = {
-							["<leader>a"] = { query = "@parameter.inner", desc = "Swap with next argument" },
-						},
-						swap_previous = {
-							["<leader>A"] = { query = "@parameter.inner", desc = "Swap with prev argument" },
-						},
-					},
 				},
 			})
 
