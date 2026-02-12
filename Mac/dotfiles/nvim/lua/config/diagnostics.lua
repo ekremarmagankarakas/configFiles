@@ -29,6 +29,11 @@ vim.keymap.set("n", "<leader>leu", function()
 	vim.notify("Underline: " .. (ul_on and "ENABLED" or "DISABLED"), vim.log.levels.INFO)
 end, { desc = "Diagnostics: toggle underline" })
 
+-- Open diagnostic float
+vim.keymap.set("n", "<leader>lef", function()
+	vim.diagnostic.open_float(nil, { focusable = true })
+end, { silent = true, desc = "Diagnostics: float" })
+
 -- Navigation: next / prev diagnostic
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1, float = true })

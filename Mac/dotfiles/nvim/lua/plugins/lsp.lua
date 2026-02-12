@@ -287,13 +287,10 @@ return {
 					vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
 				end
 
-				-- Hover, rename, code action, diag float
-				nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
-				nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
-				nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
-				nmap("<leader>lef", function()
-					vim.diagnostic.open_float(nil, { focusable = true })
-				end, "Diagnostics Float")
+			-- Hover, rename, code action
+			nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
+			nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
+			nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
 
 				-- LSP pickers through Telescope (inherit global layout)
 				local ok_tb, tb = pcall(require, "telescope.builtin")
