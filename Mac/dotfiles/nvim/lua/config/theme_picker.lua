@@ -1,8 +1,16 @@
 local M = {}
 
 function M.pick()
-	-- We call this inside the function so it catches variants
-	-- registered by plugins after startup.
+	-- Force-load all lazy theme plugins so their colorschemes are registered.
+	-- Colorscheme plugins are just highlight tables — negligible memory cost.
+	local lazy_plugins = require("lazy").plugins()
+	for _, plugin in ipairs(lazy_plugins) do
+		if plugin.priority == 1000 and plugin.lazy and not plugin._.loaded then
+			require("lazy").load({ plugins = { plugin.name } })
+		end
+	end
+
+	-- Now getcompletion returns all available colorschemes.
 	local themes = vim.fn.getcompletion("", "color")
 
 	local pickers = require("telescope.pickers")
