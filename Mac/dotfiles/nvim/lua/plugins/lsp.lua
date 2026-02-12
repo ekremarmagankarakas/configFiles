@@ -7,7 +7,7 @@ return {
 		{
 			"mason-org/mason-lspconfig.nvim",
 			opts = {
-				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman" },
+				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman", "clangd", "rust_analyzer", "gopls", "bashls", "jdtls" },
 			},
 		},
 		"j-hui/fidget.nvim",
@@ -39,12 +39,20 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "ruff_format" },
+				c = { "clang_format" },
 				cpp = { "clang_format" },
 				javascript = { "eslint_d", "prettier" },
 				typescript = { "eslint_d", "prettier" },
 				typescriptreact = { "eslint_d", "prettier" },
 				javascriptreact = { "eslint_d", "prettier" },
+				go = { "goimports", "gofumpt" },
+				rust = { "rustfmt" },
+				zig = { "zigfmt" },
+				bash = { "shfmt" },
+				sh = { "shfmt" },
+				markdown = { "prettier" },
 				r = { "r_styler" },
+				java = { "google-java-format" },
 				tex = { "latexindent" },
 				latex = { "latexindent" },
 			},
@@ -64,6 +72,19 @@ return {
 				},
 				prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
 				stylua = { prepend_args = { "--indent-width", "4" } },
+				zigfmt = {
+					command = "zig",
+					args = { "fmt", "--stdin" },
+					stdin = true,
+				},
+				shfmt = {
+					prepend_args = { "-i", "4" },
+				},
+				["google-java-format"] = {
+					command = "google-java-format",
+					args = { "-" },
+					stdin = true,
+				},
 				eslint_d = {
 					command = "eslint_d",
 					stdin = false,
@@ -269,8 +290,48 @@ return {
 			root_markers = { ".git", ".marksman.toml", "index.md" },
 		})
 
+		-- C/C++
+		vim.lsp.config("clangd", {
+			filetypes = { "c", "cpp", "objc", "objcpp" },
+			root_markers = { "compile_commands.json", "compile_flags.txt", ".clangd", ".git" },
+		})
+
+		-- Rust
+		vim.lsp.config("rust_analyzer", {
+			filetypes = { "rust" },
+			root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+			settings = {
+				["rust-analyzer"] = {
+					checkOnSave = { command = "clippy" },
+					cargo = { allFeatures = true },
+				},
+			},
+		})
+
+		-- Go
+		vim.lsp.config("gopls", {
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			root_markers = { "go.mod", "go.work", ".git" },
+			settings = {
+				gopls = {
+					analyses = {
+						unusedparams = true,
+						shadow = true,
+					},
+					staticcheck = true,
+					gofumpt = true,
+				},
+			},
+		})
+
+		-- Bash
+		vim.lsp.config("bashls", {
+			filetypes = { "sh", "bash" },
+			root_markers = { ".git" },
+		})
+
 		-- Enable all Mason-managed servers
-		vim.lsp.enable({ "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman" })
+		vim.lsp.enable({ "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman", "clangd", "rust_analyzer", "gopls", "bashls" })
 
 		-- R (installed via R, not Mason)
 		-- Use autocmd to explicitly start server since it's not managed by Mason
@@ -309,10 +370,10 @@ return {
 					vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
 				end
 
-			-- Hover, rename, code action
-			nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
-			nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
-			nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
+				-- Hover, rename, code action
+				nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
+				nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
+				nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
 
 				-- LSP pickers through Telescope (inherit global layout)
 				local ok_tb, tb = pcall(require, "telescope.builtin")

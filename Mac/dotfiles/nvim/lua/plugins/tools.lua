@@ -139,6 +139,7 @@ return {
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },
 				{ "<leader>h", group = "harpoon" },
+				{ "<leader>j", group = "java" },
 				{ "<leader>l", group = "lsp" },
 				{ "<leader>n", group = "neo-tree" },
 				{ "<leader>p", group = "pairs/surround" },

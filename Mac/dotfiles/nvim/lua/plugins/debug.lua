@@ -34,6 +34,8 @@ return {
 				"delve",
 				"js-debug-adapter",
 				"codelldb",
+				"java-debug-adapter",
+				"java-test",
 			},
 			automatic_installation = true,
 		})
