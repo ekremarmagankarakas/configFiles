@@ -186,6 +186,23 @@ return {
 		})
 
 		-- Python
+		local function get_python_path(workspace)
+			-- 1. Respect VIRTUAL_ENV if already activated
+			local venv = vim.env.VIRTUAL_ENV
+			if venv then
+				return venv .. "/bin/python"
+			end
+
+			-- 2. Auto-detect .venv in project root
+			local venv_path = workspace .. "/.venv/bin/python"
+			if vim.fn.executable(venv_path) == 1 then
+				return venv_path
+			end
+
+			-- 3. Fallback to system python
+			return vim.fn.exepath("python3") or "python"
+		end
+
 		vim.lsp.config("pyright", {
 			filetypes = { "python" },
 			root_markers = {
@@ -197,6 +214,11 @@ return {
 				"Pipfile",
 				".git",
 			},
+			on_init = function(client)
+				local root = client.config.root_dir or vim.fn.getcwd()
+				local python_path = get_python_path(root)
+				client.config.settings.python.pythonPath = python_path
+			end,
 			settings = {
 				python = {
 					analysis = {
