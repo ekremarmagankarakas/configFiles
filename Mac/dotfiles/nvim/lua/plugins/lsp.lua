@@ -181,8 +181,6 @@ return {
 		----------------------------------------------------------------------
 		-- LSP core
 		----------------------------------------------------------------------
-		require("fidget").setup()
-
 		vim.lsp.config("*", {
 			capabilities = cmp_lsp.default_capabilities(),
 		})
