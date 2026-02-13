@@ -186,7 +186,8 @@ return {
 								"node_modules",
 								"--exclude",
 								"venv",
-                                ".venv",
+								"--exclude",
+								".venv",
 								"--exclude",
 								".git",
 								"--exclude",
@@ -244,6 +245,7 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"windwp/nvim-ts-autotag",
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -309,6 +311,9 @@ return {
 					additional_vim_regex_highlighting = { "markdown" },
 				},
 			})
+
+			-- Auto-close and auto-rename HTML/JSX tags
+			require("nvim-ts-autotag").setup()
 
 			-- Set up textobjects keymaps manually (required for newer nvim-treesitter)
 			local ts_select = require("nvim-treesitter-textobjects.select")

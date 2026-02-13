@@ -127,7 +127,7 @@ return {
 				function()
 					require("which-key").show({ global = true })
 				end,
-				desc = "Which-key: buffer local keymaps",
+				desc = "Which-key: global keymaps",
 			},
 		},
 		config = function(_, opts)
