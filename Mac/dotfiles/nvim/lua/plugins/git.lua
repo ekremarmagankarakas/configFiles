@@ -13,7 +13,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		main = "gitsigns",
-		lazy = false,
+		event = "BufReadPre",
 		keys = {
 			-- Preview
 			{

@@ -2,12 +2,41 @@ return {
 	"neovim/nvim-lspconfig",
 	version = "*",
 	dependencies = {
-		-- LSP + Mason
+		-- Mason
 		{ "mason-org/mason.nvim", opts = {} },
 		{
-			"mason-org/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			opts = {
-				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman", "clangd", "rust_analyzer", "gopls", "bashls", "jdtls" },
+				ensure_installed = {
+					-- LSP servers
+					"lua-language-server",
+					"pyright",
+					"typescript-language-server",
+					"zls",
+					"ltex-ls",
+					"marksman",
+					"clangd",
+					"rust-analyzer",
+					"gopls",
+					"bash-language-server",
+					"jdtls",
+					-- Formatters
+					"stylua",
+					"prettier",
+					"eslint_d",
+					"shfmt",
+					"goimports",
+					"gofumpt",
+					"google-java-format",
+					"latexindent",
+					-- DAP adapters
+					"debugpy",
+					"delve",
+					"js-debug-adapter",
+					"codelldb",
+					"java-debug-adapter",
+					"java-test",
+				},
 			},
 		},
 		-- Formatting
@@ -20,10 +49,6 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"saadparwaiz1/cmp_luasnip",
-
-		-- Telescope
-		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-telescope/telescope.nvim" },
 	},
 
 	config = function()
@@ -363,7 +388,18 @@ return {
 		})
 
 		-- Enable all Mason-managed servers
-		vim.lsp.enable({ "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman", "clangd", "rust_analyzer", "gopls", "bashls" })
+		vim.lsp.enable({
+			"lua_ls",
+			"pyright",
+			"ts_ls",
+			"zls",
+			"ltex",
+			"marksman",
+			"clangd",
+			"rust_analyzer",
+			"gopls",
+			"bashls",
+		})
 
 		-- R (installed via R, not Mason)
 		-- Use autocmd to explicitly start server since it's not managed by Mason
@@ -385,57 +421,6 @@ return {
 					cmd = { "R", "--slave", "-e", "languageserver::run()" },
 					root_dir = root_dir,
 				})
-			end,
-		})
-
-		----------------------------------------------------------------------
-		-- LSP attach behavior
-		----------------------------------------------------------------------
-		local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachKeymaps", { clear = true })
-
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = lsp_attach_group,
-			callback = function(ev)
-				local bufnr = ev.buf
-
-				local function nmap(lhs, rhs, desc)
-					vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
-				end
-
-				-- Hover, rename, code action
-				nmap("<leader>ld", vim.lsp.buf.hover, "Hover")
-				nmap("<leader>lrn", vim.lsp.buf.rename, "Rename")
-				nmap("<leader>lca", vim.lsp.buf.code_action, "Code Action")
-
-				-- LSP pickers through Telescope (inherit global layout)
-				local ok_tb, tb = pcall(require, "telescope.builtin")
-				if ok_tb then
-					if tb.diagnostics then
-						nmap("<leader>lD", tb.diagnostics, "Diagnostics (Telescope)")
-					else
-						nmap("<leader>lD", function()
-							vim.diagnostic.setqflist()
-							vim.cmd("copen")
-						end, "Diagnostics (Quickfix)")
-					end
-
-					nmap("<leader>lgd", tb.lsp_definitions, "Go to Definition")
-					nmap("<leader>lgr", function()
-						tb.lsp_references({ include_declaration = false })
-					end, "References")
-					nmap("<leader>lgi", tb.lsp_implementations, "Implementations")
-					nmap("<leader>lgD", tb.lsp_type_definitions, "Type Definitions")
-					nmap("<leader>ls", tb.lsp_document_symbols, "Document Symbols")
-					nmap("<leader>lS", tb.lsp_workspace_symbols, "Workspace Symbols")
-				else
-					-- Fallbacks if Telescope is not present
-					nmap("<leader>lgd", vim.lsp.buf.definition, "Go to Definition")
-					nmap("<leader>lgr", function()
-						vim.lsp.buf.references({ include_declaration = false })
-					end, "References")
-					nmap("<leader>lgi", vim.lsp.buf.implementation, "Implementations")
-					nmap("<leader>lgD", vim.lsp.buf.type_definition, "Type Definitions")
-				end
 			end,
 		})
 	end,

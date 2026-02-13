@@ -5,8 +5,6 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
 		"theHamsta/nvim-dap-virtual-text",
-		"jay-babu/mason-nvim-dap.nvim",
-		"mason-org/mason.nvim",
 
 		-- Language Specific Helpers
 		"mfussenegger/nvim-dap-python", -- Python
@@ -18,33 +16,114 @@ return {
 		-- Core run
 		{ "<leader>dc", desc = "DAP Prepare and Continue" },
 		-- Stepping
-		{ "<leader>dn", function() require("dap").step_over() end, desc = "DAP Step Over" },
-		{ "<leader>di", function() require("dap").step_into() end, desc = "DAP Step Into" },
-		{ "<leader>do", function() require("dap").step_out() end, desc = "DAP Step Out" },
-		{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "DAP Run to Cursor" },
+		{
+			"<leader>dn",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "DAP Step Over",
+		},
+		{
+			"<leader>di",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "DAP Step Into",
+		},
+		{
+			"<leader>do",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "DAP Step Out",
+		},
+		{
+			"<leader>dC",
+			function()
+				require("dap").run_to_cursor()
+			end,
+			desc = "DAP Run to Cursor",
+		},
 		-- Breakpoints
-		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
-		{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "DAP Conditional Breakpoint" },
-		{ "<leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "DAP Logpoint" },
+		{
+			"<leader>db",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "DAP Toggle Breakpoint",
+		},
+		{
+			"<leader>dB",
+			function()
+				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+			end,
+			desc = "DAP Conditional Breakpoint",
+		},
+		{
+			"<leader>dl",
+			function()
+				require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+			end,
+			desc = "DAP Logpoint",
+		},
 		-- Inspection & UI
-		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "DAP Hover" },
-		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, mode = "v", desc = "DAP Hover Selection" },
-		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "DAP Toggle REPL" },
-		{ "<leader>dq", function() require("dap").terminate() end, desc = "DAP Terminate" },
-		{ "<leader>du", function() require("dapui").toggle() end, desc = "DAP UI Toggle" },
+		{
+			"<leader>dh",
+			function()
+				require("dap.ui.widgets").hover()
+			end,
+			desc = "DAP Hover",
+		},
+		{
+			"<leader>dh",
+			function()
+				require("dap.ui.widgets").hover()
+			end,
+			mode = "v",
+			desc = "DAP Hover Selection",
+		},
+		{
+			"<leader>dr",
+			function()
+				require("dap").repl.toggle()
+			end,
+			desc = "DAP Toggle REPL",
+		},
+		{
+			"<leader>dq",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "DAP Terminate",
+		},
+		{
+			"<leader>du",
+			function()
+				require("dapui").toggle()
+			end,
+			desc = "DAP UI Toggle",
+		},
 		-- Python Specific
 		{ "<leader>ds", desc = "Debug nearest Python test" },
 		{ "<leader>df", desc = "Debug Python test class" },
 		{ "<leader>de", desc = "Debug selection", mode = "v" },
 		-- Toggles
-		{ "<leader>dtj", function()
-			_G.DAP_JUST_MY_CODE = not _G.DAP_JUST_MY_CODE
-			vim.notify("DAP justMyCode = " .. tostring(_G.DAP_JUST_MY_CODE))
-		end, desc = "Toggle justMyCode" },
-		{ "<leader>dtv", function()
-			_G.DAP_USE_VSCODE_LAUNCH = not _G.DAP_USE_VSCODE_LAUNCH
-			vim.notify("DAP VSCode launch.json = " .. tostring(_G.DAP_USE_VSCODE_LAUNCH))
-		end, desc = "Toggle VS Code launch.json" },
+		{
+			"<leader>dtj",
+			function()
+				_G.DAP_JUST_MY_CODE = not _G.DAP_JUST_MY_CODE
+				vim.notify("DAP justMyCode = " .. tostring(_G.DAP_JUST_MY_CODE))
+			end,
+			desc = "Toggle justMyCode",
+		},
+		{
+			"<leader>dtv",
+			function()
+				_G.DAP_USE_VSCODE_LAUNCH = not _G.DAP_USE_VSCODE_LAUNCH
+				vim.notify("DAP VSCode launch.json = " .. tostring(_G.DAP_USE_VSCODE_LAUNCH))
+			end,
+			desc = "Toggle VS Code launch.json",
+		},
 	},
 	config = function()
 		local dap = require("dap")
@@ -55,22 +134,6 @@ return {
 		----------------------------------------------------------------------
 		_G.DAP_JUST_MY_CODE = false
 		_G.DAP_USE_VSCODE_LAUNCH = false
-
-		----------------------------------------------------------------------
-		-- Mason Setup
-		----------------------------------------------------------------------
-		require("mason").setup()
-		require("mason-nvim-dap").setup({
-			ensure_installed = {
-				"debugpy",
-				"delve",
-				"js-debug-adapter",
-				"codelldb",
-				"java-debug-adapter",
-				"java-test",
-			},
-			automatic_installation = true,
-		})
 
 		----------------------------------------------------------------------
 		-- Prepare Phase (shared by ALL entry points)

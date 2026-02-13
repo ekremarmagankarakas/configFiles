@@ -8,18 +8,17 @@ vim.keymap.set("v", "<leader>x", '"+d', { silent = true, desc = "Cut to system c
 -- Clear search
 vim.keymap.set("n", "<leader>/", "<cmd>nohlsearch<cr>", { silent = true, desc = "Clear search highlight" })
 
--- Split
-vim.keymap.set("n", "<leader>v", "<cmd>vsplit<cr>", { silent = true, desc = "Vertical split" })
-vim.keymap.set("n", "<leader>hs", "<cmd>split<cr>", { silent = true, desc = "Horizontal split" })
-
 -- QuickFix Keymaps
-vim.keymap.set("n", "<M-j>", "<cmd>cnext<cr>", { silent = true, desc = "Quickfix: next" })
-vim.keymap.set("n", "<M-k>", "<cmd>cprev<cr>", { silent = true, desc = "Quickfix: prev" })
+vim.keymap.set("n", "<A-j>", "<cmd>cnext<cr>", { silent = true, desc = "Quickfix: next" })
+vim.keymap.set("n", "<A-k>", "<cmd>cprev<cr>", { silent = true, desc = "Quickfix: prev" })
 
 -- Open Terminal
 vim.keymap.set("n", "<leader>t", function()
 	vim.cmd("belowright 15split | term")
 end, { silent = true, desc = "Open terminal" })
+
+-- Terminal: exit insert mode with Escape
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Terminal: exit insert mode" })
 
 -- Toggle jk
 local toggle_jk = false
@@ -41,9 +40,6 @@ end, { silent = true, desc = "Toggle j/k and gj/gk" })
 vim.keymap.set("n", "<leader>st", function()
 	require("config.theme_picker").pick()
 end, { silent = true, desc = "Theme: pick" })
-
--- Terminal: exit insert mode with Escape
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { silent = true, desc = "Terminal: exit insert mode" })
 
 -- Navigate between splits with Ctrl-hjkl
 vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true, desc = "Move to left split" })

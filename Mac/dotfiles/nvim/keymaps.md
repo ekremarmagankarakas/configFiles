@@ -124,8 +124,6 @@ Leader: `Space` | Local leader: `\`
 | Key | Mode | Description |
 |-----|------|-------------|
 | `<leader>sp` | n | Toggle spell check |
-| `<leader>o` | n | Jump back (`Ctrl-o`) |
-| `<leader>i` | n | Jump forward (`Ctrl-i`) |
 | `<leader>y` | v | Yank to system clipboard |
 | `<leader>x` | v | Cut to system clipboard |
 | `<leader>/` | n | Clear search highlight |
@@ -170,7 +168,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>xq` | n | Toggle quickfix list |
 | `<leader>xs` | n | Toggle symbols |
 
-### Treesitter Text Objects (`plugins/editor.lua`)
+### Treesitter Text Objects (`plugins/treesitter.lua`)
 
 #### Select (use with `v`, `d`, `c`, `y`)
 
@@ -199,7 +197,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>a` | n | Swap argument with next |
 | `<leader>A` | n | Swap argument with prev |
 
-### Telescope (`plugins/editor.lua`)
+### Telescope (`plugins/telescope.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -231,17 +229,8 @@ Leader: `Space` | Local leader: `\`
 |-----|------|-------------|
 | `<leader>lf` | n | Format file (conform) |
 | `<leader>ltc` | n | Toggle completion on/off |
-| `<leader>ld` | n | Hover documentation |
-| `<leader>lrn` | n | Rename symbol |
-| `<leader>lca` | n | Code action |
 | `<leader>lef` | n | Diagnostics float |
 | `<leader>lD` | n | Diagnostics list (Telescope) |
-| `<leader>lgd` | n | Go to definition |
-| `<leader>lgr` | n | References |
-| `<leader>lgi` | n | Implementations |
-| `<leader>lgD` | n | Type definitions |
-| `<leader>ls` | n | Document symbols |
-| `<leader>lS` | n | Workspace symbols |
 
 ### Completion (nvim-cmp, insert mode)
 

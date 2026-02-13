@@ -77,3 +77,13 @@ vim.keymap.set("n", "<leader>lel", function()
 	vim.diagnostic.setloclist()
 end, { silent = true, desc = "Diagnostics: send to loclist" })
 
+-- Browse diagnostics via Telescope (global — works without LSP)
+vim.keymap.set("n", "<leader>lD", function()
+	local ok, tb = pcall(require, "telescope.builtin")
+	if ok then
+		tb.diagnostics()
+	else
+		vim.diagnostic.setqflist()
+		vim.cmd("copen")
+	end
+end, { silent = true, desc = "Diagnostics: browse (Telescope)" })
