@@ -10,8 +10,6 @@ return {
 				ensure_installed = { "lua_ls", "pyright", "ts_ls", "zls", "ltex", "marksman", "clangd", "rust_analyzer", "gopls", "bashls", "jdtls" },
 			},
 		},
-		"j-hui/fidget.nvim",
-
 		-- Formatting
 		"stevearc/conform.nvim",
 
