@@ -91,28 +91,27 @@ install_mac() {
     echo -e "${BOLD}── macOS configs ──${NC}"
     echo ""
 
-    local mac_dir="$DOTFILES_DIR/Mac"
     local config_dir="$HOME/.config"
 
     # Zsh
-    link_file "$mac_dir/zshrc" "$HOME/.zshrc"
+    link_file "$DOTFILES_DIR/zsh/zshrc.mac" "$HOME/.zshrc"
 
     # Neovim
-    link_file "$mac_dir/dotfiles/nvim" "$config_dir/nvim"
+    link_file "$DOTFILES_DIR/nvim/mac" "$config_dir/nvim"
 
     # Tmux
-    link_file "$mac_dir/dotfiles/tmux/tmux.conf" "$config_dir/tmux/tmux.conf"
+    link_file "$DOTFILES_DIR/tmux/tmux.conf.mac" "$config_dir/tmux/tmux.conf"
 
     # Kitty
-    link_file "$mac_dir/dotfiles/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
-    link_file "$mac_dir/dotfiles/kitty/current-theme.conf" "$config_dir/kitty/current-theme.conf"
+    link_file "$DOTFILES_DIR/kitty/mac/kitty.conf" "$config_dir/kitty/kitty.conf"
+    link_file "$DOTFILES_DIR/kitty/mac/current-theme.conf" "$config_dir/kitty/current-theme.conf"
 
     # AeroSpace
-    link_file "$mac_dir/dotfiles/aerospace/aerospace.toml" "$config_dir/aerospace/aerospace.toml"
+    link_file "$DOTFILES_DIR/aerospace/aerospace.toml" "$config_dir/aerospace/aerospace.toml"
 
     # Karabiner
-    link_file "$mac_dir/dotfiles/karabiner/karabiner.json" "$config_dir/karabiner/karabiner.json"
-    link_file "$mac_dir/dotfiles/karabiner/assets" "$config_dir/karabiner/assets"
+    link_file "$DOTFILES_DIR/karabiner/karabiner.json" "$config_dir/karabiner/karabiner.json"
+    link_file "$DOTFILES_DIR/karabiner/assets" "$config_dir/karabiner/assets"
 }
 
 install_linux() {
@@ -120,30 +119,29 @@ install_linux() {
     echo -e "${BOLD}── Linux configs ──${NC}"
     echo ""
 
-    local linux_dir="$DOTFILES_DIR/Linux"
     local config_dir="$HOME/.config"
 
     # Zsh
-    link_file "$linux_dir/.zshrc" "$HOME/.zshrc"
+    link_file "$DOTFILES_DIR/zsh/zshrc.linux" "$HOME/.zshrc"
 
     # Neovim
-    link_file "$linux_dir/dotfiles/nvim" "$config_dir/nvim"
+    link_file "$DOTFILES_DIR/nvim/linux" "$config_dir/nvim"
 
     # Tmux
-    link_file "$linux_dir/dotfiles/tmux/tmux.conf" "$config_dir/tmux/tmux.conf"
+    link_file "$DOTFILES_DIR/tmux/tmux.conf.linux" "$config_dir/tmux/tmux.conf"
 
     # Kitty
-    link_file "$linux_dir/dotfiles/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
-    link_file "$linux_dir/dotfiles/kitty/current-theme.conf" "$config_dir/kitty/current-theme.conf"
+    link_file "$DOTFILES_DIR/kitty/linux/kitty.conf" "$config_dir/kitty/kitty.conf"
+    link_file "$DOTFILES_DIR/kitty/linux/current-theme.conf" "$config_dir/kitty/current-theme.conf"
 
     # i3
-    link_file "$linux_dir/dotfiles/i3/config" "$config_dir/i3/config"
-    link_file "$linux_dir/dotfiles/i3/i3blocks.conf" "$config_dir/i3/i3blocks.conf"
-    link_file "$linux_dir/dotfiles/i3/scripts" "$config_dir/i3/scripts"
+    link_file "$DOTFILES_DIR/i3/config" "$config_dir/i3/config"
+    link_file "$DOTFILES_DIR/i3/i3blocks.conf" "$config_dir/i3/i3blocks.conf"
+    link_file "$DOTFILES_DIR/i3/scripts" "$config_dir/i3/scripts"
 
     # Rofi
-    link_file "$linux_dir/dotfiles/rofi/config.rasi" "$config_dir/rofi/config.rasi"
-    link_file "$linux_dir/dotfiles/rofi/scripts" "$config_dir/rofi/scripts"
+    link_file "$DOTFILES_DIR/rofi/config.rasi" "$config_dir/rofi/config.rasi"
+    link_file "$DOTFILES_DIR/rofi/scripts" "$config_dir/rofi/scripts"
 }
 
 install_tmux_plugins() {

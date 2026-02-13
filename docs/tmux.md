@@ -1,6 +1,6 @@
 # Tmux Configuration
 
-Both macOS and Linux share the same tmux setup with minor path differences.
+Both macOS and Linux share the same tmux setup with minor path differences. Configs live in `tmux/tmux.conf.mac` and `tmux/tmux.conf.linux`.
 
 ## Key Settings
 

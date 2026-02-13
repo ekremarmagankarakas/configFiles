@@ -3,8 +3,7 @@
 Thumbs.db
 
 # Tmux plugins (managed by TPM at runtime)
-Linux/dotfiles/tmux/plugins/
-Mac/dotfiles/tmux/plugins/
+tmux/plugins/
 
 # Neovim generated files
 **/lazy-lock.json

@@ -6,14 +6,14 @@ Cross-platform configuration files for macOS and Linux. Built around a consisten
 
 | Tool | macOS | Linux | Docs |
 |------|:-----:|:-----:|------|
-| **Neovim** | [config](Mac/dotfiles/nvim) | [config](Linux/dotfiles/nvim) | [docs/neovim.md](docs/neovim.md) |
-| **Tmux** | [config](Mac/dotfiles/tmux) | [config](Linux/dotfiles/tmux) | [docs/tmux.md](docs/tmux.md) |
-| **Zsh** | [config](Mac/zshrc) | [config](Linux/.zshrc) | [docs/shell.md](docs/shell.md) |
-| **Kitty** | [config](Mac/dotfiles/kitty) | [config](Linux/dotfiles/kitty) | - |
-| **AeroSpace** (tiling WM) | [config](Mac/dotfiles/aerospace) | - | [docs/window-management.md](docs/window-management.md) |
-| **i3** (tiling WM) | - | [config](Linux/dotfiles/i3) | [docs/window-management.md](docs/window-management.md) |
-| **Karabiner** (key remap) | [config](Mac/dotfiles/karabiner) | - | - |
-| **Rofi** (launcher) | - | [config](Linux/dotfiles/rofi) | [docs/window-management.md](docs/window-management.md) |
+| **Neovim** | [config](nvim/mac) | [config](nvim/linux) | [docs/neovim.md](docs/neovim.md) |
+| **Tmux** | [config](tmux/tmux.conf.mac) | [config](tmux/tmux.conf.linux) | [docs/tmux.md](docs/tmux.md) |
+| **Zsh** | [config](zsh/zshrc.mac) | [config](zsh/zshrc.linux) | [docs/shell.md](docs/shell.md) |
+| **Kitty** | [config](kitty/mac) | [config](kitty/linux) | - |
+| **AeroSpace** (tiling WM) | [config](aerospace/aerospace.toml) | - | [docs/window-management.md](docs/window-management.md) |
+| **i3** (tiling WM) | - | [config](i3) | [docs/window-management.md](docs/window-management.md) |
+| **Karabiner** (key remap) | [config](karabiner) | - | - |
+| **Rofi** (launcher) | - | [config](rofi) | [docs/window-management.md](docs/window-management.md) |
 
 Full keybinding reference: [docs/keymaps.md](docs/keymaps.md)
 
@@ -83,29 +83,35 @@ After installation, open tmux and press `Ctrl-s` + `I` to install tmux plugins.
 
 ```
 .
-├── install.sh              # Symlink installer (macOS + Linux)
-├── Mac/
-│   ├── zshrc               # -> ~/.zshrc
-│   └── dotfiles/
-│       ├── nvim/           # -> ~/.config/nvim
-│       ├── tmux/           # -> ~/.config/tmux
-│       ├── kitty/          # -> ~/.config/kitty
-│       ├── aerospace/      # -> ~/.config/aerospace
-│       └── karabiner/      # -> ~/.config/karabiner
-├── Linux/
-│   ├── .zshrc              # -> ~/.zshrc
-│   └── dotfiles/
-│       ├── nvim/           # -> ~/.config/nvim
-│       ├── tmux/           # -> ~/.config/tmux
-│       ├── kitty/          # -> ~/.config/kitty
-│       ├── i3/             # -> ~/.config/i3
-│       └── rofi/           # -> ~/.config/rofi
+├── install.sh                # Symlink installer (macOS + Linux)
+├── nvim/
+│   ├── mac/                  # -> ~/.config/nvim (macOS)
+│   │   ├── init.lua
+│   │   ├── keymaps.md
+│   │   └── lua/
+│   └── linux/                # -> ~/.config/nvim (Linux)
+│       ├── init.lua
+│       └── lua/
+├── tmux/
+│   ├── tmux.conf.mac         # -> ~/.config/tmux/tmux.conf (macOS)
+│   └── tmux.conf.linux       # -> ~/.config/tmux/tmux.conf (Linux)
+├── zsh/
+│   ├── zshrc.mac             # -> ~/.zshrc (macOS)
+│   └── zshrc.linux           # -> ~/.zshrc (Linux)
+├── kitty/
+│   ├── mac/                  # -> ~/.config/kitty (macOS)
+│   └── linux/                # -> ~/.config/kitty (Linux)
+├── aerospace/
+│   └── aerospace.toml        # -> ~/.config/aerospace/aerospace.toml (macOS)
+├── karabiner/                # -> ~/.config/karabiner (macOS)
+├── i3/                       # -> ~/.config/i3 (Linux)
+├── rofi/                     # -> ~/.config/rofi (Linux)
 └── docs/
-    ├── neovim.md           # Neovim setup & plugin docs
-    ├── keymaps.md          # Complete keybinding reference
-    ├── tmux.md             # Tmux configuration docs
-    ├── shell.md            # Zsh configuration docs
-    └── window-management.md # i3 / AeroSpace / Rofi docs
+    ├── neovim.md             # Neovim setup & plugin docs
+    ├── keymaps.md            # Complete keybinding reference
+    ├── tmux.md               # Tmux configuration docs
+    ├── shell.md              # Zsh configuration docs
+    └── window-management.md  # i3 / AeroSpace / Rofi docs
 ```
 
 ## Highlights

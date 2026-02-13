@@ -1,6 +1,6 @@
 # Shell Configuration (Zsh)
 
-Both macOS and Linux use Zsh with a nearly identical setup.
+Both macOS and Linux use Zsh with a nearly identical setup. Configs live in `zsh/zshrc.mac` and `zsh/zshrc.linux`.
 
 ## Prompt
 

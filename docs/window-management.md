@@ -13,7 +13,7 @@ Both use the same mental model: vi-style focus, workspace numbers 1-10, and a re
 
 ## AeroSpace (macOS)
 
-Config: [`Mac/dotfiles/aerospace/aerospace.toml`](../Mac/dotfiles/aerospace/aerospace.toml)
+Config: [`aerospace/aerospace.toml`](../aerospace/aerospace.toml)
 
 ### Keybindings
 
@@ -64,7 +64,7 @@ Workspaces 1-5 are assigned to the main monitor. Workspaces 6-9 are assigned to 
 
 ## i3 (Linux)
 
-Config: [`Linux/dotfiles/i3/config`](../Linux/dotfiles/i3/config)
+Config: [`i3/config`](../i3/config)
 
 ### Keybindings
 
@@ -138,7 +138,7 @@ Monitor profiles are available via keybindings or the Rofi monitor selector:
 
 ## Rofi (Linux Application Launcher)
 
-Config: [`Linux/dotfiles/rofi/config.rasi`](../Linux/dotfiles/rofi/config.rasi)
+Config: [`rofi/config.rasi`](../rofi/config.rasi)
 
 Rofi is used as the primary launcher on Linux, replacing dmenu. It has vi-style navigation (`Alt+j/k`) and a dark theme matching the i3 color scheme.
 
@@ -171,7 +171,7 @@ The bangs system provides quick access to common actions:
 
 ## Karabiner-Elements (macOS)
 
-Config: [`Mac/dotfiles/karabiner/karabiner.json`](../Mac/dotfiles/karabiner/karabiner.json)
+Config: [`karabiner/karabiner.json`](../karabiner/karabiner.json)
 
 Key remappings:
 
