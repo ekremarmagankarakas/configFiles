@@ -7,7 +7,7 @@ Cross-platform configuration files for macOS and Linux. Built around a consisten
 | Tool | macOS | Linux | Docs |
 |------|:-----:|:-----:|------|
 | **Neovim** | [config](nvim) | [config](nvim) | [docs/neovim.md](docs/neovim.md) |
-| **Tmux** | [config](tmux/tmux.conf.mac) | [config](tmux/tmux.conf.linux) | [docs/tmux.md](docs/tmux.md) |
+| **Tmux** | [config](tmux/tmux.conf) | [config](tmux/tmux.conf) | [docs/tmux.md](docs/tmux.md) |
 | **Zsh** | [config](zsh/zshrc.mac) | [config](zsh/zshrc.linux) | [docs/shell.md](docs/shell.md) |
 | **Kitty** | [config](kitty) | [config](kitty) | - |
 | **AeroSpace** (tiling WM) | [config](aerospace/aerospace.toml) | - | [docs/window-management.md](docs/window-management.md) |
@@ -89,8 +89,7 @@ After installation, open tmux and press `Ctrl-s` + `I` to install tmux plugins.
 │   ├── keymaps.md
 │   └── lua/
 ├── tmux/
-│   ├── tmux.conf.mac         # -> ~/.config/tmux/tmux.conf (macOS)
-│   └── tmux.conf.linux       # -> ~/.config/tmux/tmux.conf (Linux)
+│   └── tmux.conf             # -> ~/.config/tmux/tmux.conf (shared)
 ├── zsh/
 │   ├── zshrc.mac             # -> ~/.zshrc (macOS)
 │   └── zshrc.linux           # -> ~/.zshrc (Linux)

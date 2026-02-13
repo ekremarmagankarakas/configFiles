@@ -100,7 +100,7 @@ install_mac() {
     link_file "$DOTFILES_DIR/nvim" "$config_dir/nvim"
 
     # Tmux
-    link_file "$DOTFILES_DIR/tmux/tmux.conf.mac" "$config_dir/tmux/tmux.conf"
+    link_file "$DOTFILES_DIR/tmux/tmux.conf" "$config_dir/tmux/tmux.conf"
 
     # Kitty
     link_file "$DOTFILES_DIR/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
@@ -128,7 +128,7 @@ install_linux() {
     link_file "$DOTFILES_DIR/nvim" "$config_dir/nvim"
 
     # Tmux
-    link_file "$DOTFILES_DIR/tmux/tmux.conf.linux" "$config_dir/tmux/tmux.conf"
+    link_file "$DOTFILES_DIR/tmux/tmux.conf" "$config_dir/tmux/tmux.conf"
 
     # Kitty
     link_file "$DOTFILES_DIR/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
