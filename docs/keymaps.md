@@ -1,6 +1,6 @@
 # Keymaps Reference
 
-Complete keybinding reference across all tools. For Neovim-specific keymaps, see also [`nvim/mac/keymaps.md`](../nvim/mac/keymaps.md) for the full vim motions cheatsheet.
+Complete keybinding reference across all tools. For Neovim-specific keymaps, see also [`nvim/keymaps.md`](../nvim/keymaps.md) for the full vim motions cheatsheet.
 
 ---
 

@@ -97,14 +97,14 @@ install_mac() {
     link_file "$DOTFILES_DIR/zsh/zshrc.mac" "$HOME/.zshrc"
 
     # Neovim
-    link_file "$DOTFILES_DIR/nvim/mac" "$config_dir/nvim"
+    link_file "$DOTFILES_DIR/nvim" "$config_dir/nvim"
 
     # Tmux
     link_file "$DOTFILES_DIR/tmux/tmux.conf.mac" "$config_dir/tmux/tmux.conf"
 
     # Kitty
-    link_file "$DOTFILES_DIR/kitty/mac/kitty.conf" "$config_dir/kitty/kitty.conf"
-    link_file "$DOTFILES_DIR/kitty/mac/current-theme.conf" "$config_dir/kitty/current-theme.conf"
+    link_file "$DOTFILES_DIR/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
+    link_file "$DOTFILES_DIR/kitty/current-theme.conf" "$config_dir/kitty/current-theme.conf"
 
     # AeroSpace
     link_file "$DOTFILES_DIR/aerospace/aerospace.toml" "$config_dir/aerospace/aerospace.toml"
@@ -125,14 +125,14 @@ install_linux() {
     link_file "$DOTFILES_DIR/zsh/zshrc.linux" "$HOME/.zshrc"
 
     # Neovim
-    link_file "$DOTFILES_DIR/nvim/linux" "$config_dir/nvim"
+    link_file "$DOTFILES_DIR/nvim" "$config_dir/nvim"
 
     # Tmux
     link_file "$DOTFILES_DIR/tmux/tmux.conf.linux" "$config_dir/tmux/tmux.conf"
 
     # Kitty
-    link_file "$DOTFILES_DIR/kitty/linux/kitty.conf" "$config_dir/kitty/kitty.conf"
-    link_file "$DOTFILES_DIR/kitty/linux/current-theme.conf" "$config_dir/kitty/current-theme.conf"
+    link_file "$DOTFILES_DIR/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
+    link_file "$DOTFILES_DIR/kitty/current-theme.conf" "$config_dir/kitty/current-theme.conf"
 
     # i3
     link_file "$DOTFILES_DIR/i3/config" "$config_dir/i3/config"

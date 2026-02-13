@@ -6,10 +6,10 @@ Cross-platform configuration files for macOS and Linux. Built around a consisten
 
 | Tool | macOS | Linux | Docs |
 |------|:-----:|:-----:|------|
-| **Neovim** | [config](nvim/mac) | [config](nvim/linux) | [docs/neovim.md](docs/neovim.md) |
+| **Neovim** | [config](nvim) | [config](nvim) | [docs/neovim.md](docs/neovim.md) |
 | **Tmux** | [config](tmux/tmux.conf.mac) | [config](tmux/tmux.conf.linux) | [docs/tmux.md](docs/tmux.md) |
 | **Zsh** | [config](zsh/zshrc.mac) | [config](zsh/zshrc.linux) | [docs/shell.md](docs/shell.md) |
-| **Kitty** | [config](kitty/mac) | [config](kitty/linux) | - |
+| **Kitty** | [config](kitty) | [config](kitty) | - |
 | **AeroSpace** (tiling WM) | [config](aerospace/aerospace.toml) | - | [docs/window-management.md](docs/window-management.md) |
 | **i3** (tiling WM) | - | [config](i3) | [docs/window-management.md](docs/window-management.md) |
 | **Karabiner** (key remap) | [config](karabiner) | - | - |
@@ -84,23 +84,19 @@ After installation, open tmux and press `Ctrl-s` + `I` to install tmux plugins.
 ```
 .
 ├── install.sh                # Symlink installer (macOS + Linux)
-├── nvim/
-│   ├── mac/                  # -> ~/.config/nvim (macOS)
-│   │   ├── init.lua
-│   │   ├── keymaps.md
-│   │   └── lua/
-│   └── linux/                # -> ~/.config/nvim (Linux)
-│       ├── init.lua
-│       └── lua/
+├── nvim/                     # -> ~/.config/nvim (shared)
+│   ├── init.lua
+│   ├── keymaps.md
+│   └── lua/
 ├── tmux/
 │   ├── tmux.conf.mac         # -> ~/.config/tmux/tmux.conf (macOS)
 │   └── tmux.conf.linux       # -> ~/.config/tmux/tmux.conf (Linux)
 ├── zsh/
 │   ├── zshrc.mac             # -> ~/.zshrc (macOS)
 │   └── zshrc.linux           # -> ~/.zshrc (Linux)
-├── kitty/
-│   ├── mac/                  # -> ~/.config/kitty (macOS)
-│   └── linux/                # -> ~/.config/kitty (Linux)
+├── kitty/                    # -> ~/.config/kitty (shared)
+│   ├── kitty.conf
+│   └── current-theme.conf
 ├── aerospace/
 │   └── aerospace.toml        # -> ~/.config/aerospace/aerospace.toml (macOS)
 ├── karabiner/                # -> ~/.config/karabiner (macOS)

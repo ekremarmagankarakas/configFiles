@@ -1,6 +1,6 @@
 # Neovim Configuration
 
-Both macOS and Linux have Neovim configs built on [Lazy.nvim](https://github.com/folke/lazy.nvim). The macOS config (`nvim/mac/`) is the primary/more complete one. The Linux config (`nvim/linux/`) follows a similar structure but is an earlier iteration.
+A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https://github.com/folke/lazy.nvim).
 
 ## Plugin Manager
 
@@ -111,7 +111,7 @@ Your selection is saved to `~/.local/share/nvim/theme.txt` and persists across s
 
 ## Core Options
 
-From `nvim/mac/lua/config/options.lua`:
+From `nvim/lua/config/options.lua`:
 
 | Option | Value | Note |
 |--------|-------|------|
@@ -125,10 +125,10 @@ From `nvim/mac/lua/config/options.lua`:
 | Mouse | enabled | |
 | Global statusline | yes | single statusline across splits |
 
-## Directory Structure (macOS)
+## Directory Structure
 
 ```
-nvim/mac/
+nvim/
 ├── init.lua                 # Entry point, bootstraps Lazy.nvim
 ├── keymaps.md               # Full keybinding reference
 ├── lua/
