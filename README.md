@@ -57,7 +57,7 @@ Full keybinding reference: [docs/keymaps.md](docs/keymaps.md)
 ## Installation
 
 ```bash
-git clone https://github.com/ekremarmagankarakas/configFiles.git ~/dotfiles
+git clone https://github.com/ekremarmagankarakas/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # Preview what will be linked (recommended first)
