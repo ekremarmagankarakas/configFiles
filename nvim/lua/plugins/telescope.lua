@@ -38,14 +38,6 @@ return {
 						"~/Workspace",
 						"~/Northeastern",
 						"~/Work",
-						"~/.config/nvim",
-						"~/.config/kitty",
-						"~/.config/picom",
-						"~/.config/rofi",
-						"~/.config/starship",
-						"~/.config/i3",
-						"~/.config/i3ctl",
-						"~/.config/securegit",
 					}
 
 					-- Filter to only directories that exist

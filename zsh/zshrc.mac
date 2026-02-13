@@ -149,7 +149,5 @@ if command -v thefuck >/dev/null 2>&1; then
   eval "$(thefuck --alias)"
 fi
 
-# export PATH="/Users/ekremarmagankarakas/Workspace/funlang/venv/bin:$PATH"
-
 # Added by Antigravity
 export PATH="/Users/ekremarmagankarakas/.antigravity/antigravity/bin:$PATH"

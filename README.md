@@ -79,6 +79,19 @@ The install script:
 
 After installation, open tmux and press `Ctrl-s` + `I` to install tmux plugins.
 
+## Customization
+
+Some settings are intentionally machine-specific. If you fork/clone this repo, search for these and update them:
+
+- search and replace `ekrem-armagan-karakas` and `ekremarmagankarakas` with your own username
+- `zsh/zshrc.linux`: `BROWSER` and `zen` (expects `~/AppImages/zen_browser.appimage`)
+- `i3/config`: browser keybind (expects `~/AppImages/zen_browser.appimage`)
+- `i3/config`: file explorer keybind (expects `Thunar`)
+- `nvim/lua/plugins/telescope.lua`: Has hardcoded dir locations to search from. Update these to fit your own setup.
+- `zsh/zshrc.mac`: optional `antigravity` PATH entry
+- `aerospace/aerospace.toml`: browser keybind (expects `Brave`)
+- `aerospace/aerospace.toml`: file explorer keybind (expects `Commander One`)
+
 ## Repository Structure
 
 ```
