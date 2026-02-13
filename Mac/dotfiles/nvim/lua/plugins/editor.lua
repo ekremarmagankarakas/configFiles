@@ -186,6 +186,7 @@ return {
 								"node_modules",
 								"--exclude",
 								"venv",
+                                ".venv",
 								"--exclude",
 								".git",
 								"--exclude",
