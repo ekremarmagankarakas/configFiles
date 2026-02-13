@@ -1,3 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Tmux plugins (managed by TPM at runtime)
 Linux/dotfiles/tmux/plugins/
 Mac/dotfiles/tmux/plugins/
-.DS_Store
+
+# Neovim generated files
+**/lazy-lock.json
+**/.luarc.json
+
+# Backup files
+*.bak
+**/*.bak
+
+# Karabiner auto-generated backups
+**/automatic_backups/
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
