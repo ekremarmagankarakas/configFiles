@@ -14,6 +14,38 @@ return {
 		"mxsdev/nvim-dap-vscode-js", -- JS/TS
 		"julianolf/nvim-dap-lldb", -- C/C++/Rust
 	},
+	keys = {
+		-- Core run
+		{ "<leader>dc", desc = "DAP Prepare and Continue" },
+		-- Stepping
+		{ "<leader>dn", function() require("dap").step_over() end, desc = "DAP Step Over" },
+		{ "<leader>di", function() require("dap").step_into() end, desc = "DAP Step Into" },
+		{ "<leader>do", function() require("dap").step_out() end, desc = "DAP Step Out" },
+		{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "DAP Run to Cursor" },
+		-- Breakpoints
+		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
+		{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "DAP Conditional Breakpoint" },
+		{ "<leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "DAP Logpoint" },
+		-- Inspection & UI
+		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, desc = "DAP Hover" },
+		{ "<leader>dh", function() require("dap.ui.widgets").hover() end, mode = "v", desc = "DAP Hover Selection" },
+		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "DAP Toggle REPL" },
+		{ "<leader>dq", function() require("dap").terminate() end, desc = "DAP Terminate" },
+		{ "<leader>du", function() require("dapui").toggle() end, desc = "DAP UI Toggle" },
+		-- Python Specific
+		{ "<leader>ds", desc = "Debug nearest Python test" },
+		{ "<leader>df", desc = "Debug Python test class" },
+		{ "<leader>de", desc = "Debug selection", mode = "v" },
+		-- Toggles
+		{ "<leader>dtj", function()
+			_G.DAP_JUST_MY_CODE = not _G.DAP_JUST_MY_CODE
+			vim.notify("DAP justMyCode = " .. tostring(_G.DAP_JUST_MY_CODE))
+		end, desc = "Toggle justMyCode" },
+		{ "<leader>dtv", function()
+			_G.DAP_USE_VSCODE_LAUNCH = not _G.DAP_USE_VSCODE_LAUNCH
+			vim.notify("DAP VSCode launch.json = " .. tostring(_G.DAP_USE_VSCODE_LAUNCH))
+		end, desc = "Toggle VS Code launch.json" },
+	},
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
@@ -126,65 +158,29 @@ return {
 		end
 
 		----------------------------------------------------------------------
-		-- Keymaps
+		-- Keymaps that need dap_prepare()
 		----------------------------------------------------------------------
 		local map = vim.keymap.set
 		local dappy = require("dap-python")
 
-		-- Core run (prepare → run)
 		map("n", "<leader>dc", function()
 			dap_prepare()
 			dap.continue()
 		end, { desc = "DAP Prepare and Continue" })
 
-		-- Stepping
-		map("n", "<leader>dn", dap.step_over, { desc = "DAP Step Over" })
-		map("n", "<leader>di", dap.step_into, { desc = "DAP Step Into" })
-		map("n", "<leader>do", dap.step_out, { desc = "DAP Step Out" })
-		map("n", "<leader>dC", dap.run_to_cursor, { desc = "DAP Run to Cursor" })
-
-		-- 2. Breakpoints
-		map("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP Toggle Breakpoint" })
-		map("n", "<leader>dB", function()
-			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end, { desc = "DAP Conditional Breakpoint" })
-		map("n", "<leader>dl", function()
-			dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-		end, { desc = "DAP Logpoint" })
-
-		-- 3. Inspection & UI
-		map("n", "<leader>dh", function()
-			require("dap.ui.widgets").hover()
-		end, { desc = "DAP Hover" })
-		map("v", "<leader>dh", function()
-			require("dap.ui.widgets").hover()
-		end, { desc = "DAP Hover Selection" })
-		map("n", "<leader>dr", dap.repl.toggle, { desc = "DAP Toggle REPL" })
-		map("n", "<leader>dq", dap.terminate, { desc = "DAP Terminate" })
-		map("n", "<leader>du", dapui.toggle, { desc = "DAP UI Toggle" })
-
-		-- 4. Python Specific (nvim-dap-python)
 		map("n", "<leader>ds", function()
 			dap_prepare()
 			dappy.test_method()
 		end, { desc = "Debug nearest Python test" })
+
 		map("n", "<leader>df", function()
 			dap_prepare()
 			dappy.test_class()
 		end, { desc = "Debug Python test class" })
+
 		map("v", "<leader>de", function()
 			dap_prepare()
 			dappy.debug_selection()
 		end, { desc = "Debug selection" })
-
-		-- Toggles
-		map("n", "<leader>dtj", function()
-			_G.DAP_JUST_MY_CODE = not _G.DAP_JUST_MY_CODE
-			vim.notify("DAP justMyCode = " .. tostring(_G.DAP_JUST_MY_CODE))
-		end, { desc = "Toggle justMyCode" })
-		map("n", "<leader>dtv", function()
-			_G.DAP_USE_VSCODE_LAUNCH = not _G.DAP_USE_VSCODE_LAUNCH
-			vim.notify("DAP VSCode launch.json = " .. tostring(_G.DAP_USE_VSCODE_LAUNCH))
-		end, { desc = "Toggle VS Code launch.json" })
 	end,
 }

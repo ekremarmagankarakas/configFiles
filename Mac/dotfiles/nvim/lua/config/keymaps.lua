@@ -1,10 +1,6 @@
 -- Toggle Spell Check
 vim.keymap.set("n", "<leader>sp", "<cmd>setlocal spell!<cr>", { silent = true, desc = "Toggle spell check" })
 
--- Go Back Go Forward
-vim.keymap.set("n", "<leader>o", "<C-o>", { silent = true, desc = "Jump back" })
-vim.keymap.set("n", "<leader>i", "<C-i>", { silent = true, desc = "Jump forward" })
-
 -- Yank
 vim.keymap.set("v", "<leader>y", '"+y', { silent = true, desc = "Yank to system clipboard" })
 vim.keymap.set("v", "<leader>x", '"+d', { silent = true, desc = "Cut to system clipboard" })
