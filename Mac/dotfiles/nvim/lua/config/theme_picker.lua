@@ -1,5 +1,22 @@
 local M = {}
 
+local state_file = vim.fn.stdpath("data") .. "/theme.txt"
+local default_theme = "vscode"
+
+function M.load()
+	if vim.fn.filereadable(state_file) == 1 then
+		local theme = vim.fn.readfile(state_file)[1]
+		if theme and theme ~= "" then
+			return theme
+		end
+	end
+	return default_theme
+end
+
+function M.save(theme)
+	vim.fn.writefile({ theme }, state_file)
+end
+
 function M.pick()
 	-- Force-load all lazy theme plugins so their colorschemes are registered.
 	-- Colorscheme plugins are just highlight tables — negligible memory cost.
@@ -25,18 +42,14 @@ function M.pick()
 			finder = finders.new_table({ results = themes }),
 			sorter = conf.generic_sorter({}),
 			attach_mappings = function(bufnr, map)
-				-- This replaces the default 'Enter' behavior (opening a file)
 				actions.select_default:replace(function()
 					local selection = action_state.get_selected_entry()
 					actions.close(bufnr)
 
 					if selection then
-						-- Apply the theme
 						vim.cmd.colorscheme(selection.value)
-						-- Persist the choice
-						require("config.theme_state").save(selection.value)
+						M.save(selection.value)
 
-						-- Refresh Lualine so it detects the new background (light/dark)
 						if package.loaded["lualine"] then
 							require("lualine").setup({ options = { theme = "auto" } })
 						end

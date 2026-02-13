@@ -23,8 +23,8 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			local theme_state = require("config.theme_state")
-			vim.cmd.colorscheme(theme_state.load())
+			local theme = require("config.theme_picker")
+			vim.cmd.colorscheme(theme.load())
 		end,
 	},
 
@@ -41,7 +41,7 @@ return {
 			respect_scrolloff = false,
 			cursor_scrolls_alone = true,
 		},
-    },
+	},
 
 	----------------------------------------------------------------------
 	-- Lualine
