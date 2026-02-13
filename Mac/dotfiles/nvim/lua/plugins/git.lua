@@ -128,7 +128,14 @@ return {
 				desc = "Git: toggle signs",
 			},
 		},
-		opts = {},
+		opts = {
+			on_attach = function(bufnr)
+				local gs = require("gitsigns")
+				vim.keymap.set({ "o", "x" }, "ih", function()
+					gs.select_hunk()
+				end, { buffer = bufnr, desc = "Git: select hunk" })
+			end,
+		},
 	},
 
 	----------------------------------------------------------------------
