@@ -132,6 +132,30 @@ return {
 	},
 
 	----------------------------------------------------------------------
+	-- Nvim Colorizer
+	----------------------------------------------------------------------
+	{
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			filetypes = { "*" },
+			user_default_options = {
+				RGB = true,
+				RRGGBB = true,
+				names = false, -- disable named colors (e.g. "Blue")
+				RRGGBBAA = true,
+				rgb_fn = true,
+				hsl_fn = true,
+				css = true,
+				css_fn = true,
+				mode = "background", -- "background" | "foreground" | "virtualtext"
+				tailwind = false,
+				virtualtext = "■",
+			},
+		},
+	},
+
+	----------------------------------------------------------------------
 	-- Noice (UI for messages, cmdline, and notifications)
 	----------------------------------------------------------------------
 	{
