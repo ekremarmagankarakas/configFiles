@@ -16,12 +16,10 @@ Complete keybinding reference across all tools. For Neovim-specific keymaps, see
 | `<leader>y` | v | Yank to system clipboard |
 | `<leader>x` | v | Cut to system clipboard |
 | `<leader>/` | n | Clear search highlight |
-| `<leader>v` | n | Vertical split |
-| `<leader>hs` | n | Horizontal split |
 | `Ctrl-h/j/k/l` | n | Navigate between splits |
 | `Alt-j` / `Alt-k` | n | Quickfix next / prev |
 | `<leader>t` | n | Open terminal below |
-| `Esc` | t | Exit terminal insert mode |
+| `Esc Esc` | t | Exit terminal insert mode |
 | `<leader>st` | n | Theme picker |
 | `<leader>sj` | n | Toggle j/k vs gj/gk |
 | `<leader>sr` | n | Search & replace (global) |
@@ -59,6 +57,12 @@ Complete keybinding reference across all tools. For Neovim-specific keymaps, see
 | `<leader>ltc` | n | Toggle completion |
 | `<leader>lef` | n | Diagnostics float |
 | `<leader>lD` | n | Diagnostics list |
+
+### Lint
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ll` | n | Run linters |
 
 ### Completion (nvim-cmp)
 

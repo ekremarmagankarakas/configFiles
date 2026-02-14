@@ -16,24 +16,25 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [Mason](https://github.com/mason-org/mason.nvim) | LSP/DAP/formatter installer |
 | [mason-tool-installer](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Auto-install tools via Mason |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting engine |
+| [nvim-lint](https://github.com/mfussenegger/nvim-lint) | Linting engine (runs CLI linters, publishes diagnostics) |
 | [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Autocompletion |
 
-#### Configured Language Servers
+#### Language Tooling
 
-| Language | Server | Formatter |
-|----------|--------|-----------|
-| Lua | lua_ls | stylua |
-| Python | pyright | ruff |
-| TypeScript/JavaScript | ts_ls | eslint_d, prettier |
-| Go | gopls | goimports, gofumpt |
-| Rust | rust_analyzer | rustfmt |
-| C/C++ | clangd | clang-format |
-| Zig | zls | zigfmt |
-| Bash | bashls | shfmt |
-| Markdown | marksman | prettier |
-| Java | jdtls | google-java-format |
-| LaTeX | ltex | latexindent |
-| R | r_language_server | styler |
+| Language | LSP server | Formatter | Linter |
+|----------|------------|-----------|--------|
+| Lua | lua_ls | stylua | - |
+| Python | pyright | ruff (format) | ruff (lint) |
+| TypeScript/JavaScript | ts_ls | prettier | eslint_d |
+| Go | gopls | goimports, gofumpt | - |
+| Rust | rust_analyzer | rustfmt | - |
+| C/C++ | clangd | clang-format | - |
+| Zig | zls | zigfmt | - |
+| Bash | bashls | shfmt | shellcheck |
+| Markdown | marksman | prettier | - |
+| Java | nvim-jdtls (JDTLS) | google-java-format | - |
+| TeX/LaTeX | ltex (grammar) | latexindent | - |
+| R | r_language_server | styler | - |
 
 ### Editor
 
@@ -103,7 +104,7 @@ Global toggles:
 
 ### Theme Picker
 
-12 themes are installed and available through a persistent picker (`<leader>st`):
+13 themes are installed and available through a persistent picker (`<leader>st`):
 
 catppuccin, nightfox, kanagawa, github-theme, onedarkpro, dracula, tokyonight, adwaita, rose-pine, gruvbox-material, everforest, cyberdream, vscode
 
@@ -140,17 +141,26 @@ nvim/
 │   │   ├── diagnostics.lua  # Diagnostic display configuration
 │   │   └── theme_picker.lua # Persistent theme selection
 │   └── plugins/
-│       ├── lsp.lua          # LSP, Mason, conform, cmp
-│       ├── editor.lua       # Neo-tree, Flash, Makview etc.
+│       ├── lsp.lua          # LSP + Mason + nvim-cmp
+│       ├── format.lua       # Conform (formatters)
+│       ├── lint.lua         # nvim-lint (linters)
+│       ├── tools.lua        # Neo-tree, Flash, Trouble, Markview, etc.
 │       ├── git.lua          # Fugitive, gitsigns, Copilot, LazyGit
 │       ├── telescope.lua    # Telescope config and pickers
 │       ├── treesitter.lua   # Treesitter + text objects
-│       ├── tools.lua        # Harpoon, surround, undotree, etc.
 │       ├── ui.lua           # Themes, lualine, indent, noice
 │       ├── debug.lua        # DAP config for all languages
 │       ├── java.lua         # JDTLS with DAP integration
 │       └── snippets.lua     # LuaSnip + friendly-snippets
 ```
+
+## Linting
+
+Linting is handled separately from LSP via `mfussenegger/nvim-lint`:
+
+- Runs on `BufReadPost`, `InsertLeave`, and `BufWritePost`
+- Uses `ruff` for Python, `eslint_d` for JS/TS (only if the project has an ESLint config), and `shellcheck` for shell
+- Manual trigger: `<leader>ll`
 
 ## Java Setup
 

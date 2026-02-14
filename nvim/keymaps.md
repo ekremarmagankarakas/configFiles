@@ -127,8 +127,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>y` | v | Yank to system clipboard |
 | `<leader>x` | v | Cut to system clipboard |
 | `<leader>/` | n | Clear search highlight |
-| `<leader>v` | n | Vertical split |
-| `<leader>hs` | n | Horizontal split |
 | `Alt-j` | n | Quickfix next |
 | `Alt-k` | n | Quickfix prev |
 | `<leader>t` | n | Open terminal (below) |
@@ -136,13 +134,13 @@ Leader: `Space` | Local leader: `\`
 | `<leader>st` | n | Theme picker |
 | `<leader>sr` | n | Search & replace (global, prompts) |
 | `<leader>sq` | n | Search & replace (quickfix list) |
-| `Esc` | t | Exit terminal insert mode |
+| `Esc Esc` | t | Exit terminal insert mode |
 | `Ctrl-h` | n | Move to left split |
 | `Ctrl-j` | n | Move to below split |
 | `Ctrl-k` | n | Move to above split |
 | `Ctrl-l` | n | Move to right split |
 
-### Neo-tree (`plugins/editor.lua`)
+### Neo-tree (`plugins/tools.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -150,7 +148,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>nt` | n | Toggle Neo-tree |
 | `O` | n | Open file externally (inside Neo-tree) |
 
-### Todo Comments (`plugins/editor.lua`)
+### Todo Comments (`plugins/tools.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -158,7 +156,7 @@ Leader: `Space` | Local leader: `\`
 | `[t` | n | Jump to prev TODO comment |
 | `<leader>fT` | n | Find TODO comments (Telescope) |
 
-### Trouble (`plugins/editor.lua`)
+### Trouble (`plugins/tools.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -231,6 +229,12 @@ Leader: `Space` | Local leader: `\`
 | `<leader>ltc` | n | Toggle completion on/off |
 | `<leader>lef` | n | Diagnostics float |
 | `<leader>lD` | n | Diagnostics list (Telescope) |
+
+### Lint (`plugins/lint.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>ll` | n | Run linters |
 
 ### Completion (nvim-cmp, insert mode)
 
@@ -377,7 +381,7 @@ Leader: `Space` | Local leader: `\`
 |-----|------|-------------|
 | `<leader>wm` | n | Maximize window |
 
-### Other (`plugins/tools.lua` & `plugins/editor.lua`)
+### Other (`plugins/tools.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
