@@ -307,13 +307,13 @@ return {
 
 		-- LTEX
 		vim.lsp.config("ltex", {
-			filetypes = { "markdown", "text", "tex", "latex", "bib" },
+			filetypes = { "tex", "latex", "bib" },
 			root_markers = { ".git" },
 			settings = {
 				ltex = {
 					checkFrequency = "save",
 					language = "en-US",
-					enabled = { "markdown", "text", "tex" },
+					enabled = { "tex", "latex", "bib" },
 					disabledRules = { ["en-US"] = { "WHITESPACE_RULE" } },
 				},
 			},

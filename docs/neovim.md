@@ -30,7 +30,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | C/C++ | clangd | clang-format |
 | Zig | zls | zigfmt |
 | Bash | bashls | shfmt |
-| Markdown | marksman, ltex | prettier |
+| Markdown | marksman | prettier |
 | Java | jdtls | google-java-format |
 | LaTeX | ltex | latexindent |
 | R | r_language_server | styler |
