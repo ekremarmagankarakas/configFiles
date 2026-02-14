@@ -23,12 +23,15 @@ return {
 					-- Formatters
 					"stylua",
 					"prettier",
-					"eslint_d",
 					"shfmt",
 					"goimports",
 					"gofumpt",
 					"google-java-format",
 					"latexindent",
+                    -- Linters
+                    "ruff",
+					"eslint_d",
+                    "shellcheck",
 					-- DAP adapters
 					"debugpy",
 					"delve",
@@ -39,9 +42,6 @@ return {
 				},
 			},
 		},
-		-- Formatting
-		"stevearc/conform.nvim",
-
 		-- Completion
 		{ "hrsh7th/nvim-cmp", event = { "InsertEnter", "CmdlineEnter" } },
 		"hrsh7th/cmp-nvim-lsp",
@@ -52,106 +52,6 @@ return {
 	},
 
 	config = function()
-		--------------------------------------------------------------------------
-		-- Conform (Formatting Only)
-		--------------------------------------------------------------------------
-		local conform = require("conform")
-		local util = require("conform.util")
-
-		conform.setup({
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "ruff_format" },
-				c = { "clang_format" },
-				cpp = { "clang_format" },
-				javascript = { "eslint_d", "prettier" },
-				typescript = { "eslint_d", "prettier" },
-				typescriptreact = { "eslint_d", "prettier" },
-				javascriptreact = { "eslint_d", "prettier" },
-				go = { "goimports", "gofumpt" },
-				rust = { "rustfmt" },
-				zig = { "zigfmt" },
-				bash = { "shfmt" },
-				sh = { "shfmt" },
-				markdown = { "prettier" },
-				r = { "r_styler" },
-				java = { "google-java-format" },
-				tex = { "latexindent" },
-				latex = { "latexindent" },
-			},
-			default_format_opts = {
-				lsp_format = "fallback",
-			},
-			formatters = {
-				ruff_format = {
-					command = "ruff",
-					args = { "format", "--stdin-filename", "$FILENAME" },
-					stdin = true,
-				},
-				clang_format = {
-					command = "clang-format",
-					args = { "--assume-filename", "$FILENAME" },
-					stdin = true,
-				},
-				prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
-				stylua = { prepend_args = { "--indent-width", "4" } },
-				zigfmt = {
-					command = "zig",
-					args = { "fmt", "--stdin" },
-					stdin = true,
-				},
-				shfmt = {
-					prepend_args = { "-i", "4" },
-				},
-				["google-java-format"] = {
-					command = "google-java-format",
-					args = { "-" },
-					stdin = true,
-				},
-				eslint_d = {
-					command = "eslint_d",
-					stdin = false,
-					args = { "--fix", "--stdin-filename", "$FILENAME", "$FILENAME" },
-					condition = function(ctx)
-						if vim.fn.executable("eslint_d") ~= 1 then
-							return false
-						end
-						return util.root_file({
-							".eslintrc",
-							".eslintrc.js",
-							".eslintrc.cjs",
-							".eslintrc.json",
-							"eslint.config.js",
-							"eslint.config.mjs",
-							"eslint.config.cjs",
-							"eslint.config.ts",
-							"eslint.config.mts",
-							"eslint.config.cts",
-						}, ctx.buf) ~= nil
-					end,
-				},
-				r_styler = {
-					command = "Rscript",
-					args = {
-						"-e",
-						"styler::style_file(commandArgs(trailingOnly = TRUE)[1])",
-						"$FILENAME",
-					},
-					stdin = false,
-				},
-				latexindent = {
-					command = "latexindent",
-					args = { "-" },
-					stdin = true,
-					timeout_ms = 4000,
-				},
-			},
-		})
-
-		vim.keymap.set("n", "<leader>lf", function()
-			conform.format()
-		end, { noremap = true, silent = true, desc = "Format file" })
-
 		--------------------------------------------------------------------------
 		-- CMP
 		--------------------------------------------------------------------------
