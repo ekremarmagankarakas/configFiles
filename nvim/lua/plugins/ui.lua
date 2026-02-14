@@ -14,19 +14,7 @@ return {
 	{ "sainnhe/gruvbox-material", lazy = true, priority = 1000 },
 	{ "sainnhe/everforest", lazy = true, priority = 1000 },
 	{ "scottmckendry/cyberdream.nvim", lazy = true, priority = 1000 },
-
-	----------------------------------------------------------------------
-	-- Load Current Theme
-	----------------------------------------------------------------------
-	{
-		"Mofiqul/vscode.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			local theme = require("config.theme_picker")
-			vim.cmd.colorscheme(theme.load())
-		end,
-	},
+	{ "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
 
 	----------------------------------------------------------------------
 	--  Neoscroll

@@ -23,3 +23,8 @@ require("lazy").setup({
 	checker = { enabled = false },
 })
 
+local theme = require("config.theme_picker").load()
+local ok, _ = pcall(vim.cmd.colorscheme, theme)
+if not ok then
+	vim.notify("Colorscheme '" .. theme .. "' not found, falling back to default", vim.log.levels.WARN)
+end
