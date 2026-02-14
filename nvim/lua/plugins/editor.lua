@@ -42,7 +42,7 @@ return {
 	{
 		"OXY2DEV/markview.nvim",
 		main = "markview",
-		cmd = { "Markview" },
+        ft = { "markdown" },
 		keys = {
 			{ "<leader>sm", "<cmd>Markview toggle<cr>", silent = true, desc = "Markview: toggle" },
 		},
