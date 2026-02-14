@@ -141,7 +141,7 @@ nvim/
 │   │   └── theme_picker.lua # Persistent theme selection
 │   └── plugins/
 │       ├── lsp.lua          # LSP, Mason, conform, cmp
-│       ├── editor.lua       # Neo-tree, Telescope, Treesitter, etc.
+│       ├── editor.lua       # Neo-tree, Flash, Makview etc.
 │       ├── git.lua          # Fugitive, gitsigns, Copilot, LazyGit
 │       ├── telescope.lua    # Telescope config and pickers
 │       ├── treesitter.lua   # Treesitter + text objects

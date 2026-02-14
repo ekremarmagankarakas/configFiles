@@ -92,36 +92,6 @@ Some settings are intentionally machine-specific. If you fork/clone this repo, s
 - `aerospace/aerospace.toml`: browser keybind (expects `Brave`)
 - `aerospace/aerospace.toml`: file explorer keybind (expects `Commander One`)
 
-## Repository Structure
-
-```
-.
-├── install.sh                # Symlink installer (macOS + Linux)
-├── nvim/                     # -> ~/.config/nvim (shared)
-│   ├── init.lua
-│   ├── keymaps.md
-│   └── lua/
-├── tmux/
-│   └── tmux.conf             # -> ~/.config/tmux/tmux.conf (shared)
-├── zsh/
-│   ├── zshrc.mac             # -> ~/.zshrc (macOS)
-│   └── zshrc.linux           # -> ~/.zshrc (Linux)
-├── kitty/                    # -> ~/.config/kitty (shared)
-│   ├── kitty.conf
-│   └── current-theme.conf
-├── aerospace/
-│   └── aerospace.toml        # -> ~/.config/aerospace/aerospace.toml (macOS)
-├── karabiner/                # -> ~/.config/karabiner (macOS)
-├── i3/                       # -> ~/.config/i3 (Linux)
-├── rofi/                     # -> ~/.config/rofi (Linux)
-└── docs/
-    ├── neovim.md             # Neovim setup & plugin docs
-    ├── keymaps.md            # Complete keybinding reference
-    ├── tmux.md               # Tmux configuration docs
-    ├── shell.md              # Zsh configuration docs
-    └── window-management.md  # i3 / AeroSpace / Rofi docs
-```
-
 ## Highlights
 
 ### Neovim
