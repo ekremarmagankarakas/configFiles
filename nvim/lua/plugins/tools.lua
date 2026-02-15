@@ -64,23 +64,6 @@ return {
 	},
 
 	----------------------------------------------------------------------
-	-- Trouble (better diagnostics/quickfix list)
-	----------------------------------------------------------------------
-	{
-		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		cmd = "Trouble",
-		keys = {
-			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Trouble: diagnostics" },
-			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Trouble: buffer diagnostics" },
-			{ "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Trouble: location list" },
-			{ "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Trouble: quickfix list" },
-			{ "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Trouble: symbols" },
-		},
-		opts = {},
-	},
-
-	----------------------------------------------------------------------
 	-- Flash (enhanced motions)
 	----------------------------------------------------------------------
 	{
@@ -269,7 +252,6 @@ return {
 				{ "<leader>p", group = "pairs/surround" },
 				{ "<leader>s", group = "settings" },
 				{ "<leader>w", group = "windows" },
-				{ "<leader>x", group = "trouble" },
 			})
 		end,
 	},

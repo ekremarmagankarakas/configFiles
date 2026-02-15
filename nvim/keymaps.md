@@ -156,16 +156,6 @@ Leader: `Space` | Local leader: `\`
 | `[t` | n | Jump to prev TODO comment |
 | `<leader>fT` | n | Find TODO comments (Telescope) |
 
-### Trouble (`plugins/tools.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>xx` | n | Toggle all diagnostics |
-| `<leader>xX` | n | Toggle buffer diagnostics |
-| `<leader>xl` | n | Toggle location list |
-| `<leader>xq` | n | Toggle quickfix list |
-| `<leader>xs` | n | Toggle symbols |
-
 ### Treesitter Text Objects (`plugins/treesitter.lua`)
 
 #### Select (use with `v`, `d`, `c`, `y`)
@@ -413,4 +403,3 @@ Leader: `Space` | Local leader: `\`
 | `<leader>p` | Pairs/Surround |
 | `<leader>s` | Settings |
 | `<leader>w` | Windows |
-| `<leader>x` | Trouble |

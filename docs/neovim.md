@@ -35,7 +35,6 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | Textobjects powered by Treesitter |
 | [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) | Auto close/rename HTML/TSX tags |
 | [flash.nvim](https://github.com/folke/flash.nvim) | Jump/motion enhancements |
-| [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics/quickfix UI |
 | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | TODO/FIXME highlighting + search |
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | Keymap discovery popup |
 | [harpoon](https://github.com/ThePrimeagen/harpoon) | Quick file switching |
@@ -141,7 +140,7 @@ nvim/
 │       ├── lsp.lua          # LSP + Mason + nvim-cmp
 │       ├── format.lua       # Conform (formatters)
 │       ├── lint.lua         # nvim-lint (linters)
-│       ├── tools.lua        # Neo-tree, Flash, Trouble, Markview, etc.
+│       ├── tools.lua        # Neo-tree, Flash, Markview, etc.
 │       ├── git.lua          # Fugitive, gitsigns, Copilot, LazyGit
 │       ├── telescope.lua    # Telescope config and pickers
 │       ├── treesitter.lua   # Treesitter + text objects
