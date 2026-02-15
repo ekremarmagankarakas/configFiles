@@ -8,10 +8,6 @@ vim.keymap.set("v", "<leader>x", '"+d', { silent = true, desc = "Cut to system c
 -- Clear search
 vim.keymap.set("n", "<leader>/", "<cmd>nohlsearch<cr>", { silent = true, desc = "Clear search highlight" })
 
--- QuickFix Keymaps
-vim.keymap.set("n", "<A-j>", "<cmd>cnext<cr>", { silent = true, desc = "Quickfix: next" })
-vim.keymap.set("n", "<A-k>", "<cmd>cprev<cr>", { silent = true, desc = "Quickfix: prev" })
-
 -- Open Terminal
 vim.keymap.set("n", "<leader>t", function()
 	vim.cmd("belowright 15split | term")
@@ -60,6 +56,6 @@ vim.keymap.set("n", "<leader>sr", ":%s//gc<Left><Left><Left>", { silent = false,
 vim.keymap.set(
 	"n",
 	"<leader>sq",
-	":cdo %s//gc | update<Left><Left><Left><Left><Left><Left><Left><Left>",
+	":cdo %s//gc | update<Left><left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>",
 	{ silent = false, desc = "Search & replace (quickfix)" }
 )
