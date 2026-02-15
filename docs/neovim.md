@@ -20,6 +20,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [cmp-path](https://github.com/hrsh7th/cmp-path) | Path completion source |
 | [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline) | Cmdline completion source |
 | [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) | LuaSnip completion source |
+| [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf) | Quickfix Replacement |
 | [LuaSnip](https://github.com/L3MON4D3/LuaSnip) | Snippet engine |
 | [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippet collection |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting runner |
