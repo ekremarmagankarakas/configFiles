@@ -127,8 +127,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>y` | v | Yank to system clipboard |
 | `<leader>x` | v | Cut to system clipboard |
 | `<leader>/` | n | Clear search highlight |
-| `Alt-j` | n | Quickfix next |
-| `Alt-k` | n | Quickfix prev |
 | `<leader>t` | n | Open terminal (below) |
 | `<leader>sj` | n | Toggle j/k vs gj/gk (visual lines) |
 | `<leader>st` | n | Theme picker |
