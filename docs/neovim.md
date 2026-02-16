@@ -51,6 +51,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | LazyGit integration |
 | [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Side-by-side diffs + merge UI |
 | [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | Copilot integration |
+| [99.lua](https://github.com/ThePrimeagen/99) | ThePrimagen ai tool |
 | [nvim-dap](https://github.com/mfussenegger/nvim-dap) | Debug Adapter Protocol client |
 | [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) | DAP UI panes |
 | [nvim-nio](https://github.com/nvim-neotest/nvim-nio) | Async utilities for DAP UI (dependency) |
@@ -139,10 +140,11 @@ nvim/
 │   │   └── theme_picker.lua # Persistent theme selection
 │   └── plugins/
 │       ├── lsp.lua          # LSP + Mason + nvim-cmp
+│       ├── ai.lua           # Copilot + 99 
 │       ├── format.lua       # Conform (formatters)
 │       ├── lint.lua         # nvim-lint (linters)
 │       ├── tools.lua        # Neo-tree, Flash, Markview, etc.
-│       ├── git.lua          # Fugitive, gitsigns, Copilot, LazyGit
+│       ├── git.lua          # Fugitive, gitsigns, LazyGit
 │       ├── telescope.lua    # Telescope config and pickers
 │       ├── treesitter.lua   # Treesitter + text objects
 │       ├── ui.lua           # Themes, lualine, indent, noice

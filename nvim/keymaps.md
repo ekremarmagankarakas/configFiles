@@ -180,8 +180,8 @@ Leader: `Space` | Local leader: `\`
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>a` | n | Swap argument with next |
-| `<leader>A` | n | Swap argument with prev |
+| `<leader>ma` | n | Swap argument with next |
+| `<leader>mA` | n | Swap argument with prev |
 
 ### Telescope (`plugins/telescope.lua`)
 
@@ -257,13 +257,21 @@ Leader: `Space` | Local leader: `\`
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>gct` | n | Toggle Copilot |
-| `<leader>gcd` | n | Disable Copilot |
-| `<leader>gce` | n | Enable Copilot |
+| `<leader>act` | n | Toggle Copilot |
+| `<leader>acd` | n | Disable Copilot |
+| `<leader>ace` | n | Enable Copilot |
 | `Alt-y` | i | Accept suggestion |
 | `Alt-]` | i | Next suggestion |
 | `Alt-[` | i | Previous suggestion |
 | `Ctrl-]` | i | Dismiss suggestion |
+
+#### Copilot
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>a9l` | n | View Logs |
+| `<leader>a9s` | n | Stop Request |
+| `<leader>a9v` | n | Send selection |
 
 #### LazyGit
 

@@ -120,10 +120,10 @@ return {
 		end
 
 		-- Swap
-		vim.keymap.set("n", "<leader>a", function()
+		vim.keymap.set("n", "<leader>ma", function()
 			ts_swap.swap_next("@parameter.inner", "textobjects")
 		end, { desc = "Swap with next argument" })
-		vim.keymap.set("n", "<leader>A", function()
+		vim.keymap.set("n", "<leader>mA", function()
 			ts_swap.swap_previous("@parameter.inner", "textobjects")
 		end, { desc = "Swap with prev argument" })
 

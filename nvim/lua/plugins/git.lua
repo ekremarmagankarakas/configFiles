@@ -140,32 +140,6 @@ return {
 	},
 
 	----------------------------------------------------------------------
-	-- Copilot
-	----------------------------------------------------------------------
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		keys = {
-			{ "<leader>gct", "<cmd>Copilot toggle<cr>", silent = true, desc = "Copilot: toggle" },
-			{ "<leader>gcd", "<cmd>Copilot disable<cr>", silent = true, desc = "Copilot: disable" },
-			{ "<leader>gce", "<cmd>Copilot enable<cr>", silent = true, desc = "Copilot: enable" },
-		},
-		opts = {
-			suggestion = {
-				auto_trigger = false,
-				keymap = {
-					accept = "<M-y>",
-					next = "<M-]>",
-					prev = "<M-[>",
-					dismiss = "<C-]>",
-				},
-			},
-			panel = { enabled = false },
-		},
-	},
-
-	----------------------------------------------------------------------
 	-- LazyGit
 	----------------------------------------------------------------------
 	{
