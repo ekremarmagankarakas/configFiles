@@ -399,6 +399,7 @@ Leader: `Space` | Local leader: `\`
 
 | Prefix | Group |
 |--------|-------|
+| `<leader>a` | AI|
 | `<leader>d` | Debug |
 | `<leader>f` | Find |
 | `<leader>g` | Git |
@@ -409,3 +410,4 @@ Leader: `Space` | Local leader: `\`
 | `<leader>p` | Pairs/Surround |
 | `<leader>s` | Settings |
 | `<leader>w` | Windows |
+| `<leader>?` | Whichkey |

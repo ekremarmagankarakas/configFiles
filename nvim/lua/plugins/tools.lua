@@ -242,6 +242,7 @@ return {
 			wk.setup(opts)
 
 			wk.add({
+				{ "<leader>a", group = "ai" },
 				{ "<leader>d", group = "debug" },
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },
@@ -252,6 +253,7 @@ return {
 				{ "<leader>p", group = "pairs/surround" },
 				{ "<leader>s", group = "settings" },
 				{ "<leader>w", group = "windows" },
+				{ "<leader>?", group = "whichkey" },
 			})
 		end,
 	},
