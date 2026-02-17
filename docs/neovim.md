@@ -50,6 +50,8 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks in the sign column |
 | [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | LazyGit integration |
 | [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Side-by-side diffs + merge UI |
+| [opencode.nvim](https://github.com/nickjvandyke/opencode.nvim) | OpenCode integration (chat/actions) |
+| [snacks.nvim](https://github.com/folke/snacks.nvim) | Optional UI enhancements used by OpenCode |
 | [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | Copilot integration |
 | [99.lua](https://github.com/ThePrimeagen/99) | ThePrimagen ai tool |
 | [nvim-dap](https://github.com/mfussenegger/nvim-dap) | Debug Adapter Protocol client |
@@ -140,7 +142,7 @@ nvim/
 │   │   └── theme_picker.lua # Persistent theme selection
 │   └── plugins/
 │       ├── lsp.lua          # LSP + Mason + nvim-cmp
-│       ├── ai.lua           # Copilot + 99 
+│       ├── ai.lua           # OpenCode + Copilot + 99
 │       ├── format.lua       # Conform (formatters)
 │       ├── lint.lua         # nvim-lint (linters)
 │       ├── tools.lua        # Neo-tree, Flash, Markview, etc.

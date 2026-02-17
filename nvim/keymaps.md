@@ -253,6 +253,19 @@ Leader: `Space` | Local leader: `\`
 | `<leader>gb` | n | Toggle line blame |
 | `<leader>gT` | n | Toggle git signs |
 
+#### OpenCode (opencode.nvim)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>aoa` | n/v | Ask with `@this:` (submit immediately) |
+| `<leader>aoe` | n/v | Select/execute OpenCode action |
+| `<leader>aot` | n/t | Toggle OpenCode UI |
+| `<leader>aor` | n/v | Add range to prompt (`@this`) |
+| `<leader>aol` | n | Add current line to prompt (`@this`) |
+| `<leader>aok` | n | Scroll OpenCode session up |
+| `<leader>aoj` | n | Scroll OpenCode session down |
+| `Alt-a` | n/i | Snacks picker: send selection to OpenCode |
+
 #### Copilot
 
 | Key | Mode | Description |
@@ -265,7 +278,7 @@ Leader: `Space` | Local leader: `\`
 | `Alt-[` | i | Previous suggestion |
 | `Ctrl-]` | i | Dismiss suggestion |
 
-#### Copilot
+#### 99
 
 | Key | Mode | Description |
 |-----|------|-------------|
