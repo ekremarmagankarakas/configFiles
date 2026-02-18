@@ -45,6 +45,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [middleclass](https://github.com/anuvyklack/middleclass) | Dependency for windows.nvim |
 | [windows.nvim](https://github.com/anuvyklack/windows.nvim) | Window maximize |
 | [markview.nvim](https://github.com/OXY2DEV/markview.nvim) | Markdown rendering in buffer |
+| [Mkdnflow](https://github.com/jakewvincent/mkdnflow.nvim) | Markdown fluent navigation |
 | [vimtex](https://github.com/lervag/vimtex) | LaTeX editing/compile workflow |
 | [vim-fugitive](https://github.com/tpope/vim-fugitive) | Git commands |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks in the sign column |

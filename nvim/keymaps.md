@@ -390,6 +390,21 @@ Leader: `Space` | Local leader: `\`
 |-----|------|-------------|
 | `<leader>wm` | n | Maximize window |
 
+### Markdown (`plugins/tools.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>mm` | n | Toggle Markview (in-editor markdown) |
+| `<leader>mf` | n | Mkdnflow: follow link |
+| `<leader>mF` | n | Mkdnflow: destroy link |
+| `<leader>mc` | n/v | Mkdnflow: create link |
+| `<leader>mC` | n/v | Mkdnflow: link from clipboard |
+| `<leader>mn` | n | Mkdnflow: next link |
+| `<leader>mp` | n | Mkdnflow: prev link |
+| `<leader>mb` | n | Mkdnflow: back |
+| `<leader>mB` | n | Mkdnflow: forward |
+| `<leader>mt` | n/v | Mkdnflow: toggle todo |
+
 ### Other (`plugins/tools.lua`)
 
 | Key | Mode | Description |
@@ -397,7 +412,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>u` | n | Toggle undotree |
 | `<leader>?l` | n | Which-key: buffer local keymaps |
 | `<leader>?g` | n | Which-key: global keymaps |
-| `<leader>sm` | n | Toggle Markview (in-editor markdown) |
 
 ### Snippets (`plugins/snippets.lua`)
 
@@ -419,6 +433,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>h` | Harpoon |
 | `<leader>j` | Java |
 | `<leader>l` | LSP |
+| `<leader>m` | Markdown |
 | `<leader>n` | Neo-tree |
 | `<leader>p` | Pairs/Surround |
 | `<leader>s` | Settings |
