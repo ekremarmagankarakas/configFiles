@@ -149,5 +149,5 @@ if command -v thefuck >/dev/null 2>&1; then
   eval "$(thefuck --alias)"
 fi
 
-# Added by Antigravity
-export PATH="/Users/ekremarmagankarakas/.antigravity/antigravity/bin:$PATH"
+# Neovim venv tools
+export PATH="$HOME/.venvs/nvim/bin:$PATH"
