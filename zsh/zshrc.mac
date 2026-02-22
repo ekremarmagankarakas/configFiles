@@ -148,6 +148,3 @@ fi
 if command -v thefuck >/dev/null 2>&1; then
   eval "$(thefuck --alias)"
 fi
-
-# Neovim venv tools
-export PATH="$HOME/.venvs/nvim/bin:$PATH"
