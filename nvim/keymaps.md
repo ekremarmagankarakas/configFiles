@@ -26,8 +26,9 @@ Leader: `Space` | Local leader: `\`
 | `Ctrl-d` `Ctrl-u` | Half-page down / up (centered via neoscroll) |
 | `Ctrl-f` `Ctrl-b` | Full page down / up |
 | `Ctrl-o` `Ctrl-i` | Jump list back / forward |
-| `gd` | Go to local definition |
-| `gD` | Go to global declaration |
+| `gd` | Go to definition (LSP when available) |
+| `gD` | Go to declaration (LSP when available) |
+| `gy` | Go to type definition (LSP when available) |
 
 ### Editing
 
@@ -213,6 +214,9 @@ Leader: `Space` | Local leader: `\`
 
 | Key | Mode | Description |
 |-----|------|-------------|
+| `gd` | n | Go to definition |
+| `gD` | n | Go to declaration |
+| `gy` | n | Go to type definition |
 | `<leader>lf` | n | Format file (conform) |
 | `<leader>ltc` | n | Toggle completion on/off |
 | `<leader>lef` | n | Diagnostics float |

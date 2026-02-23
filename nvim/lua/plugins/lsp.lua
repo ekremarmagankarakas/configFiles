@@ -110,6 +110,24 @@ return {
 			capabilities = cmp_lsp.default_capabilities(),
 		})
 
+		-- LSP keymaps
+		-- Neovim provides a set of default LSP mappings (e.g. K, grr, grn, gra).
+		-- We add the common "goto" ones that Neovim intentionally does not override.
+		local lsp_keymaps = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true })
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = lsp_keymaps,
+			callback = function(ev)
+				local bufnr = ev.buf
+				local map = function(lhs, rhs, desc)
+					vim.keymap.set("n", lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
+				end
+
+				map("gd", vim.lsp.buf.definition, "LSP: goto definition")
+				map("gD", vim.lsp.buf.declaration, "LSP: goto declaration")
+				map("gy", vim.lsp.buf.type_definition, "LSP: goto type definition")
+			end,
+		})
+
 		----------------------------------------------------------------------
 		-- Server configs
 		----------------------------------------------------------------------

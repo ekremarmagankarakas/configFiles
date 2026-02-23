@@ -89,6 +89,8 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | TeX/LaTeX | ltex (grammar) | latexindent | - |
 | R | r_language_server | styler | - |
 
+Keymaps: Neovim's built-in LSP mappings are enabled automatically on attach (e.g. `K`, `grr`). This config also maps `gd`, `gD`, and `gy` to LSP goto actions. See `nvim/keymaps.md`.
+
 Configured debug adapters:
 
 | Language | Adapter |
