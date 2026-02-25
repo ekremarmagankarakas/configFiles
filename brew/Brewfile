@@ -161,8 +161,6 @@ cask "karabiner-elements"
 cask "libreoffice"
 # Sandbox construction video game
 cask "minecraft"
-# App to write, plan, collaborate, and get organised
-cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Image editor
@@ -191,8 +189,6 @@ cask "slack"
 cask "spotify"
 # Free, open-source, and completely encrypted notes app
 cask "standard-notes"
-# System monitor for the menu bar
-cask "stats"
 # Video game digital distribution service
 cask "steam"
 # Customizable email client
