@@ -17,21 +17,6 @@ return {
 	{ "Mofiqul/vscode.nvim", lazy = true, priority = 1000 },
 
 	----------------------------------------------------------------------
-	--  Neoscroll
-	----------------------------------------------------------------------
-	{
-		"karb94/neoscroll.nvim",
-		event = "VeryLazy",
-		opts = {
-			mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
-			hide_cursor = true,
-			stop_eof = true,
-			respect_scrolloff = false,
-			cursor_scrolls_alone = true,
-		},
-	},
-
-	----------------------------------------------------------------------
 	-- Lualine
 	----------------------------------------------------------------------
 	{
@@ -110,23 +95,6 @@ return {
 				},
 				lualine_y = { "filetype" },
 				lualine_z = { "progress", "location" },
-			},
-		},
-	},
-
-	----------------------------------------------------------------------
-	-- Indent Blankline
-	----------------------------------------------------------------------
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		---@module "ibl"
-		---@type ibl.config
-		opts = {
-			scope = {
-				enabled = true,
-				show_start = true,
-				show_end = false,
 			},
 		},
 	},

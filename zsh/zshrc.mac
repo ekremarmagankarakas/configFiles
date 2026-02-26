@@ -148,3 +148,10 @@ fi
 if command -v thefuck >/dev/null 2>&1; then
   eval "$(thefuck --alias)"
 fi
+
+# bun completions
+[ -s "/Users/ekremarmagankarakas/.bun/_bun" ] && source "/Users/ekremarmagankarakas/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
