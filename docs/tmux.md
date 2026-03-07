@@ -7,12 +7,12 @@ A single shared tmux config used on both macOS and Linux. Config lives in `tmux/
 | Setting | Value |
 |---------|-------|
 | Prefix | `Ctrl-s` (default `Ctrl-b` is unbound) |
-| Shell | `/bin/zsh` (Mac) / `/usr/bin/zsh` (Linux) |
+| Shell | `/bin/zsh` |
 | Mode keys | vi |
 | Mouse | enabled |
 | Base index | 1 (windows and panes start at 1, not 0) |
 | True color | enabled via `tmux-256color` + terminal overrides |
-| Kitty graphics | passthrough enabled (Mac) |
+| Kitty graphics | passthrough enabled |
 
 ## Keybindings
 
@@ -96,8 +96,10 @@ If TPM is not installed, the install script handles it automatically.
 
 ## Platform Differences
 
+Current `tmux/tmux.conf` is effectively shared across macOS and Linux with no platform-specific branches:
+
 | Setting | macOS | Linux |
 |---------|-------|-------|
-| Shell path | `/bin/zsh` | `/usr/bin/zsh` |
-| Kitty passthrough | `set -g allow-passthrough on` | not set |
-| Terminal override | `*:Tc` | `xterm*:Tc` |
+| Shell path | `/bin/zsh` | `/bin/zsh` |
+| Kitty passthrough | `set -g allow-passthrough on` | `set -g allow-passthrough on` |
+| Terminal override | `*:Tc` | `*:Tc` |

@@ -56,7 +56,7 @@ brew "jq"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.14"
 # Interactive environments for writing and running code
-brew "jupyterlab", restart_service: :changed
+brew "jupyterlab"
 # Add indentation to LaTeX files
 brew "latexindent"
 # Simple terminal UI for git commands
