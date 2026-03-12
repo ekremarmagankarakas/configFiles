@@ -122,6 +122,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Editor
 export EDITOR=/opt/homebrew/bin/nvim
+alias v='nvim'
 
 # Plugins installed via Homebrew
 # zsh-autosuggestions
@@ -155,3 +156,7 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Claude switch
+alias claude-u="CLAUDE_CONFIG_DIR=~/.claude-u command claude"
+alias claude-p="CLAUDE_CONFIG_DIR=~/.claude-p command claude"
