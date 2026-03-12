@@ -123,6 +123,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>sr` | n | Search and replace in file |
 | `<leader>sq` | n | Search and replace over quickfix |
 | `<leader>sc` | n | Convert Markdown buffer to PDF (`:MarkdownToPdf`) |
+| `<leader>su` | n | Notebook: toggle Jupytext view auto-handling |
 | `<C-h>` `<C-j>` `<C-k>` `<C-l>` | n | Move across splits |
 | `<` `>` | v | Re-indent and keep selection |
 | `n` `N` | n | Next/prev search result + center cursor |
@@ -161,6 +162,12 @@ Leader: `Space` | Local leader: `\`
 | `<leader>nn` | n | Reveal current file in Neo-tree |
 | `<leader>nt` | n | Toggle Neo-tree |
 | `O` | n | Open file externally (inside Neo-tree window) |
+
+### Notebook (`lua/plugins/tools.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `:JupytextViewToggle` | cmd | Toggle notebook auto-view (Jupytext on/off) for `.ipynb` |
 
 ### Telescope (`lua/plugins/telescope.lua`)
 

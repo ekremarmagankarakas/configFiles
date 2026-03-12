@@ -30,6 +30,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | Auto-pairs |
 | [markview.nvim](https://github.com/OXY2DEV/markview.nvim) | Markdown rendering |
 | [mkdnflow.nvim](https://github.com/jakewvincent/mkdnflow.nvim) | Markdown link/todo workflow |
+| [jupytext.nvim](https://github.com/goerz/jupytext.nvim) | View/edit `.ipynb` as text buffers |
 | [vimtex](https://github.com/lervag/vimtex) | TeX/LaTeX workflow |
 | [vim-fugitive](https://github.com/tpope/vim-fugitive) | Git commands |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks/signs |
@@ -80,6 +81,7 @@ These are kept in `nvim/lua/plugins/disabled.lua` but not active:
 
 - Built-in Neovim LSP defaults are available on attach (`K`, `grr`, etc.).
 - Custom LSP goto keymaps: `gd`, `gD`, `gy`.
+- `<leader>su` toggles Jupytext notebook view handling for `.ipynb` buffers.
 - Full key reference: [`nvim/keymaps.md`](../nvim/keymaps.md).
 
 ## Debug Adapters
