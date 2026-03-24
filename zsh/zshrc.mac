@@ -160,3 +160,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Claude switch
 alias claude-u="CLAUDE_CONFIG_DIR=~/.claude-u command claude"
 alias claude-p="CLAUDE_CONFIG_DIR=~/.claude-p command claude"
+alias claude-n="CLAUDE_CONFIG_DIR=~/.claude-n command claude"
