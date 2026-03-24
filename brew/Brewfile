@@ -143,8 +143,6 @@ cask "claude-code"
 cask "codex"
 # Two-panel file manager
 cask "commander-one"
-# Write, edit, and chat about your code with AI
-cask "cursor"
 # Universal database tool and SQL client
 cask "dbeaver-community"
 # Voice and text chat software
@@ -161,6 +159,8 @@ cask "karabiner-elements"
 cask "libreoffice"
 # Sandbox construction video game
 cask "minecraft"
+# Neovim Client
+cask "neovide-app"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Image editor
