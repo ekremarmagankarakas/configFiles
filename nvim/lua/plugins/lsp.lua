@@ -183,7 +183,7 @@ return {
 			settings = {
 				python = {
 					analysis = {
-						typeCheckingMode = "standard",
+						typeCheckingMode = "basic",
 						autoSearchPaths = true,
 						useLibraryCodeForTypes = true,
 					},
