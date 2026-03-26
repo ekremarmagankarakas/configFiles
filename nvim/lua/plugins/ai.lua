@@ -10,6 +10,18 @@ return {
 			{ "<leader>act", "<cmd>Copilot toggle<cr>", silent = true, desc = "Copilot: toggle" },
 			{ "<leader>acd", "<cmd>Copilot disable<cr>", silent = true, desc = "Copilot: disable" },
 			{ "<leader>ace", "<cmd>Copilot enable<cr>", silent = true, desc = "Copilot: enable" },
+			{
+				"<leader>aca",
+				function()
+					local suggestion = require("copilot.suggestion")
+					local config = require("copilot.config")
+					local current = config.get("suggestion").auto_trigger
+					require("copilot.suggestion").toggle_auto_trigger()
+					vim.notify("Copilot auto-trigger: " .. (current and "OFF" or "ON"))
+				end,
+				silent = true,
+				desc = "Copilot: toggle auto-trigger",
+			},
 		},
 		opts = {
 			suggestion = {
