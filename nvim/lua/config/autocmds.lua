@@ -15,7 +15,7 @@ vim.api.nvim_create_user_command("MarkdownToPdf", function()
 	print("Converted " .. current_file .. " to " .. output_file)
 end, { desc = "Convert current Markdown file to PDF" })
 
-vim.keymap.set("n", "<leader>sc", ":MarkdownToPdf<CR>", { desc = "Convert Markdown to Pdf" })
+vim.keymap.set("n", "<leader>ms", ":MarkdownToPdf<CR>", { desc = "Convert Markdown to Pdf" })
 
 ----------------------------------------------------------------------
 -- Trim Trailing Whitespace
