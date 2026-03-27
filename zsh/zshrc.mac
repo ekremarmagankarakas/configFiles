@@ -118,6 +118,9 @@ alias dcu='docker compose up'
 alias dcub='docker compose up --build'
 alias dcd='docker compose down'
 
+# Zoxide
+alias z='zoxide'
+
 # Scripts
 alias tn='tmux-cmd'
 
