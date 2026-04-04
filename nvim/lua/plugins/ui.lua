@@ -146,7 +146,13 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			{
+				"rcarriga/nvim-notify",
+				opts = {
+					max_width = 60,
+					max_height = 10,
+				},
+			},
 		},
 		opts = {
 			lsp = {
