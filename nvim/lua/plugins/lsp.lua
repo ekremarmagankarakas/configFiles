@@ -28,10 +28,10 @@ return {
 					"gofumpt",
 					"google-java-format",
 					"latexindent",
-                    -- Linters
-                    "ruff",
+					-- Linters
+					"ruff",
 					"eslint_d",
-                    "shellcheck",
+					"shellcheck",
 					-- DAP adapters
 					"debugpy",
 					"delve",
@@ -111,8 +111,7 @@ return {
 		})
 
 		-- LSP keymaps
-		-- Neovim provides a set of default LSP mappings (e.g. K, grr, grn, gra).
-		-- We add the common "goto" ones that Neovim intentionally does not override.
+		-- gd/gD are Neovim 0.11+ defaults; only gy (type definition) needs explicit mapping
 		local lsp_keymaps = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true })
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = lsp_keymaps,

@@ -23,12 +23,12 @@ vim.keymap.set("n", "<leader>sj", function()
 		vim.keymap.set("n", "j", "j", { remap = false, silent = true })
 		vim.keymap.set("n", "k", "k", { remap = false, silent = true })
 		toggle_jk = false
-		print("Switched to normal j/k")
+		vim.notify("Switched to normal j/k")
 	else
 		vim.keymap.set("n", "j", "gj", { remap = false, silent = true })
 		vim.keymap.set("n", "k", "gk", { remap = false, silent = true })
 		toggle_jk = true
-		print("Switched to gj/gk")
+		vim.notify("Switched to gj/gk")
 	end
 end, { silent = true, desc = "Toggle j/k and gj/gk" })
 

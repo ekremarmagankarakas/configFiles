@@ -79,7 +79,6 @@ return {
 		-- Set up textobjects keymaps manually (required for newer nvim-treesitter)
 		local ts_select = require("nvim-treesitter-textobjects.select")
 		local ts_move = require("nvim-treesitter-textobjects.move")
-		local ts_swap = require("nvim-treesitter-textobjects.swap")
 
 		-- Select
 		local select_maps = {
@@ -118,24 +117,5 @@ return {
 				map.fn(map.query, "textobjects")
 			end, { desc = map.desc })
 		end
-
-		-- Swap
-		vim.keymap.set("n", "<leader>ma", function()
-			ts_swap.swap_next("@parameter.inner", "textobjects")
-		end, { desc = "Swap with next argument" })
-		vim.keymap.set("n", "<leader>mA", function()
-			ts_swap.swap_previous("@parameter.inner", "textobjects")
-		end, { desc = "Swap with prev argument" })
-
-		local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-		treesitter_parser_config.templ = {
-			install_info = {
-				url = "https://github.com/vrischmann/tree-sitter-templ.git",
-				files = { "src/parser.c", "src/scanner.c" },
-				branch = "master",
-			},
-		}
-
-		vim.treesitter.language.register("templ", "templ")
 	end,
 }

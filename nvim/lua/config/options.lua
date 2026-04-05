@@ -25,7 +25,6 @@ vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.showmode = false
-vim.opt.laststatus = 3
 vim.opt.scrolloff = 8
 vim.opt.completeopt = "menu,menuone,noselect"
 

@@ -12,7 +12,7 @@ vim.api.nvim_create_user_command("MarkdownToPdf", function()
 		"--pdf-engine=xelatex",
 		"-V", "geometry:margin=1in",
 	})
-	print("Converted " .. current_file .. " to " .. output_file)
+	vim.notify("Converted " .. current_file .. " to " .. output_file)
 end, { desc = "Convert current Markdown file to PDF" })
 
 vim.keymap.set("n", "<leader>ms", ":MarkdownToPdf<CR>", { desc = "Convert Markdown to Pdf" })

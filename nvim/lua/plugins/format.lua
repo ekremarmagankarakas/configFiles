@@ -36,29 +36,12 @@ return {
 		formatters = {
 			ruff_format = {
 				command = "ruff",
-				args = { "format", "--stdin-filename", "$FILENAME" },
-				stdin = true,
-			},
-			clang_format = {
-				command = "clang-format",
-				args = { "--assume-filename", "$FILENAME" },
+				args = { "format", "--stdin-filename", "$FILENAME", "-" },
 				stdin = true,
 			},
 			prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
 			stylua = { prepend_args = { "--indent-width", "4" } },
-			zigfmt = {
-				command = "zig",
-				args = { "fmt", "--stdin" },
-				stdin = true,
-			},
-			shfmt = {
-				prepend_args = { "-i", "4" },
-			},
-			["google-java-format"] = {
-				command = "google-java-format",
-				args = { "-" },
-				stdin = true,
-			},
+			shfmt = { prepend_args = { "-i", "4" } },
 			r_styler = {
 				command = "Rscript",
 				args = {
@@ -67,12 +50,6 @@ return {
 					"$FILENAME",
 				},
 				stdin = false,
-			},
-			latexindent = {
-				command = "latexindent",
-				args = { "-" },
-				stdin = true,
-				timeout_ms = 4000,
 			},
 		},
 	},

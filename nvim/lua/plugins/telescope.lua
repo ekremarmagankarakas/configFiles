@@ -40,7 +40,6 @@ return {
 						"~/Work",
 					}
 
-					-- Filter to only directories that exist
 					local search_dirs = {}
 					for _, dir in ipairs(dirs) do
 						local expanded = vim.fn.expand(dir)
@@ -93,24 +92,14 @@ return {
 						width = 0.95,
 						height = 0.95,
 						horizontal = {
-							preview_width = 0.6, -- preview on the right, larger
+							preview_width = 0.6,
 						},
 					},
 					preview = { hide_on_startup = false },
 					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 				},
 				extensions = {
-					-- Make ui-select follow the same layout instead of dropdown
-					["ui-select"] = {
-						layout_strategy = "horizontal",
-						sorting_strategy = "ascending",
-						layout_config = {
-							prompt_position = "top",
-							width = 0.95,
-							height = 0.95,
-							horizontal = { preview_width = 0.6 },
-						},
-					},
+					["ui-select"] = require("telescope.themes").get_dropdown(),
 				},
 			})
 
