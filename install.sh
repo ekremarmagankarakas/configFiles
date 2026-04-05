@@ -106,6 +106,9 @@ install_mac() {
     link_file "$DOTFILES_DIR/kitty/kitty.conf" "$config_dir/kitty/kitty.conf"
     link_file "$DOTFILES_DIR/kitty/current-theme.conf" "$config_dir/kitty/current-theme.conf"
 
+    # Ghostty
+    link_file "$DOTFILES_DIR/ghostty/config" "$config_dir/ghostty/config"
+
     # AeroSpace
     link_file "$DOTFILES_DIR/aerospace/aerospace.toml" "$config_dir/aerospace/aerospace.toml"
 
@@ -175,7 +178,7 @@ check_dependencies() {
     echo ""
 
     # Common
-    for cmd in git nvim tmux zsh kitty; do
+    for cmd in git nvim tmux zsh; do
         if command -v "$cmd" &>/dev/null; then
             ok "$cmd found: $(command -v "$cmd")"
         else
