@@ -223,35 +223,6 @@ return {
 	},
 
 	----------------------------------------------------------------------
-	-- Nvim Surround (Lua rewrite of vim-surround)
-	----------------------------------------------------------------------
-	{
-		"kylechui/nvim-surround",
-		version = "*",
-		keys = {
-			{ "<leader>ps", desc = "Surround: add" },
-			{ "<leader>pS", desc = "Surround: line" },
-			{ "<leader>pd", desc = "Surround: delete" },
-			{ "<leader>pc", desc = "Surround: change" },
-			{ "<leader>pC", desc = "Surround: change (surrounding)" },
-			{ "<leader>ps", mode = "x", desc = "Surround: visual add" },
-		},
-		opts = {
-			keymaps = {
-				normal = "<leader>ps",
-				normal_cur = "<leader>pS",
-				normal_line = false,
-				normal_cur_line = false,
-				visual = "<leader>ps",
-				visual_line = false,
-				delete = "<leader>pd",
-				change = "<leader>pc",
-				change_line = "<leader>pC",
-			},
-		},
-	},
-
-	----------------------------------------------------------------------
 	-- Markview
 	----------------------------------------------------------------------
 	{
@@ -292,69 +263,6 @@ return {
 					map("n", "<leader>mB", "<cmd>MkdnGoForward<cr>", "Markdown: forward")
 					map({ "n", "v" }, "<leader>mt", "<cmd>MkdnToggleToDo<cr>", "Markdown: toggle todo")
 				end,
-			})
-		end,
-	},
-
-	----------------------------------------------------------------------
-	-- Jupytext (view/edit ipynb as text)
-	----------------------------------------------------------------------
-	{
-		"goerz/jupytext.nvim",
-		event = "VeryLazy",
-		config = function()
-			local jupytext_ok, jupytext = pcall(require, "jupytext")
-			if not jupytext_ok then
-				return
-			end
-
-			local notebook_view_enabled = true
-			local has_jupytext_cli = vim.fn.executable("jupytext") == 1
-
-			local function notify_missing_cli()
-				vim.notify(
-					"jupytext CLI not found. Install with: pip install jupytext",
-					vim.log.levels.WARN
-				)
-			end
-
-			if not has_jupytext_cli then
-				-- Do not register jupytext autocmd handlers; they error on opening .ipynb
-				-- when the binary is missing. Keep a toggle command/keymap that explains why.
-				vim.api.nvim_create_user_command("JupytextViewToggle", function()
-					notify_missing_cli()
-				end, { desc = "Notebook: toggle Jupytext view" })
-
-				vim.keymap.set("n", "<leader>su", "<cmd>JupytextViewToggle<cr>", {
-					silent = true,
-					desc = "Notebook: toggle Jupytext view",
-				})
-				return
-			end
-
-			jupytext.setup({
-				format = function()
-					return notebook_view_enabled and "markdown" or "ipynb"
-				end,
-				update = true,
-			})
-
-			vim.api.nvim_create_user_command("JupytextViewToggle", function()
-				notebook_view_enabled = not notebook_view_enabled
-				jupytext.opts.format = notebook_view_enabled and "markdown" or "ipynb"
-
-				local path = vim.api.nvim_buf_get_name(0)
-				if path:lower():sub(-6) == ".ipynb" then
-					vim.b.jupytext_format = notebook_view_enabled and "markdown" or "ipynb"
-					vim.cmd("edit!")
-				end
-
-				vim.notify("Notebook view: " .. (notebook_view_enabled and "ON (markdown view)" or "OFF (raw ipynb)"))
-			end, { desc = "Notebook: toggle Jupytext view" })
-
-			vim.keymap.set("n", "<leader>su", "<cmd>JupytextViewToggle<cr>", {
-				silent = true,
-				desc = "Notebook: toggle Jupytext view",
 			})
 		end,
 	},
