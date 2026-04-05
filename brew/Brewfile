@@ -59,6 +59,8 @@ brew "python@3.14"
 brew "jupyterlab"
 # Add indentation to LaTeX files
 brew "latexindent"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Next-gen compiler infrastructure
@@ -67,6 +69,8 @@ brew "llvm"
 brew "lld"
 # NCurses Disk Usage
 brew "ncdu"
+# Incremental parsing library
+brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Create, run, and share large language models (LLMs)
@@ -103,12 +107,12 @@ brew "sevenzip"
 brew "stow"
 # Programmatically correct mistyped console commands
 brew "thefuck"
+# Simplified and community-driven man pages
+brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Incremental parsing library
-brew "tree-sitter"
 # Parser generator tool
 brew "tree-sitter-cli"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -119,6 +123,8 @@ brew "wget"
 brew "yarn"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
@@ -149,12 +155,18 @@ cask "dbeaver-community"
 cask "discord"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Free and open-source image editor
 cask "gimp"
 # Web browser
 cask "google-chrome"
+# Speech to text application
+cask "handy"
 # Keyboard customiser
 cask "karabiner-elements"
+# GPU-based terminal emulator
+cask "kitty"
 # Free cross-platform office suite, fresh version
 cask "libreoffice"
 # Sandbox construction video game
