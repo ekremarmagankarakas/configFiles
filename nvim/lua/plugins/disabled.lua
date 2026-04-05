@@ -143,4 +143,68 @@ return {
 		},
 		opts = {},
 	},
+
+	----------------------------------------------------------------------
+	-- Git Fugitive
+	----------------------------------------------------------------------
+	{
+		"tpope/vim-fugitive",
+        enabled = false,
+		cmd = { "Git", "G", "Gvdiffsplit", "Gread", "Gwrite", "Gdiffsplit" },
+	},
+
+	----------------------------------------------------------------------
+	-- UndoTree
+	----------------------------------------------------------------------
+	{
+		"mbbill/undotree",
+        enabled = false,
+		keys = {
+			{ "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Undotree: toggle" },
+		},
+	},
+
+	----------------------------------------------------------------------
+	-- Todo Comments
+	----------------------------------------------------------------------
+	{
+		"folke/todo-comments.nvim",
+        enabled = false,
+		event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{
+				"]t",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Todo: next comment",
+			},
+			{
+				"[t",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Todo: prev comment",
+			},
+			{ "<leader>fT", "<cmd>TodoTelescope<cr>", desc = "Find: todo comments" },
+		},
+		opts = {},
+	},
+
+	----------------------------------------------------------------------
+	-- Image viewer
+	----------------------------------------------------------------------
+	{
+		"3rd/image.nvim",
+        enabled = false,
+		event = "VeryLazy",
+		opts = {
+			backend = "kitty",
+			processor = "magick_cli",
+			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
+			max_width_window_percentage = 80,
+			max_height_window_percentage = 50,
+		},
+	},
 }
