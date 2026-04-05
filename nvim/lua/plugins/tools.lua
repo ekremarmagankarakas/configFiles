@@ -296,9 +296,13 @@ return {
 		main = "markview",
 		ft = { "markdown" },
 		keys = {
-			{ "<leader>mm", "<cmd>Markview toggle<cr>", silent = true, desc = "Markview: toggle" },
+			{ "<leader>mm", "<cmd>Markview<cr>", desc = "Markview: toggle" },
 		},
-		opts = {},
+		opts = {
+			preview = {
+				enable = false,
+			},
+		},
 	},
 
 	----------------------------------------------------------------------
