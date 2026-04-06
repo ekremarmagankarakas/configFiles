@@ -1,29 +1,50 @@
-# Kitty Configuration
+# Terminal Emulators
 
-A shared Kitty setup for macOS and Linux. Main config lives in `kitty/kitty.conf`, with the active color theme in `kitty/current-theme.conf`.
+Two terminal emulators are configured: **Ghostty** (primary) and **Kitty** (alternative). Both are installed via Homebrew and linked by `install.sh`.
 
-## Structure
+---
 
-- `kitty/kitty.conf`: core terminal behavior, font setup, and optional visual tweaks
-- `kitty/current-theme.conf`: currently selected theme values (included from `kitty.conf`)
+## Ghostty
 
-## Active Theme
+Config: `ghostty/config`
 
-- Theme: **Catppuccin Mocha**
-- Loaded via:
+Ghostty is the primary terminal. Minimal config — relies on Ghostty defaults.
+
+```conf
+theme = GitHub Dark Default
+font-family = JetBrains Mono
+font-size = 13
+```
+
+Ghostty supports the Kitty graphics protocol natively, so `image.nvim` works without any extra config.
+
+---
+
+## Kitty
+
+Config: `kitty/kitty.conf` + `kitty/current-theme.conf`
+
+Kitty is kept as an alternative. Main config includes the theme via:
 
 ```conf
 include current-theme.conf
 ```
 
-The theme include is wrapped by markers in `kitty/kitty.conf`:
+### Theme
 
-- `# BEGIN_KITTY_THEME`
-- `# END_KITTY_THEME`
+**Adwaita Dark** — a dark theme based on the GNOME Adwaita palette.
 
-## Font
+Colors are defined in `kitty/current-theme.conf`:
 
-Configured font family:
+| Element | Color |
+|---------|-------|
+| Background | `#1d1d20` |
+| Foreground | `#deddda` |
+| Cursor | `#deddda` |
+| Active tab bg | `#242424` |
+| Inactive tab bg | `#303030` |
+
+### Font
 
 ```conf
 font_family      family="JetBrains Mono"
@@ -32,11 +53,18 @@ italic_font      auto
 bold_italic_font auto
 ```
 
-## Behavior
+### Behavior
 
-- Audio bell is disabled (`enable_audio_bell no`)
-- GPU/background tuning and opacity options are present but commented out for optional use
+- Audio bell disabled (`enable_audio_bell no`)
 
-## Platform Notes
+---
 
-No platform-specific branches in the Kitty config itself; the same files are linked on both macOS and Linux by `install.sh`.
+## AeroSpace Terminal Launch
+
+`Alt + Enter` opens the default terminal. Currently configured to launch Kitty:
+
+```toml
+alt-enter = "exec-and-forget open -a 'kitty'"
+```
+
+Change to `'Ghostty'` to switch the default launch shortcut.

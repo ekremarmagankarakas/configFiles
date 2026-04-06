@@ -214,7 +214,6 @@ return {
 				{ "<leader>l", group = "lsp" },
 				{ "<leader>m", group = "markdown" },
 				{ "<leader>n", group = "neo-tree" },
-				{ "<leader>p", group = "pairs/surround" },
 				{ "<leader>s", group = "settings" },
 				{ "<leader>w", group = "windows" },
 				{ "<leader>?", group = "whichkey" },

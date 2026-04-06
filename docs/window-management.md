@@ -37,7 +37,7 @@ Config: [`aerospace/aerospace.toml`](../aerospace/aerospace.toml)
 
 | Key | Action |
 |-----|--------|
-| `Alt + Enter` | Open Kitty terminal |
+| `Alt + Enter` | Open Ghostty terminal |
 | `Alt + b` | Open Brave Browser |
 | `Alt + Shift + f` | Open Commander One (file manager) |
 

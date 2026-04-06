@@ -6,59 +6,57 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 
 [Lazy.nvim](https://github.com/folke/lazy.nvim) lazy-loads plugins for fast startup. Use `:Lazy` to inspect status.
 
-## Active Plugin Overview
+## Active Plugins
 
 | Plugin | Purpose |
 |--------|---------|
-| [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager |
 | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP client configuration |
 | [mason.nvim](https://github.com/mason-org/mason.nvim) | Install LSP/DAP/formatters/linters |
 | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) | Auto-install Mason tools |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) + cmp sources | Completion engine |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) + sources | Completion engine |
 | [LuaSnip](https://github.com/L3MON4D3/LuaSnip) + [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippets |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
 | [nvim-lint](https://github.com/mfussenegger/nvim-lint) | Linting |
-| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer |
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) + extensions | Fuzzy finder |
+| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer sidebar |
+| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) + fzf-native + ui-select | Fuzzy finder |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) + textobjects + autotag | Parsing, highlighting, text objects |
 | [flash.nvim](https://github.com/folke/flash.nvim) | Motion enhancements |
-| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | TODO/FIXME navigation/search |
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | Keymap hints |
-| [harpoon](https://github.com/ThePrimeagen/harpoon) | Quick file marks/navigation |
-| [undotree](https://github.com/mbbill/undotree) | Undo history UI |
-| [nvim-surround](https://github.com/kylechui/nvim-surround) | Surround editing |
+| [harpoon](https://github.com/ThePrimeagen/harpoon) (v2) | Quick file marks/navigation |
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | Auto-pairs |
-| [markview.nvim](https://github.com/OXY2DEV/markview.nvim) | Markdown rendering |
 | [mkdnflow.nvim](https://github.com/jakewvincent/mkdnflow.nvim) | Markdown link/todo workflow |
-| [jupytext.nvim](https://github.com/goerz/jupytext.nvim) | View/edit `.ipynb` as text buffers |
 | [vimtex](https://github.com/lervag/vimtex) | TeX/LaTeX workflow |
-| [vim-fugitive](https://github.com/tpope/vim-fugitive) | Git commands |
-| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks/signs |
-| [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | LazyGit integration |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks/signs in buffer |
+| [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | LazyGit TUI integration |
 | [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Diff and merge UI |
-| [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | Copilot suggestions |
+| [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | Copilot suggestions (auto-trigger off by default) |
 | [CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim) | Copilot chat/actions |
-| [nvim-dap](https://github.com/mfussenegger/nvim-dap) + UI helpers | Debugging |
-| [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python) | Python debug helpers |
-| [nvim-dap-go](https://github.com/leoluz/nvim-dap-go) | Go debug helpers |
-| [nvim-dap-vscode-js](https://github.com/mxsdev/nvim-dap-vscode-js) | JS/TS debug adapter integration |
-| [nvim-dap-lldb](https://github.com/julianolf/nvim-dap-lldb) | C/C++/Rust LLDB integration |
+| [nvim-dap](https://github.com/mfussenegger/nvim-dap) + UI + virtual text | Debugging framework |
+| [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python) | Python debugger |
+| [nvim-dap-go](https://github.com/leoluz/nvim-dap-go) | Go debugger |
+| [nvim-dap-vscode-js](https://github.com/mxsdev/nvim-dap-vscode-js) | JS/TS debug adapter |
+| [nvim-dap-lldb](https://github.com/julianolf/nvim-dap-lldb) | C/C++/Rust LLDB adapter |
 | [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) | Java LSP + DAP/test integration |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline |
-| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indent guides |
-| [nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua) | Inline color previews |
+| [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indent guides with scope highlight |
 | [noice.nvim](https://github.com/folke/noice.nvim) + [nvim-notify](https://github.com/rcarriga/nvim-notify) | Command/message/notification UI |
 | Theme plugins (13) | catppuccin, nightfox, kanagawa, github-theme, onedarkpro, dracula, tokyonight, adwaita, rose-pine, gruvbox-material, everforest, cyberdream, vscode |
 
-## Disabled Plugins In Repo
+## Removed Plugins
 
-These are kept in `nvim/lua/plugins/disabled.lua` but not active:
+These have been removed from the config entirely (not loaded):
 
 - `nickjvandyke/opencode.nvim`
 - `ThePrimeagen/99`
 - `karb94/neoscroll.nvim`
 - `kevinhwang91/nvim-bqf`
 - `anuvyklack/windows.nvim`
+- `tpope/vim-fugitive`
+- `mbbill/undotree`
+- `folke/todo-comments.nvim`
+- `3rd/image.nvim`
+- `kylechui/nvim-surround`
+- `OXY2DEV/markview.nvim`
 
 ## Language Tooling
 
@@ -77,12 +75,17 @@ These are kept in `nvim/lua/plugins/disabled.lua` but not active:
 | TeX/LaTeX | `ltex` | `latexindent` | - |
 | R | `r_language_server` | `styler` (`r_styler`) | - |
 
+ESLint linting is skipped automatically when no ESLint config file is found in the project.
+
+Python venv is auto-detected from `$VIRTUAL_ENV` or `.venv/` in the project root.
+
 ## Keymaps
 
-- Built-in Neovim LSP defaults are available on attach (`K`, `grr`, etc.).
-- Custom LSP goto keymaps: `gd`, `gD`, `gy`.
-- `<leader>su` toggles Jupytext notebook view handling for `.ipynb` buffers.
-- Full key reference: [`nvim/keymaps.md`](../nvim/keymaps.md).
+- Built-in Neovim 0.11+ LSP defaults apply on attach (`K`, `grr`, `grn`, `gra`, `gd`, `gD`, etc.)
+- `gy` → go to type definition (custom, not a Neovim default)
+- `<leader>lf` → format file (conform)
+- `<leader>ll` → run linters manually
+- Full key reference: [`nvim/keymaps.md`](../nvim/keymaps.md)
 
 ## Debug Adapters
 
@@ -94,33 +97,28 @@ These are kept in `nvim/lua/plugins/disabled.lua` but not active:
 | C/C++/Rust | `codelldb` |
 | Java | `java-debug-adapter` + `java-test` |
 
-Global debug toggles:
-
-- `<leader>dtj` toggles Python `justMyCode`
-- `<leader>dtv` toggles loading `.vscode/launch.json`
+Debug toggles:
+- `<leader>dtj` — toggle Python `justMyCode`
+- `<leader>dtv` — toggle loading `.vscode/launch.json`
 
 ## Theme Picker
 
-13 themes are available through `<leader>st`.
-
-Selected theme is persisted in `~/.local/share/nvim/theme.txt`.
+13 themes available via `<leader>st`. Selected theme is persisted in `~/.local/share/nvim/theme.txt`.
 
 ## Core Options
 
-From `nvim/lua/config/options.lua`:
-
-| Option | Value | Note |
-|--------|-------|------|
-| Line numbers | relative | absolute + relative enabled |
-| Tab width | 4 spaces | `expandtab` enabled |
-| Undo | persistent | survives restarts |
-| Search | smart case | `ignorecase` + `smartcase` |
-| Leader | `Space` | |
-| Local leader | `\` | |
-| Scroll offset | 8 | |
-| Mouse | enabled | |
-| Wrap | enabled | `linebreak` enabled |
-| Global statusline | yes | `laststatus=3` |
+| Option | Value |
+|--------|-------|
+| Line numbers | absolute + relative |
+| Tab width | 4 spaces (`expandtab`) |
+| Undo | persistent (survives restarts) |
+| Search | smart case (`ignorecase` + `smartcase`) |
+| Leader | `Space` |
+| Local leader | `\` |
+| Scroll offset | 8 lines |
+| Mouse | enabled |
+| Wrap | enabled (`linebreak`) |
+| Virtual text diagnostics | off by default (toggle `<leader>lee`) |
 
 ## Directory Structure
 
@@ -141,21 +139,30 @@ nvim/
 │       ├── ai.lua           # Copilot + CopilotChat
 │       ├── format.lua       # Conform formatters
 │       ├── lint.lua         # nvim-lint setup
-│       ├── tools.lua        # Neo-tree, Flash, Harpoon, markdown tools, etc.
-│       ├── git.lua          # Fugitive, gitsigns, LazyGit, Diffview
+│       ├── tools.lua        # Neo-tree, Flash, Harpoon, markview, mkdnflow, vimtex
+│       ├── git.lua          # Gitsigns, LazyGit, Diffview
 │       ├── telescope.lua    # Telescope pickers + extensions
-│       ├── treesitter.lua   # Treesitter + textobjects
-│       ├── ui.lua           # Themes, lualine, indent guides, noice
+│       ├── treesitter.lua   # Treesitter + textobjects + autotag
+│       ├── ui.lua           # Themes, lualine, indent-blankline, noice
 │       ├── debug.lua        # DAP config and keymaps
 │       ├── java.lua         # JDTLS setup with DAP integration
-│       ├── snippets.lua     # LuaSnip + snippets
-│       └── disabled.lua     # Installed but disabled plugins
+│       └── snippets.lua     # LuaSnip + friendly-snippets
 ```
 
 ## Java Setup
 
 Java uses [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) (not `lspconfig`) for full Eclipse JDT behavior:
 
-- starts/attaches on Java filetypes
-- integrates Java debug/test bundles when installed via Mason
-- keymaps: `<leader>jo`, `<leader>jev`, `<leader>jec`, `<leader>jem`, `<leader>jtm`, `<leader>jtc`
+- Starts/attaches on Java filetypes via autocmd
+- Per-project workspace isolation in `~/.local/share/nvim/jdtls-workspace/`
+- Integrates `java-debug-adapter` and `java-test` bundles when installed via Mason
+- Keymaps (Java buffers only):
+
+| Key | Action |
+|-----|--------|
+| `<leader>jo` | Organize imports |
+| `<leader>jev` | Extract variable |
+| `<leader>jec` | Extract constant |
+| `<leader>jem` | Extract method |
+| `<leader>jtm` | Test nearest method |
+| `<leader>jtc` | Test class |

@@ -122,8 +122,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>st` | n | Theme picker |
 | `<leader>sr` | n | Search and replace in file |
 | `<leader>sq` | n | Search and replace over quickfix |
-| `<leader>sc` | n | Convert Markdown buffer to PDF (`:MarkdownToPdf`) |
-| `<leader>su` | n | Notebook: toggle Jupytext view auto-handling |
+| `<leader>ms` | n | Convert Markdown buffer to PDF (`:MarkdownToPdf`) |
 | `<C-h>` `<C-j>` `<C-k>` `<C-l>` | n | Move across splits |
 | `<` `>` | v | Re-indent and keep selection |
 | `n` `N` | n | Next/prev search result + center cursor |
@@ -163,12 +162,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>nt` | n | Toggle Neo-tree |
 | `O` | n | Open file externally (inside Neo-tree window) |
 
-### Notebook (`lua/plugins/tools.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `:JupytextViewToggle` | cmd | Toggle notebook auto-view (Jupytext on/off) for `.ipynb` |
-
 ### Telescope (`lua/plugins/telescope.lua`)
 
 | Key | Mode | Description |
@@ -192,12 +185,11 @@ Leader: `Space` | Local leader: `\`
 | `<leader>fq` | n | Quickfix list |
 | `<leader>fl` | n | Location list |
 | `<leader>fa` | n | Find files in configured base directories |
-| `<leader>fT` | n | TODO comments (TodoTelescope) |
 | `<leader>gtc` | n | Git commits |
 | `<leader>gts` | n | Git status |
 | `<leader>gtB` | n | Git branches |
 
-### Flash + Todo Comments (`lua/plugins/tools.lua`)
+### Flash (`lua/plugins/tools.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -205,7 +197,6 @@ Leader: `Space` | Local leader: `\`
 | `S` | n/x/o | Flash Treesitter jump |
 | `r` | o | Flash remote |
 | `R` | o/x | Flash Treesitter search |
-| `]t` `[t` | n | Next / previous TODO comment |
 
 ### Treesitter Text Objects (`lua/plugins/treesitter.lua`)
 
@@ -221,8 +212,6 @@ Leader: `Space` | Local leader: `\`
 | `]]` `[[` | n/x/o | Next / previous class start |
 | `][` `[]` | n/x/o | Next / previous class end |
 | `]a` `[a` | n/x/o | Next / previous argument |
-| `<leader>ma` | n | Swap argument with next |
-| `<leader>mA` | n | Swap argument with previous |
 
 ### Git (`lua/plugins/git.lua`)
 
@@ -286,6 +275,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>act` | n | Copilot toggle |
 | `<leader>acd` | n | Copilot disable |
 | `<leader>ace` | n | Copilot enable |
+| `<leader>aca` | n | Toggle Copilot auto-trigger |
 | `Alt-y` | i | Accept Copilot suggestion |
 | `Alt-]` | i | Next suggestion |
 | `Alt-[` | i | Previous suggestion |
@@ -306,13 +296,8 @@ Leader: `Space` | Local leader: `\`
 | `<leader>ha` `<leader>hd` `<leader>hh` | n | Harpoon add / remove / menu |
 | `<leader>h1` `<leader>h2` `<leader>h3` `<leader>h4` | n | Harpoon jump to slots 1-4 |
 | `<leader>hp` `<leader>hn` | n | Harpoon previous / next |
-| `<leader>u` | n | Toggle Undotree |
 | `<leader>?l` | n | Show buffer-local which-key mappings |
 | `<leader>?g` | n | Show global which-key mappings |
-| `<leader>ps` `<leader>pS` | n | Surround add / line surround |
-| `<leader>pd` `<leader>pc` `<leader>pC` | n | Surround delete / change / change surrounding |
-| `<leader>ps` | v | Surround add (visual) |
-| `<leader>mm` | n | Toggle Markview |
 | `<leader>mf` `<leader>mF` | n | Mkdnflow follow / destroy link |
 | `<leader>mc` `<leader>mC` | n/v | Mkdnflow create link / from clipboard |
 | `<leader>mn` `<leader>mp` | n | Mkdnflow next / previous link |
@@ -333,7 +318,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>l` | lsp |
 | `<leader>m` | markdown |
 | `<leader>n` | neo-tree |
-| `<leader>p` | pairs/surround |
 | `<leader>s` | settings |
-| `<leader>w` | windows (group label present; plugin disabled) |
+| `<leader>w` | windows |
 | `<leader>?` | whichkey |

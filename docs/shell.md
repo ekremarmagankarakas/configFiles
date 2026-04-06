@@ -57,9 +57,11 @@ A comprehensive completion system with:
 | Alias | Command |
 |-------|---------|
 | `g` | `git` |
-| `ga` | `git add .` |
+| `ga` | `git add` |
+| `gaa` | `git add .` |
 | `gb` | `git branch` |
 | `gc` | `git commit` |
+| `gcm` | `git commit -m` |
 | `gca` | `git commit -am` |
 | `gd` | `git diff` |
 | `gl` | `git log --oneline --graph --decorate --all` |
@@ -70,6 +72,7 @@ A comprehensive completion system with:
 | `gco` | `git checkout` |
 | `gcb` | `git checkout -b` |
 | `gr` | `git restore` |
+| `grb` | `git rebase` |
 
 ### Docker
 
@@ -81,12 +84,35 @@ A comprehensive completion system with:
 | `dcub` | `docker compose up --build` |
 | `dcd` | `docker compose down` |
 
+### Claude
+
+| Alias | Command |
+|-------|---------|
+| `claude-u` | Claude with `~/.claude-u` config dir |
+| `claude-p` | Claude with `~/.claude-p` config dir |
+| `claude-n` | Claude with `~/.claude-n` config dir |
+
 ### Other
 
 | Alias | Command |
 |-------|---------|
+| `v` | `nvim` |
 | `tn` | Launch/attach tmux session (via `tmux-cmd` script) |
 | `grep` | `grep --color=auto` |
+
+## Tools
+
+### Zoxide
+
+[zoxide](https://github.com/ajeetdsouza/zoxide) is a smarter `cd` that learns your most-visited directories.
+
+```zsh
+z dotfiles     # jump to most frecent match
+zi             # interactive fuzzy picker (uses fzf)
+z foo bar      # match path containing both terms
+```
+
+Initialized via `eval "$(zoxide init zsh)"` in zshrc. Directories are learned automatically as you `cd` into them.
 
 ## Plugins
 
@@ -97,6 +123,7 @@ A comprehensive completion system with:
 | [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) | Fish-like command suggestions |
 | [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) | Syntax coloring in the prompt |
 | [fzf](https://github.com/junegunn/fzf) | Fuzzy file/history finder |
+| [zoxide](https://github.com/ajeetdsouza/zoxide) | Smart directory jumper |
 | [thefuck](https://github.com/nvbn/thefuck) | Auto-correct previous command |
 
 ### Linux (cloned to `~/.zsh/`)
@@ -115,7 +142,8 @@ A comprehensive completion system with:
 | Variable | Value |
 |----------|-------|
 | `EDITOR` | `/opt/homebrew/bin/nvim` |
-| `PATH` | Prepends `~/.local/bin` |
+| `BUN_INSTALL` | `$HOME/.bun` |
+| `PATH` | Prepends `~/.local/bin`, `$BUN_INSTALL/bin` |
 
 ### Linux
 

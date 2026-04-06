@@ -42,6 +42,13 @@ Neovim keymaps live here: [`nvim/keymaps.md`](../nvim/keymaps.md).
 | `Ctrl-a` / `Ctrl-e` | insert | Beginning / end of line |
 | `Alt-y` | insert | Accept autosuggestion |
 
+### Zoxide
+
+| Command | Action |
+|---------|--------|
+| `z <name>` | Jump to most frecent matching directory |
+| `zi` | Interactive fuzzy directory picker |
+
 ---
 
 ## Window Managers
@@ -54,7 +61,9 @@ Neovim keymaps live here: [`nvim/keymaps.md`](../nvim/keymaps.md).
 | `Alt + Shift + h/j/k/l` | Move window |
 | `Alt + 1-0` | Workspace |
 | `Alt + f` | Fullscreen |
-| `Alt + Enter` | Kitty |
+| `Alt + Enter` | Open Ghostty terminal |
+| `Alt + b` | Open Brave Browser |
+| `Alt + Shift + f` | Open Commander One |
 | `Alt + r` | Resize mode |
 
 ### i3 (Linux) -- Modifier: `Super`
