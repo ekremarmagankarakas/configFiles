@@ -123,6 +123,7 @@ eval "$(zoxide init zsh)"
 
 # Scripts
 alias tn='tmux-cmd'
+alias vh='fc -l 1 | nvim -R -'
 
 export PATH="$HOME/.local/bin:$PATH"
 
