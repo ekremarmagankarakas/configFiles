@@ -222,6 +222,23 @@ return {
 	},
 
 	----------------------------------------------------------------------
+	-- Markview
+	----------------------------------------------------------------------
+	-- {
+	-- 	"OXY2DEV/markview.nvim",
+	-- 	main = "markview",
+	-- 	ft = { "markdown" },
+	-- 	keys = {
+	-- 		{ "<leader>mm", "<cmd>Markview<cr>", desc = "Markview: toggle" },
+	-- 	},
+	-- 	opts = {
+	-- 		preview = {
+	-- 			enable = false,
+	-- 		},
+	-- 	},
+	-- },
+
+	----------------------------------------------------------------------
 	-- Mkdnflow
 	----------------------------------------------------------------------
 	{
@@ -238,7 +255,12 @@ return {
 					map("n", "<leader>mf", "<cmd>MkdnFollowLink<cr>", "Markdown: follow link")
 					map("n", "<leader>mF", "<cmd>MkdnDestroyLink<cr>", "Markdown: destroy link")
 					map({ "n", "v" }, "<leader>mc", "<cmd>MkdnCreateLink<cr>", "Markdown: create link")
-					map({ "n", "v" }, "<leader>mC", "<cmd>MkdnCreateLinkFromClipboard<cr>", "Markdown: link from clipboard")
+					map(
+						{ "n", "v" },
+						"<leader>mC",
+						"<cmd>MkdnCreateLinkFromClipboard<cr>",
+						"Markdown: link from clipboard"
+					)
 					map("n", "<leader>mn", "<cmd>MkdnNextLink<cr>", "Markdown: next link")
 					map("n", "<leader>mp", "<cmd>MkdnPrevLink<cr>", "Markdown: prev link")
 					map("n", "<leader>mb", "<cmd>MkdnGoBack<cr>", "Markdown: back")
