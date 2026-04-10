@@ -27,7 +27,6 @@ return {
 					"goimports",
 					"gofumpt",
 					"google-java-format",
-					"latexindent",
 					-- Linters
 					"ruff",
 					"eslint_d",

@@ -27,8 +27,8 @@ return {
 			markdown = { "prettier" },
 			r = { "r_styler" },
 			java = { "google-java-format" },
-			tex = { "latexindent" },
-			latex = { "latexindent" },
+			tex = { "tex_fmt" },
+			latex = { "tex_fmt" },
 		},
 		default_format_opts = {
 			lsp_format = "fallback",
@@ -42,6 +42,11 @@ return {
 			prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
 			stylua = { prepend_args = { "--indent-width", "4" } },
 			shfmt = { prepend_args = { "-i", "4" } },
+			tex_fmt = {
+				command = "tex-fmt",
+				args = { "--stdin" },
+				stdin = true,
+			},
 			r_styler = {
 				command = "Rscript",
 				args = {
