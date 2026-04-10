@@ -145,6 +145,13 @@ return {
 				long_message_to_split = true, -- long messages go to a split
 				lsp_doc_border = true, -- bordered LSP hover/signature docs
 			},
+			routes = {
+				-- Suppress nvim-treesitter injection bug (nvim 0.12.x)
+				{
+					filter = { find = "attempt to call method 'range'" },
+					opts = { skip = true },
+				},
+			},
 		},
 	},
 }
