@@ -121,6 +121,9 @@ alias dcd='docker compose down'
 # Zoxide
 eval "$(zoxide init zsh)"
 
+# Yazi
+alias y='yazi'
+
 # Scripts
 alias tn='tmux-cmd'
 alias vh='fc -l 1 | nvim -R -'
