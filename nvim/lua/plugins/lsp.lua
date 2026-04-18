@@ -20,6 +20,10 @@ return {
 					"gopls",
 					"bash-language-server",
 					"jdtls",
+					"intelephense",
+					"sqls",
+					"css-lsp",
+					"html-lsp",
 					-- Formatters
 					"stylua",
 					"prettier",
@@ -27,6 +31,7 @@ return {
 					"goimports",
 					"gofumpt",
 					"google-java-format",
+					"sqlfmt",
 					-- Linters
 					"ruff",
 					"eslint_d",
@@ -303,6 +308,30 @@ return {
 			root_markers = { ".git" },
 		})
 
+		-- PHP
+		vim.lsp.config("intelephense", {
+			filetypes = { "php" },
+			root_markers = { "composer.json", ".git" },
+		})
+
+		-- SQL
+		vim.lsp.config("sqls", {
+			filetypes = { "sql", "mysql" },
+			root_markers = { ".git" },
+		})
+
+		-- CSS
+		vim.lsp.config("cssls", {
+			filetypes = { "css", "scss", "less" },
+			root_markers = { "package.json", ".git" },
+		})
+
+		-- HTML
+		vim.lsp.config("html", {
+			filetypes = { "html" },
+			root_markers = { "package.json", ".git" },
+		})
+
 		-- Enable all Mason-managed servers
 		vim.lsp.enable({
 			"lua_ls",
@@ -315,6 +344,10 @@ return {
 			"rust_analyzer",
 			"gopls",
 			"bashls",
+			"intelephense",
+			"sqls",
+			"cssls",
+			"html",
 		})
 
 		-- R (installed via R, not Mason)
