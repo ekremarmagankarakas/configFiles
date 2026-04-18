@@ -101,6 +101,8 @@ brew "python@3.11"
 brew "python@3.13"
 # Software environment for statistical computing
 brew "r"
+# Rsync for cloud storage
+brew "rclone"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Extremely fast Python linter, written in Rust
@@ -147,8 +149,6 @@ cask "betterdisplay"
 cask "brave-browser"
 # Utility that prevents the system from going to sleep
 cask "caffeine"
-# OpenAI's official browser with ChatGPT built in
-cask "chatgpt-atlas"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
