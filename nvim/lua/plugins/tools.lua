@@ -224,17 +224,11 @@ return {
 	----------------------------------------------------------------------
 	-- Markview
 	----------------------------------------------------------------------
-	-- {
+    -- {
 	-- 	"OXY2DEV/markview.nvim",
-	-- 	main = "markview",
-	-- 	ft = { "markdown" },
+	-- 	lazy = false,
 	-- 	keys = {
-	-- 		{ "<leader>mm", "<cmd>Markview<cr>", desc = "Markview: toggle" },
-	-- 	},
-	-- 	opts = {
-	-- 		preview = {
-	-- 			enable = false,
-	-- 		},
+	-- 		{ "<leader>mm", "<cmd>Markview toggleAll<cr>", desc = "Markview: toggle" },
 	-- 	},
 	-- },
 
