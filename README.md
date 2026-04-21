@@ -22,7 +22,7 @@ Full keybinding reference: [docs/keymaps.md](docs/keymaps.md)
 
 - **Vi-mode everywhere** -- zsh, tmux, window managers, and Neovim all use h/j/k/l navigation
 - **Tiling window management** -- i3 on Linux, AeroSpace on macOS, with matching keybindings
-- **Catppuccin Mocha** as the primary theme across tmux and terminal, with a persistent theme picker in Neovim
+- **Catppuccin Mocha** in tmux, with a persistent theme picker in Neovim (13 colorschemes)
 - **Platform parity** -- both setups share the same muscle memory despite different tools
 
 ## Prerequisites
@@ -90,7 +90,6 @@ Some settings are intentionally machine-specific. If you fork/clone this repo, s
 - `i3/config`: browser keybind (expects `~/AppImages/zen_browser.appimage`)
 - `i3/config`: file explorer keybind (expects `Thunar`)
 - `nvim/lua/plugins/telescope.lua`: Has hardcoded dir locations to search from. Update these to fit your own setup.
-- `zsh/zshrc.mac`: optional `antigravity` PATH entry
 - `aerospace/aerospace.toml`: browser keybind (expects `Brave`)
 - `aerospace/aerospace.toml`: file explorer keybind (expects `Commander One`)
 
