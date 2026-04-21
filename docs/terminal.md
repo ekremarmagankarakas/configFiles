@@ -28,32 +28,7 @@ Kitty is kept as an alternative. Main config includes the theme via:
 include current-theme.conf
 ```
 
-### Theme
-
-**Adwaita Dark** — a dark theme based on the GNOME Adwaita palette.
-
-Colors are defined in `kitty/current-theme.conf`:
-
-| Element | Color |
-|---------|-------|
-| Background | `#1d1d20` |
-| Foreground | `#deddda` |
-| Cursor | `#deddda` |
-| Active tab bg | `#242424` |
-| Inactive tab bg | `#303030` |
-
-### Font
-
-```conf
-font_family      family="JetBrains Mono"
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
-```
-
-### Behavior
-
-- Audio bell disabled (`enable_audio_bell no`)
+Theme: **Adwaita Dark**. Font: **JetBrains Mono**. Audio bell disabled.
 
 ---
 

@@ -103,12 +103,3 @@ After linking the config:
 
 If TPM is not installed, the install script handles it automatically.
 
-## Platform Differences
-
-Current `tmux/tmux.conf` is effectively shared across macOS and Linux with no platform-specific branches:
-
-| Setting | macOS | Linux |
-|---------|-------|-------|
-| Shell path | `/bin/zsh` | `/bin/zsh` |
-| Kitty passthrough | `set -g allow-passthrough on` | `set -g allow-passthrough on` |
-| Terminal override | `*:Tc` | `*:Tc` |

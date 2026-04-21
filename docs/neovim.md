@@ -133,20 +133,3 @@ nvim/
 │       └── snippets.lua     # LuaSnip + friendly-snippets
 ```
 
-## Java Setup
-
-Java uses [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) (not `lspconfig`) for full Eclipse JDT behavior:
-
-- Starts/attaches on Java filetypes via autocmd
-- Per-project workspace isolation in `~/.local/share/nvim/jdtls-workspace/`
-- Integrates `java-debug-adapter` and `java-test` bundles when installed via Mason
-- Keymaps (Java buffers only):
-
-| Key | Action |
-|-----|--------|
-| `<leader>jo` | Organize imports |
-| `<leader>jev` | Extract variable |
-| `<leader>jec` | Extract constant |
-| `<leader>jem` | Extract method |
-| `<leader>jtm` | Test nearest method |
-| `<leader>jtc` | Test class |
