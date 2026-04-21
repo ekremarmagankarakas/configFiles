@@ -42,22 +42,6 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [noice.nvim](https://github.com/folke/noice.nvim) + [nvim-notify](https://github.com/rcarriga/nvim-notify) | Command/message/notification UI |
 | Theme plugins (13) | catppuccin, nightfox, kanagawa, github-theme, onedarkpro, dracula, tokyonight, adwaita, rose-pine, gruvbox-material, everforest, cyberdream, vscode |
 
-## Removed Plugins
-
-These have been removed from the config entirely (not loaded):
-
-- `nickjvandyke/opencode.nvim`
-- `ThePrimeagen/99`
-- `karb94/neoscroll.nvim`
-- `kevinhwang91/nvim-bqf`
-- `anuvyklack/windows.nvim`
-- `tpope/vim-fugitive`
-- `mbbill/undotree`
-- `folke/todo-comments.nvim`
-- `3rd/image.nvim`
-- `kylechui/nvim-surround`
-- `OXY2DEV/markview.nvim`
-
 ## Language Tooling
 
 | Language | LSP server | Formatter | Linter |
@@ -139,7 +123,7 @@ nvim/
 │       ├── ai.lua           # Copilot + CopilotChat
 │       ├── format.lua       # Conform formatters
 │       ├── lint.lua         # nvim-lint setup
-│       ├── tools.lua        # Neo-tree, Flash, Harpoon, markview, mkdnflow, vimtex
+│       ├── tools.lua        # Neo-tree, Flash, Harpoon, mkdnflow, vimtex
 │       ├── git.lua          # Gitsigns, LazyGit, Diffview
 │       ├── telescope.lua    # Telescope pickers + extensions
 │       ├── treesitter.lua   # Treesitter + textobjects + autotag

@@ -16,8 +16,6 @@ font-family = JetBrains Mono
 font-size = 13
 ```
 
-Ghostty supports the Kitty graphics protocol natively, so `image.nvim` works without any extra config.
-
 ---
 
 ## Kitty
@@ -61,10 +59,8 @@ bold_italic_font auto
 
 ## AeroSpace Terminal Launch
 
-`Alt + Enter` opens the default terminal. Currently configured to launch Kitty:
+`Alt + Enter` opens the default terminal. Currently configured to launch Ghostty:
 
 ```toml
-alt-enter = "exec-and-forget open -a 'kitty'"
+alt-enter = "exec-and-forget open -a 'ghostty'"
 ```
-
-Change to `'Ghostty'` to switch the default launch shortcut.

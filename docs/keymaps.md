@@ -26,6 +26,9 @@ Neovim keymaps live here: [`nvim/keymaps.md`](../nvim/keymaps.md).
 | `prefix + r` | Reload config |
 | `prefix + I` | Install plugins (TPM) |
 | `prefix + [` | Enter copy mode (vi keys) |
+| `prefix + J` | Pull pane from another window (prompts `window.pane`) |
+| `prefix + S` | Send current pane to another window (prompts number) |
+| `prefix + B` | Break current pane into its own window |
 
 ---
 

@@ -9,7 +9,7 @@ Cross-platform configuration files for macOS and Linux. Built around a consisten
 | **Neovim** | [config](nvim) | [config](nvim) | [docs/neovim.md](docs/neovim.md) |
 | **Tmux** | [config](tmux/tmux.conf) | [config](tmux/tmux.conf) | [docs/tmux.md](docs/tmux.md) |
 | **Zsh** | [config](zsh/zshrc.mac) | [config](zsh/zshrc.linux) | [docs/shell.md](docs/shell.md) |
-| **Kitty** | [config](kitty) | [config](kitty) | [docs/kitty.md](docs/kitty.md) |
+| **Kitty** | [config](kitty) | [config](kitty) | [docs/terminal.md](docs/terminal.md) |
 | **AeroSpace** (tiling WM) | [config](aerospace/aerospace.toml) | - | [docs/window-management.md](docs/window-management.md) |
 | **i3** (tiling WM) | - | [config](i3) | [docs/window-management.md](docs/window-management.md) |
 | **Karabiner** (key remap) | [config](karabiner) | - | - |

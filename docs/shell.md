@@ -97,7 +97,9 @@ A comprehensive completion system with:
 | Alias | Command |
 |-------|---------|
 | `v` | `nvim` |
+| `y` | `yazi` |
 | `tn` | Launch/attach tmux session (via `tmux-cmd` script) |
+| `vh` | View shell history in Neovim (read-only) |
 | `grep` | `grep --color=auto` |
 
 ## Tools

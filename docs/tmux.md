@@ -56,6 +56,15 @@ All keybindings use the prefix `Ctrl-s` unless noted otherwise.
 | `prefix + z` | Toggle pane zoom (fullscreen) |
 | `prefix + {` / `prefix + }` | Swap pane left / right |
 
+### Pane Moving
+
+| Key | Action |
+|-----|--------|
+| `prefix + J` | Pull a pane from another window into current (prompts `window.pane`) |
+| `prefix + S` | Send current pane to another window (prompts window number) |
+| `prefix + B` | Break current pane out into its own window |
+| `prefix + !` | Break current pane into new window (built-in) |
+
 ### Copy Mode (vi)
 
 | Key | Action |
