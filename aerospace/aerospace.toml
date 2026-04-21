@@ -93,6 +93,10 @@ outer.bottom     = 5
     8 = ['secondary', 'main']
     9 = ['secondary', 'main']
 
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
+run = 'layout floating'
+
 [mode.resize.binding]
     h = 'resize width -50'
     j = 'resize height +50'
