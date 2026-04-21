@@ -9,7 +9,8 @@ Cross-platform configuration files for macOS and Linux. Built around a consisten
 | **Neovim** | [config](nvim) | [config](nvim) | [docs/neovim.md](docs/neovim.md) |
 | **Tmux** | [config](tmux/tmux.conf) | [config](tmux/tmux.conf) | [docs/tmux.md](docs/tmux.md) |
 | **Zsh** | [config](zsh/zshrc.mac) | [config](zsh/zshrc.linux) | [docs/shell.md](docs/shell.md) |
-| **Kitty** | [config](kitty) | [config](kitty) | [docs/terminal.md](docs/terminal.md) |
+| **Ghostty** (primary) | [config](ghostty) | - | [docs/terminal.md](docs/terminal.md) |
+| **Kitty** (alternative) | [config](kitty) | [config](kitty) | [docs/terminal.md](docs/terminal.md) |
 | **AeroSpace** (tiling WM) | [config](aerospace/aerospace.toml) | - | [docs/window-management.md](docs/window-management.md) |
 | **i3** (tiling WM) | - | [config](i3) | [docs/window-management.md](docs/window-management.md) |
 | **Karabiner** (key remap) | [config](karabiner) | - | - |
@@ -33,6 +34,7 @@ Full keybinding reference: [docs/keymaps.md](docs/keymaps.md)
 | [Homebrew](https://brew.sh) | `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` |
 | Neovim | `brew install neovim` |
 | Tmux | `brew install tmux` |
+| Ghostty | `brew install --cask ghostty` |
 | Kitty | `brew install --cask kitty` |
 | AeroSpace | `brew install --cask nikitabobko/tap/aerospace` |
 | Karabiner-Elements | `brew install --cask karabiner-elements` |
