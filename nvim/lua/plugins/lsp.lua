@@ -30,6 +30,7 @@ return {
 					"shfmt",
 					"goimports",
 					"gofumpt",
+					"clang-format",
 					"google-java-format",
 					"sqlfmt",
 					-- Linters
@@ -263,6 +264,19 @@ return {
 		vim.lsp.config("clangd", {
 			filetypes = { "c", "cpp", "objc", "objcpp" },
 			root_markers = { "compile_commands.json", "compile_flags.txt", ".clangd", ".git" },
+			cmd = {
+				"clangd",
+				"--background-index",
+				"--clang-tidy",
+				"--header-insertion=iwyu",
+				"--completion-style=detailed",
+				"--function-arg-placeholders",
+			},
+			init_options = {
+				usePlaceholders = true,
+				completeUnimported = true,
+				clangdFileStatus = true,
+			},
 		})
 
 		-- Rust
