@@ -18,6 +18,22 @@ end, { desc = "Convert current Markdown file to PDF" })
 vim.keymap.set("n", "<leader>ms", ":MarkdownToPdf<CR>", { desc = "Convert Markdown to Pdf" })
 
 ----------------------------------------------------------------------
+-- C/C++ indentation: use cindent instead of treesitter (unreliable for C++)
+----------------------------------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "c", "cpp" },
+	callback = function()
+		vim.schedule(function()
+			vim.opt_local.indentexpr = ""
+			vim.opt_local.cindent = true
+			vim.opt_local.shiftwidth = 2
+			vim.opt_local.tabstop = 2
+			vim.opt_local.softtabstop = 2
+		end)
+	end,
+})
+
+----------------------------------------------------------------------
 -- Trim Trailing Whitespace
 ----------------------------------------------------------------------
 local trim_ws_group = vim.api.nvim_create_augroup("TrimTrailingWhitespace", { clear = true })

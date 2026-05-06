@@ -46,6 +46,7 @@ return {
 				stdin = true,
 			},
 			prettier = { prepend_args = { "--tab-width", "2", "--use-tabs", "false" } },
+			clang_format = { prepend_args = { "--style={BasedOnStyle: Google, ColumnLimit: 80, InsertBraces: true}" } },
 			stylua = { prepend_args = { "--indent-width", "4" } },
 			shfmt = { prepend_args = { "-i", "4" } },
 			tex_fmt = {
