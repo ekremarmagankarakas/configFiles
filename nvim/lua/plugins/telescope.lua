@@ -35,7 +35,7 @@ return {
 				"<leader>fa",
 				function()
 					local dirs = {
-						"~/Workspace",
+						"~/Dev",
 						"~/Northeastern",
 						"~/Work",
 					}
