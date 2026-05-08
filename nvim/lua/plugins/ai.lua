@@ -60,14 +60,14 @@ return {
 			-- Remap chat buffer actions
 			mappings = {
 				accept_diff = {
-					normal = "<leader>ca",
-					insert = "<leader>ca",
+					normal = "<leader>aaa",
+					insert = "<leader>aaa",
 				},
 				show_diff = {
-					normal = "<leader>cd",
+					normal = "<leader>aad",
 				},
 				yank_diff = {
-					normal = "<leader>cy",
+					normal = "<leader>aay",
 				},
 			},
 		},
@@ -78,24 +78,24 @@ return {
 
 			-- Visual selection hotkeys (send selection, get a response in chat)
 			-- Uses the built-in #selection resource so you do not need a selection API.
-			vim.keymap.set("v", "<leader>cf", function()
+			vim.keymap.set("v", "<leader>aaf", function()
 				chat.ask("#selection /Fix", { prompt = "Fix selection" })
 			end, { desc = "CopilotChat: Fix selection" })
 
-			vim.keymap.set("v", "<leader>cr", function()
+			vim.keymap.set("v", "<leader>aar", function()
 				chat.ask("#selection /Optimize", { prompt = "Refactor selection" })
 			end, { desc = "CopilotChat: Refactor selection" })
 
-			vim.keymap.set("v", "<leader>ce", function()
+			vim.keymap.set("v", "<leader>aae", function()
 				chat.ask("#selection /Explain", { prompt = "Explain selection" })
 			end, { desc = "CopilotChat: Explain selection" })
 
-			vim.keymap.set("v", "<leader>ct", function()
+			vim.keymap.set("v", "<leader>aat", function()
 				chat.ask("#selection /Tests", { prompt = "Generate tests for selection" })
 			end, { desc = "CopilotChat: Tests for selection" })
 
 			-- open/toggle chat quickly
-			vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "CopilotChat: Toggle" })
+			vim.keymap.set("n", "<leader>aac", "<cmd>CopilotChatToggle<cr>", { desc = "CopilotChat: Toggle" })
 		end,
 	},
 }
