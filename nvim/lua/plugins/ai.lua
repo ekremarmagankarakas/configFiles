@@ -1,3 +1,5 @@
+local copilot_auto_trigger = false
+
 return {
 	----------------------------------------------------------------------
 	-- Copilot
@@ -13,11 +15,9 @@ return {
 			{
 				"<leader>aca",
 				function()
-					local suggestion = require("copilot.suggestion")
-					local config = require("copilot.config")
-					local current = config.get("suggestion").auto_trigger
+					copilot_auto_trigger = not copilot_auto_trigger
 					require("copilot.suggestion").toggle_auto_trigger()
-					vim.notify("Copilot auto-trigger: " .. (current and "OFF" or "ON"))
+					vim.notify("Copilot auto-trigger: " .. (copilot_auto_trigger and "ON" or "OFF"))
 				end,
 				silent = true,
 				desc = "Copilot: toggle auto-trigger",
