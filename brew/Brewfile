@@ -1,4 +1,5 @@
 tap "anomalyco/tap"
+tap "felixkratz/formulae"
 tap "hashicorp/tap"
 tap "nikitabobko/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -7,6 +8,8 @@ brew "bat"
 brew "coreutils"
 # Bash Automated Testing System
 brew "bats-core"
+# Generate compilation database for clang tooling
+brew "bear"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Cross-platform make
@@ -77,6 +80,8 @@ brew "ncdu"
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Small build system for use with gyp or CMake
+brew "ninja"
 # Create, run, and share large language models (LLMs)
 brew "ollama"
 # Development kit for the Java programming language
@@ -139,6 +144,8 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # The AI coding agent built for the terminal.
 brew "anomalyco/tap/opencode"
+# Turns macOS input fields into real vim buffers
+brew "felixkratz/formulae/svim"
 # Terraform
 brew "hashicorp/tap/terraform"
 # AeroSpace is an i3-like tiling window manager for macOS
