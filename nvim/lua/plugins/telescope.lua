@@ -21,7 +21,6 @@ return {
 			{ "<leader>fC", "<cmd>Telescope command_history<cr>", desc = "Find: command history" },
 			{ "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find: in buffer" },
 			{ "<leader>fm", "<cmd>Telescope marks<cr>", desc = "Find: marks" },
-			{ "<leader>fn", "<cmd>Telescope notify<cr>", desc = "Find: notifications" },
 			{ "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "Find: jumplist" },
 			{ "<leader>fr", "<cmd>Telescope registers<cr>", desc = "Find: registers" },
 			{ "<leader>ft", "<cmd>Telescope treesitter<cr>", desc = "Find: treesitter" },
@@ -105,7 +104,6 @@ return {
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("ui-select")
-			telescope.load_extension("notify")
 		end,
 	},
 }
