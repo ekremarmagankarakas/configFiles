@@ -1,4 +1,14 @@
 ----------------------------------------------------------------------
+-- Disable built-in treesitter highlighter for markdown (nvim 0.12 regression)
+----------------------------------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown" },
+	callback = function(args)
+		pcall(vim.treesitter.stop, args.buf)
+	end,
+})
+
+----------------------------------------------------------------------
 -- Markdown to PDF
 ----------------------------------------------------------------------
 vim.api.nvim_create_user_command("MarkdownToPdf", function()
