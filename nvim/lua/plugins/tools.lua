@@ -37,6 +37,41 @@ return {
 	},
 
 	----------------------------------------------------------------------
+	-- Oil (edit filesystem as a buffer)
+	----------------------------------------------------------------------
+	{
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		lazy = false,
+		keys = {
+			{ "-", "<cmd>Oil<cr>", desc = "Oil: open parent directory" },
+			{ "<leader>no", "<cmd>Oil<cr>", desc = "Oil: open parent directory" },
+			{
+				"<leader>nf",
+				function()
+					require("oil").toggle_float()
+				end,
+				desc = "Oil: toggle float",
+			},
+		},
+		opts = {
+			default_file_explorer = true,
+			columns = { "icon" },
+			delete_to_trash = true,
+			skip_confirm_for_simple_edits = true,
+			watch_for_changes = true,
+			view_options = {
+				show_hidden = true,
+			},
+			float = {
+				border = "rounded",
+				max_width = 0.6,
+				max_height = 0.8,
+			},
+		},
+	},
+
+	----------------------------------------------------------------------
 	-- Flash (enhanced motions)
 	----------------------------------------------------------------------
 	{
@@ -213,7 +248,7 @@ return {
 				{ "<leader>j", group = "java" },
 				{ "<leader>l", group = "lsp" },
 				{ "<leader>m", group = "markdown" },
-				{ "<leader>n", group = "neo-tree" },
+				{ "<leader>n", group = "files" },
 				{ "<leader>s", group = "settings" },
 				{ "<leader>w", group = "windows" },
 				{ "<leader>?", group = "whichkey" },

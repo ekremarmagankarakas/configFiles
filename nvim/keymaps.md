@@ -162,6 +162,14 @@ Leader: `Space` | Local leader: `\`
 | `<leader>nt` | n | Toggle Neo-tree |
 | `O` | n | Open file externally (inside Neo-tree window) |
 
+### Oil (`lua/plugins/tools.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `-` | n | Open parent directory in Oil |
+| `<leader>no` | n | Open parent directory in Oil |
+| `<leader>nf` | n | Toggle Oil floating window |
+
 ### Telescope (`lua/plugins/telescope.lua`)
 
 | Key | Mode | Description |
@@ -317,7 +325,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>j` | java |
 | `<leader>l` | lsp |
 | `<leader>m` | markdown |
-| `<leader>n` | neo-tree |
+| `<leader>n` | files (neo-tree + oil) |
 | `<leader>s` | settings |
 | `<leader>w` | windows |
 | `<leader>?` | whichkey |
