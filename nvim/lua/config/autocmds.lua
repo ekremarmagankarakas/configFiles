@@ -9,6 +9,21 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 ----------------------------------------------------------------------
+-- Swallow nil-node range crash from nvim-treesitter master query predicates
+-- on nvim 0.12 (TSNode API drift). Affects LSP hover popups + conceal_line.
+----------------------------------------------------------------------
+do
+	local orig = vim.treesitter.get_node_text
+	vim.treesitter.get_node_text = function(...)
+		local ok, result = pcall(orig, ...)
+		if ok then
+			return result
+		end
+		return ""
+	end
+end
+
+----------------------------------------------------------------------
 -- Markdown to PDF
 ----------------------------------------------------------------------
 vim.api.nvim_create_user_command("MarkdownToPdf", function()
