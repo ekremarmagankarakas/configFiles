@@ -122,6 +122,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>st` | n | Theme picker |
 | `<leader>sr` | n | Search and replace in file |
 | `<leader>sq` | n | Search and replace over quickfix |
+| `<leader>sv` | n | Toggle virtual edit |
 | `<leader>ms` | n | Convert Markdown buffer to PDF (`:MarkdownToPdf`) |
 | `<C-h>` `<C-j>` `<C-k>` `<C-l>` | n | Move across splits |
 | `<` `>` | v | Re-indent and keep selection |
@@ -154,7 +155,7 @@ Leader: `Space` | Local leader: `\`
 | `<C-y>` | i | Confirm completion |
 | `<C-Space>` | i | Trigger completion |
 
-### Neo-tree (`lua/plugins/tools.lua`)
+### Neo-tree (`lua/plugins/file-explorer.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -162,7 +163,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>nt` | n | Toggle Neo-tree |
 | `O` | n | Open file externally (inside Neo-tree window) |
 
-### Oil (`lua/plugins/tools.lua`)
+### Oil (`lua/plugins/file-explorer.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
@@ -185,7 +186,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>fC` | n | Command history |
 | `<leader>fs` | n | Fuzzy search current buffer |
 | `<leader>fm` | n | Marks |
-| `<leader>fn` | n | Notifications |
 | `<leader>fj` | n | Jumplist |
 | `<leader>fr` | n | Registers |
 | `<leader>ft` | n | Treesitter symbols |
@@ -277,16 +277,16 @@ Leader: `Space` | Local leader: `\`
 | `Alt-]` | i | Next suggestion |
 | `Alt-[` | i | Previous suggestion |
 | `Ctrl-]` | i | Dismiss suggestion |
-| `<leader>cc` | n | Toggle CopilotChat |
-| `<leader>cf` | v | CopilotChat: fix selection |
-| `<leader>cr` | v | CopilotChat: refactor selection |
-| `<leader>ce` | v | CopilotChat: explain selection |
-| `<leader>ct` | v | CopilotChat: generate tests for selection |
-| `<leader>ca` | n/i (chat buffer) | CopilotChat: accept diff |
-| `<leader>cd` | n (chat buffer) | CopilotChat: show diff |
-| `<leader>cy` | n (chat buffer) | CopilotChat: yank diff |
+| `<leader>aac` | n | Toggle CopilotChat |
+| `<leader>aaf` | v | CopilotChat: fix selection |
+| `<leader>aar` | v | CopilotChat: refactor selection |
+| `<leader>aae` | v | CopilotChat: explain selection |
+| `<leader>aat` | v | CopilotChat: generate tests for selection |
+| `<leader>aaa` | n/i (chat buffer) | CopilotChat: accept diff |
+| `<leader>aad` | n (chat buffer) | CopilotChat: show diff |
+| `<leader>aay` | n (chat buffer) | CopilotChat: yank diff |
 
-### Other Tools (`lua/plugins/tools.lua`, `lua/plugins/snippets.lua`)
+### Other Tools (`lua/plugins/tools.lua`, `lua/plugins/whichkey.lua`, `lua/plugins/markdown.lua`, `lua/plugins/snippets.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|

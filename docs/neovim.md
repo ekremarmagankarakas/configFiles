@@ -18,6 +18,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
 | [nvim-lint](https://github.com/mfussenegger/nvim-lint) | Linting |
 | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer sidebar |
+| [oil.nvim](https://github.com/stevearc/oil.nvim) | Edit filesystem as buffer |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) + fzf-native + ui-select | Fuzzy finder |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) + textobjects + autotag | Parsing, highlighting, text objects |
 | [flash.nvim](https://github.com/folke/flash.nvim) | Motion enhancements |
@@ -36,11 +37,9 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [nvim-dap-go](https://github.com/leoluz/nvim-dap-go) | Go debugger |
 | [nvim-dap-vscode-js](https://github.com/mxsdev/nvim-dap-vscode-js) | JS/TS debug adapter |
 | [nvim-dap-lldb](https://github.com/julianolf/nvim-dap-lldb) | C/C++/Rust LLDB adapter |
-| [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) | Java LSP + DAP/test integration |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline |
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indent guides with scope highlight |
-| [noice.nvim](https://github.com/folke/noice.nvim) + [nvim-notify](https://github.com/rcarriga/nvim-notify) | Command/message/notification UI |
-| Theme plugins (13) | catppuccin, nightfox, kanagawa, github-theme, onedarkpro, dracula, tokyonight, adwaita, rose-pine, gruvbox-material, everforest, cyberdream, vscode |
+| Theme plugins (7) | catppuccin, github-theme, dracula, tokyonight, adwaita, rose-pine, vscode |
 
 ## Language Tooling
 
@@ -55,7 +54,6 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | Zig | `zls` | `zig fmt` | - |
 | Bash/sh | `bashls` | `shfmt` | `shellcheck` |
 | Markdown | `marksman` | `prettier` | - |
-| Java | `nvim-jdtls` | `google-java-format` | - |
 | TeX/LaTeX | `ltex` | `latexindent` | - |
 | R | `r_language_server` | `styler` (`r_styler`) | - |
 
@@ -79,7 +77,6 @@ Python venv is auto-detected from `$VIRTUAL_ENV` or `.venv/` in the project root
 | Go | `delve` |
 | JavaScript/TypeScript | `vscode-js` (`pwa-node`) |
 | C/C++/Rust | `codelldb` |
-| Java | `java-debug-adapter` + `java-test` |
 
 Debug toggles:
 - `<leader>dtj` — toggle Python `justMyCode`
@@ -87,7 +84,7 @@ Debug toggles:
 
 ## Theme Picker
 
-13 themes available via `<leader>st`. Selected theme is persisted in `~/.local/share/nvim/theme.txt`.
+7 themes available via `<leader>st`. Selected theme is persisted in `~/.local/share/nvim/theme.txt`.
 
 ## Core Options
 
@@ -103,33 +100,3 @@ Debug toggles:
 | Mouse | enabled |
 | Wrap | enabled (`linebreak`) |
 | Virtual text diagnostics | off by default (toggle `<leader>lee`) |
-
-## Directory Structure
-
-```text
-nvim/
-├── init.lua                 # Entry point, bootstraps Lazy.nvim
-├── keymaps.md               # Full keybinding reference
-├── lua/
-│   ├── config/
-│   │   ├── init.lua         # Loads options, keymaps, autocmds, diagnostics
-│   │   ├── options.lua      # Core vim options
-│   │   ├── keymaps.lua      # Non-plugin keybindings
-│   │   ├── autocmds.lua     # User commands/autocmds (markdown PDF, trim whitespace)
-│   │   ├── diagnostics.lua  # Diagnostic behavior + keymaps
-│   │   └── theme_picker.lua # Persistent theme selection
-│   └── plugins/
-│       ├── lsp.lua          # LSP + Mason + nvim-cmp
-│       ├── ai.lua           # Copilot + CopilotChat
-│       ├── format.lua       # Conform formatters
-│       ├── lint.lua         # nvim-lint setup
-│       ├── tools.lua        # Neo-tree, Flash, Harpoon, mkdnflow, vimtex
-│       ├── git.lua          # Gitsigns, LazyGit, Diffview
-│       ├── telescope.lua    # Telescope pickers + extensions
-│       ├── treesitter.lua   # Treesitter + textobjects + autotag
-│       ├── ui.lua           # Themes, lualine, indent-blankline, noice
-│       ├── debug.lua        # DAP config and keymaps
-│       ├── java.lua         # JDTLS setup with DAP integration
-│       └── snippets.lua     # LuaSnip + friendly-snippets
-```
-
