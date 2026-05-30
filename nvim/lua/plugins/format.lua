@@ -32,7 +32,6 @@ return {
 			html = { "prettier" },
 			sql = { "sqlfmt" },
 			r = { "r_styler" },
-			java = { "google-java-format" },
 			tex = { "tex_fmt" },
 			latex = { "tex_fmt" },
 		},

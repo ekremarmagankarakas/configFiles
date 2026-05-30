@@ -22,7 +22,6 @@ return {
 				"go",
 				"gomod",
 				"gosum",
-				"java",
 				"jsdoc",
 				"bash",
 				"latex",

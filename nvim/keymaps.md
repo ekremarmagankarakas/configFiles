@@ -265,17 +265,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>dtj` | n | Toggle `justMyCode` |
 | `<leader>dtv` | n | Toggle `.vscode/launch.json` loading |
 
-### Java (`lua/plugins/java.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>jo` | n | Organize imports |
-| `<leader>jev` | n/v | Extract variable |
-| `<leader>jec` | n/v | Extract constant |
-| `<leader>jem` | n/v | Extract method |
-| `<leader>jtm` | n | Test nearest method |
-| `<leader>jtc` | n | Test class |
-
 ### AI (`lua/plugins/ai.lua`)
 
 | Key | Mode | Description |
@@ -322,7 +311,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>f` | find |
 | `<leader>g` | git |
 | `<leader>h` | harpoon |
-| `<leader>j` | java |
 | `<leader>l` | lsp |
 | `<leader>m` | markdown |
 | `<leader>n` | files (neo-tree + oil) |

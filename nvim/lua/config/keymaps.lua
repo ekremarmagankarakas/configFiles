@@ -59,3 +59,14 @@ vim.keymap.set(
 	":cdo %s//gc | update<Left><left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>",
 	{ silent = false, desc = "Search & replace (quickfix)" }
 )
+
+-- Toggle Virtual Edit (Jump to any column)
+vim.keymap.set("n", "<leader>sv", function()
+	if vim.o.virtualedit == "all" then
+		vim.o.virtualedit = ""
+		print("Virtualedit OFF")
+	else
+		vim.o.virtualedit = "all"
+		print("Virtualedit ON")
+	end
+end, { silent = true, desc = "Toggle virtual edit" })

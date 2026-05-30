@@ -32,7 +32,6 @@ return {
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },
 				{ "<leader>h", group = "harpoon" },
-				{ "<leader>j", group = "java" },
 				{ "<leader>l", group = "lsp" },
 				{ "<leader>m", group = "markdown" },
 				{ "<leader>n", group = "files" },
