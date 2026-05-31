@@ -70,3 +70,50 @@ vim.keymap.set("n", "<leader>sv", function()
 		print("Virtualedit ON")
 	end
 end, { silent = true, desc = "Toggle virtual edit" })
+
+-- Floating window helper
+local function open_float(buf, title)
+	local width = math.floor(vim.o.columns * 0.7)
+	local height = math.floor(vim.o.lines * 0.7)
+	local row = math.floor((vim.o.lines - height) / 2)
+	local col = math.floor((vim.o.columns - width) / 2)
+
+	vim.api.nvim_open_win(buf, true, {
+		relative = "editor",
+		width = width,
+		height = height,
+		row = row,
+		col = col,
+		style = "minimal",
+		border = "rounded",
+		title = title and (" " .. title .. " ") or nil,
+		title_pos = "center",
+	})
+
+	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = buf, silent = true, desc = "Close float" })
+end
+
+-- Scratch buffer (throwaway, no save)
+vim.keymap.set("n", "<leader>sb", function()
+	local buf = vim.api.nvim_create_buf(false, true)
+	vim.bo[buf].bufhidden = "wipe"
+	vim.bo[buf].swapfile = false
+	vim.bo[buf].filetype = "markdown"
+	open_float(buf, "Scratch")
+end, { silent = true, desc = "Open scratch buffer (float)" })
+
+-- Cheatsheet (persistent user manual)
+local cheatsheet_path = vim.fn.stdpath("data") .. "/cheatsheet.md"
+vim.keymap.set("n", "<leader>sm", function()
+	if vim.fn.filereadable(cheatsheet_path) == 0 then
+		vim.fn.writefile({
+			"# My Cheatsheet",
+			"",
+			"Edit freely. `:w` to save. `q` to close.",
+		}, cheatsheet_path)
+	end
+	local buf = vim.fn.bufadd(cheatsheet_path)
+	vim.fn.bufload(buf)
+	vim.bo[buf].filetype = "markdown"
+	open_float(buf, "Cheatsheet")
+end, { silent = true, desc = "Open cheatsheet (float)" })

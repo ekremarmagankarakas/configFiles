@@ -123,6 +123,8 @@ Leader: `Space` | Local leader: `\`
 | `<leader>sr` | n | Search and replace in file |
 | `<leader>sq` | n | Search and replace over quickfix |
 | `<leader>sv` | n | Toggle virtual edit |
+| `<leader>sb` | n | Open scratch buffer (floating, no save) |
+| `<leader>sm` | n | Open cheatsheet (floating, persisted at `~/.local/share/nvim/cheatsheet.md`) |
 | `<leader>ms` | n | Convert Markdown buffer to PDF (`:MarkdownToPdf`) |
 | `<C-h>` `<C-j>` `<C-k>` `<C-l>` | n | Move across splits |
 | `<` `>` | v | Re-indent and keep selection |
