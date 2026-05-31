@@ -102,18 +102,44 @@ vim.keymap.set("n", "<leader>sb", function()
 	open_float(buf, "Scratch")
 end, { silent = true, desc = "Open scratch buffer (float)" })
 
--- Cheatsheet (persistent user manual)
-local cheatsheet_path = vim.fn.stdpath("data") .. "/cheatsheet.md"
-vim.keymap.set("n", "<leader>sm", function()
-	if vim.fn.filereadable(cheatsheet_path) == 0 then
-		vim.fn.writefile({
-			"# My Cheatsheet",
-			"",
-			"Edit freely. `:w` to save. `q` to close.",
-		}, cheatsheet_path)
+-- Cheatsheet helpers
+local function open_cheatsheet(path, title, seed)
+	vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
+	if vim.fn.filereadable(path) == 0 then
+		vim.fn.writefile(seed, path)
 	end
-	local buf = vim.fn.bufadd(cheatsheet_path)
+	local buf = vim.fn.bufadd(path)
 	vim.fn.bufload(buf)
 	vim.bo[buf].filetype = "markdown"
-	open_float(buf, "Cheatsheet")
-end, { silent = true, desc = "Open cheatsheet (float)" })
+	open_float(buf, title)
+end
+
+local function project_root()
+	local cwd = vim.fn.getcwd()
+	local git = vim.fs.find(".git", { upward = true, path = cwd })[1]
+	if git then
+		return vim.fs.dirname(git)
+	end
+	return cwd
+end
+
+-- Global cheatsheet (~/.local/share/nvim/cheatsheet.md)
+vim.keymap.set("n", "<leader>sm", function()
+	open_cheatsheet(
+		vim.fn.stdpath("data") .. "/cheatsheet.md",
+		"Cheatsheet",
+		{ "# My Cheatsheet", "", "Edit freely. `:w` to save. `q` to close." }
+	)
+end, { silent = true, desc = "Open global cheatsheet (float)" })
+
+-- Project cheatsheet (~/.local/share/nvim/cheatsheets/<sanitized-path>.md)
+vim.keymap.set("n", "<leader>sM", function()
+	local root = project_root()
+	local sanitized = root:gsub("/", "%%")
+	local path = vim.fn.stdpath("data") .. "/cheatsheets/" .. sanitized .. ".md"
+	open_cheatsheet(
+		path,
+		"Project: " .. vim.fn.fnamemodify(root, ":t"),
+		{ "# " .. vim.fn.fnamemodify(root, ":t"), "", "Project-scoped notes. `:w` to save. `q` to close." }
+	)
+end, { silent = true, desc = "Open project cheatsheet (float)" })
