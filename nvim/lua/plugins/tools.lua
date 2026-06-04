@@ -40,6 +40,21 @@ return {
 			},
 		},
 		opts = {},
+		config = function(_, opts)
+			require("flash").setup(opts)
+
+			local function apply_hl()
+				vim.api.nvim_set_hl(0, "FlashLabel",   { bg = "#ffd700", fg = "#000000", bold = true })
+				vim.api.nvim_set_hl(0, "FlashMatch",   { bg = "#3a3a3a", fg = "#ffffff", bold = true })
+				vim.api.nvim_set_hl(0, "FlashCurrent", { bg = "#ff8700", fg = "#000000", bold = true })
+			end
+
+			apply_hl()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				group = vim.api.nvim_create_augroup("FlashHighlights", { clear = true }),
+				callback = apply_hl,
+			})
+		end,
 	},
 
 	----------------------------------------------------------------------
