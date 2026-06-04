@@ -140,6 +140,7 @@ alias v='nvim'
 # Plugins installed via Homebrew
 # zsh-autosuggestions
 if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 # zsh-syntax-highlighting must be sourced at the end
