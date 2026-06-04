@@ -12,6 +12,8 @@ brew "bats-core"
 brew "bear"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
+brew "clang-format"
 # Cross-platform make
 brew "cmake"
 # Documentation for CMake
@@ -188,6 +190,8 @@ cask "kitty"
 cask "libreoffice"
 # Sandbox construction video game
 cask "minecraft"
+# Mouse control with the keyboard
+cask "mouseless"
 # Neovim Client
 cask "neovide-app"
 # Knowledge base that works on top of a local folder of plain text Markdown files
@@ -254,3 +258,4 @@ vscode "reditorsupport.r-syntax"
 vscode "shd101wyy.markdown-preview-enhanced"
 vscode "tomoki1207.pdf"
 vscode "vscodevim.vim"
+npm "@devcontainers/cli"
