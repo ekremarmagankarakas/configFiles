@@ -62,7 +62,7 @@ sudo apt-get install -y \
   `# Essentials` \
   git curl wget unzip \
   build-essential cmake ninja-build pkg-config \
-  software-properties-common apt-transport-https ca-certificates gnupg lsb-release \
+  software-properties-common ca-certificates gnupg \
   snapd \
   \
   `# Shell` \
@@ -70,7 +70,6 @@ sudo apt-get install -y \
   \
   `# i3 window manager` \
   i3 i3blocks i3lock \
-  dex-autostart \
   xss-lock \
   picom \
   \
@@ -99,9 +98,6 @@ sudo apt-get install -y \
   \
   `# LaTeX (vimtex)` \
   texlive-latex-extra texlive-fonts-recommended latexmk \
-  \
-  `# Build deps for Mason / treesitter parsers` \
-  libstdc++-dev libssl-dev \
   \
   `# tmux` \
   tmux \
