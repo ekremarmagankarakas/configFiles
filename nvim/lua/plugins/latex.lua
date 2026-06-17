@@ -9,7 +9,7 @@ return {
 			vim.g.vimtex_view_method = "general" -- use default
 			vim.g.vimtex_compiler_method = "latexmk" -- default, explicit here
 			vim.g.vimtex_quickfix_mode = 0 -- don't auto-open quickfix on warnings
-			vim.g.vimtex_compiler_progname = "nvr" -- for inverse search (requires neovim-remote)
+
 
 			-- Put all generated files (including PDF) into ./out
 			vim.g.vimtex_compiler_latexmk = {

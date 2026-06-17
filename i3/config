@@ -273,7 +273,7 @@ bar {
 
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+b exec /home/ekrem-armagan-karakas/AppImages/zen_browser.appimage
+bindsym $mod+Shift+b exec firefox
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play

@@ -122,16 +122,8 @@ alias dcd='docker compose down'
 alias mason-pip='~/.local/share/nvim/mason/packages/python-lsp-server/venv/bin/pip'
 
 ### Environment variables
-# Android Studio
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Golang
-export PATH=$PATH:/usr/local/go/bin
 
 export PATH="$PATH:/snap//bin/nvim"
 export EDITOR=/snap/bin/nvim
@@ -153,15 +145,11 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Add ~/.local/bin to PATH for user-installed packages
 export PATH="$HOME/.local/bin:$PATH"
 
-export BROWSER="/home/ekrem-armagan-karakas/AppImages/zen_browser.appimage"
-alias zen="/home/ekrem-armagan-karakas/AppImages/zen_browser.appimage"
+export BROWSER="firefox"
 
 alias tn="$HOME/Scripts/tmux-cmd"
 alias clipcat="$HOME/Scripts/clipcat"
