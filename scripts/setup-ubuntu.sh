@@ -125,18 +125,27 @@ if cmd_exists batcat && ! cmd_exists bat; then
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 2/9 · Node.js 20 LTS (NodeSource — apt default is too old for Mason tools)
+# 2/9 · Node.js 22 LTS (NodeSource — apt default is too old for Mason tools)
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "2/9 · Node.js 20 LTS"
+step "2/9 · Node.js 22 LTS"
 
-if cmd_exists node && node --version 2>/dev/null | grep -qE "^v(1[8-9]|[2-9][0-9])"; then
+if cmd_exists node && node --version 2>/dev/null | grep -qE "^v2[2-9]"; then
   ok "Node.js $(node --version) already installed"
 else
-  info "Installing Node.js 20 LTS via NodeSource..."
-  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - >/dev/null
+  info "Installing Node.js 22 LTS via NodeSource..."
+  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - >/dev/null
   sudo apt-get install -y nodejs
   ok "Node.js $(node --version) installed"
+fi
+
+# tree-sitter-cli — required for nvim treesitter parser compilation
+if ! npm list -g tree-sitter-cli &>/dev/null; then
+  info "Installing tree-sitter-cli..."
+  sudo npm install -g tree-sitter-cli
+  ok "tree-sitter-cli installed"
+else
+  ok "tree-sitter-cli already installed"
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────

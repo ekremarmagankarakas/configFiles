@@ -302,7 +302,7 @@ exec_always --no-startup-id xset -dpms
 # exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
 # bindsym $mod+shift+p exec ~/.config/picom/pause-picom-screenshot.sh
 
-gaps inner 10px
+gaps inner 10
 gaps outer 0
 
 # Set the wallpaper. Use only one of the following lines.
