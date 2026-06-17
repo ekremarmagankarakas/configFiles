@@ -249,8 +249,7 @@ step "8/9 · Directories & assets"
 for dir in \
   "$HOME/screenshots" \
   "$HOME/Pictures/Wallpapers" \
-  "$HOME/AppImages" \
-  "$HOME/Scripts"; do
+  "$HOME/AppImages"; do
   mkdir -p "$dir"
   ok "Ensured $dir"
 done
