@@ -3,11 +3,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Prompt
-autoload -Uz promptinit
-promptinit
-prompt adam1
-
 setopt histignorealldups sharehistory
 stty -ixon
 
@@ -132,14 +127,16 @@ alias mason-pip='~/.local/share/nvim/mason/packages/python-lsp-server/venv/bin/p
 
 ### Environment variables
 # Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 export PATH="$PATH:/snap/bin/nvim"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 
 # GPG
-export GPG_TTY=$(tty)
+[[ -t 1 ]] && export GPG_TTY=$(tty)
 
 export BROWSER="firefox"
 
