@@ -49,10 +49,10 @@ echo -e "Dotfiles: ${BOLD}$DOTFILES_DIR${NC}"
 echo ""
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 1/9 · Core apt packages
+# 1/10 · Core apt packages
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "1/9 · System packages"
+step "1/10 · System packages"
 
 # Enable universe repo (thefuck, btop, etc.)
 sudo add-apt-repository -y universe >/dev/null 2>&1 || true
@@ -102,6 +102,9 @@ sudo apt-get install -y \
   `# tmux` \
   tmux \
   \
+  `# C/C++ (clangd via apt is more reliable than Mason binary download)` \
+  clangd \
+  \
   `# CLI tools` \
   fzf ripgrep fd-find \
   bat btop htop \
@@ -125,10 +128,10 @@ if cmd_exists batcat && ! cmd_exists bat; then
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 2/9 · Node.js 22 LTS (NodeSource — apt default is too old for Mason tools)
+# 2/10 · Node.js 22 LTS (NodeSource — apt default is too old for Mason tools)
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "2/9 · Node.js 22 LTS"
+step "2/10 · Node.js 22 LTS"
 
 if cmd_exists node && node --version 2>/dev/null | grep -qE "^v2[2-9]"; then
   ok "Node.js $(node --version) already installed"
@@ -149,10 +152,24 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 3/9 · Docker
+# 3/10 · Go (required by Mason for gopls, goimports, gofumpt, delve, sqls)
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "3/9 · Docker"
+step "3/10 · Go"
+
+if cmd_exists go; then
+  ok "Go already installed ($(go version))"
+else
+  info "Installing Go via snap..."
+  sudo snap install go --classic
+  ok "Go installed"
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4/10 · Docker
+# ─────────────────────────────────────────────────────────────────────────────
+
+step "4/10 · Docker"
 
 if cmd_exists docker; then
   ok "Docker already installed ($(docker --version))"
@@ -173,10 +190,10 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 4/9 · Neovim (snap — latest stable, path set in zshrc)
+# 5/10 · Neovim (snap — latest stable, path set in zshrc)
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "4/9 · Neovim"
+step "5/10 · Neovim"
 
 if cmd_exists nvim; then
   ok "Neovim already installed ($(nvim --version | head -1))"
@@ -187,10 +204,10 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 5/9 · Linuxbrew (used in zshrc: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)")
+# 6/10 · Linuxbrew (used in zshrc: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)")
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "5/9 · Linuxbrew"
+step "6/10 · Linuxbrew"
 
 if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
   ok "Linuxbrew already installed"
@@ -202,10 +219,10 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 6/9 · Zsh plugins (sourced directly in zshrc.linux from ~/.zsh/)
+# 7/10 · Zsh plugins (sourced directly in zshrc.linux from ~/.zsh/)
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "6/9 · Zsh plugins"
+step "7/10 · Zsh plugins"
 
 mkdir -p "$HOME/.zsh"
 
@@ -230,10 +247,10 @@ clone_or_skip \
   "powerlevel10k"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 7/9 · Papirus icons (used in rofi config: icon-theme: "Papirus")
+# 8/10 · Papirus icons (used in rofi config: icon-theme: "Papirus")
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "7/9 · Papirus icons"
+step "8/10 · Papirus icons"
 
 if pkg_installed papirus-icon-theme; then
   ok "Papirus already installed"
@@ -246,10 +263,10 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 8/9 · Directories & assets
+# 9/10 · Directories & assets
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "8/9 · Directories & assets"
+step "9/10 · Directories & assets"
 
 for dir in \
   "$HOME/screenshots" \
@@ -271,10 +288,10 @@ if [[ ! -f "$HOME/Pictures/Wallpapers/black.png" ]]; then
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 9/9 · Default shell + dotfiles
+# 10/10 · Default shell + dotfiles
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "9/9 · Shell & dotfiles"
+step "10/10 · Shell & dotfiles"
 
 ZSH_PATH="$(which zsh)"
 if [[ "$SHELL" != "$ZSH_PATH" ]]; then

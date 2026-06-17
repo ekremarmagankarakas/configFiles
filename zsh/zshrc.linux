@@ -9,6 +9,7 @@ promptinit
 prompt adam1
 
 setopt histignorealldups sharehistory
+stty -ixon
 
 # ===== VIM MODE =====
 bindkey -v
@@ -135,6 +136,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 export PATH="$PATH:/snap/bin/nvim"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
 
 # GPG
 export GPG_TTY=$(tty)

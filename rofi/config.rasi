@@ -1,5 +1,5 @@
 configuration {
-  modi: "window,run,drun,bangs:/home/ekrem-armagan-karakas/.config/rofi/scripts/rofi-bangs";
+  modi: "window,run,drun,bangs:~/.config/rofi/scripts/rofi-bangs";
   combi-modi: "bangs,drun";
 
   run-shell-command: "kitty -e bash -lc '{cmd}'";

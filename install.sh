@@ -145,6 +145,8 @@ install_linux() {
     # Rofi
     link_file "$DOTFILES_DIR/rofi/config.rasi" "$config_dir/rofi/config.rasi"
     link_file "$DOTFILES_DIR/rofi/scripts" "$config_dir/rofi/scripts"
+    chmod +x "$DOTFILES_DIR"/rofi/scripts/*
+    chmod +x "$DOTFILES_DIR"/i3/scripts/*
 }
 
 install_tmux_plugins() {
