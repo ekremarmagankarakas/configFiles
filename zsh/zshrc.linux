@@ -3,8 +3,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Prompt
+autoload -Uz promptinit
+promptinit
+prompt adam1
+
 setopt histignorealldups sharehistory
-stty -ixon
 
 # ===== VIM MODE =====
 bindkey -v
@@ -121,10 +125,6 @@ export EDITOR=/snap/bin/nvim
 alias v='nvim'
 alias vh='fc -l 1 | nvim -R -'
 
-
-# Mason
-alias mason-pip='~/.local/share/nvim/mason/packages/python-lsp-server/venv/bin/pip'
-
 ### Environment variables
 # Homebrew
 if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
@@ -139,6 +139,11 @@ export PATH="$PATH:$HOME/go/bin"
 [[ -t 1 ]] && export GPG_TTY=$(tty)
 
 export BROWSER="firefox"
+
+# thefuck
+if command -v thefuck >/dev/null 2>&1; then
+  eval "$(thefuck --alias)"
+fi
 
 # Zsh plugins
 if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -156,8 +161,3 @@ if [ -f ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme ]; then
 fi
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# thefuck
-if command -v thefuck >/dev/null 2>&1; then
-  eval "$(thefuck --alias)"
-fi
