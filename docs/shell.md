@@ -26,7 +26,7 @@ Full vi-mode is enabled with these enhancements:
 
 | Setting | macOS | Linux |
 |---------|-------|-------|
-| History size | 10,000 | 1,000 |
+| History size | 10,000 | 10,000 |
 | History file | `~/.zsh_history` | `~/.zsh_history` |
 | Deduplication | yes (`histignorealldups`) | yes |
 | Shared history | yes (`sharehistory`) | yes |
@@ -94,17 +94,19 @@ A comprehensive completion system with:
 
 ### Other
 
-| Alias | Command |
-|-------|---------|
-| `v` | `nvim` |
-| `y` | `yazi` |
-| `tn` | Launch/attach tmux session (via `tmux-cmd` script) |
-| `vh` | View shell history in Neovim (read-only) |
-| `grep` | `grep --color=auto` |
+| Alias | Command | Platform |
+|-------|---------|----------|
+| `v` | `nvim` | both |
+| `vh` | View shell history in Neovim (read-only) | both |
+| `y` | `yazi` | macOS |
+| `tn` | Launch/attach tmux session (via `tmux-cmd` script) | macOS |
+| `grep` | `grep --color=auto` | both |
+| `cxx` | `clang++ -std=c++20 -Wall -Wextra -Wpedantic -g` | both |
+| `mason-pip` | pip inside Mason's Python LSP venv | Linux |
 
 ## Tools
 
-### Zoxide
+### Zoxide (macOS only)
 
 [zoxide](https://github.com/ajeetdsouza/zoxide) is a smarter `cd` that learns your most-visited directories.
 
@@ -114,7 +116,7 @@ zi             # interactive fuzzy picker (uses fzf)
 z foo bar      # match path containing both terms
 ```
 
-Initialized via `eval "$(zoxide init zsh)"` in zshrc. Directories are learned automatically as you `cd` into them.
+Initialized via `eval "$(zoxide init zsh)"` in `zshrc.mac`.
 
 ## Plugins
 
@@ -152,10 +154,9 @@ Initialized via `eval "$(zoxide init zsh)"` in zshrc. Directories are learned au
 | Variable | Value |
 |----------|-------|
 | `EDITOR` | `/snap/bin/nvim` |
-| `PATH` | Includes `~/.local/bin`, Android SDK, Go, snap, Linuxbrew |
-| `ANDROID_HOME` | `$HOME/Android/Sdk` |
-| `GPG_TTY` | `$(tty)` |
-| `SDKMAN_DIR` | `$HOME/.sdkman` |
+| `BROWSER` | `firefox` |
+| `GPG_TTY` | `$(tty)` (only in interactive shells) |
+| `PATH` | `~/.local/bin`, `~/go/bin`, `/snap/bin`, Linuxbrew |
 
 ## Platform Differences
 
@@ -163,7 +164,9 @@ Initialized via `eval "$(zoxide init zsh)"` in zshrc. Directories are learned au
 |---------|-------|-------|
 | `ls` coloring | `-G` (BSD) | `--color=auto` (GNU) |
 | Plugin install | Homebrew | Git clone to `~/.zsh/` |
-| fzf-tab | not installed | installed |
-| SDKMAN | not installed | installed |
-| Android SDK | not configured | configured |
-| alert alias | not present | present (notify-send) |
+| fzf-tab | no | yes |
+| zoxide | yes | no |
+| `stty -ixon` | no | yes (disables Ctrl+S lock for tmux) |
+| alert alias | no | yes (notify-send) |
+| Claude aliases | yes | no |
+| Bun | yes | no |

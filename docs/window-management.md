@@ -96,7 +96,7 @@ Config: [`i3/config`](../i3/config)
 | `Super + d` | Rofi hub (launcher menu) |
 | `Super + x` | Rofi run |
 | `Super + Shift + f` | Thunar (file manager) |
-| `Super + Shift + b` | Zen Browser |
+| `Super + Shift + b` | Firefox |
 | `Super + Shift + x` | Lock screen (i3lock) |
 | `Print` | Screenshot (maim + xclip) |
 
