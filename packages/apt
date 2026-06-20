@@ -1,0 +1,83 @@
+# ── Essentials ────────────────────────────────────────────────────────────────
+git
+curl
+wget
+unzip
+build-essential
+cmake
+ninja-build
+pkg-config
+software-properties-common
+ca-certificates
+gnupg
+snapd
+
+# ── Shell ──────────────────────────────────────────────────────────────────────
+zsh
+
+# ── i3 window manager ─────────────────────────────────────────────────────────
+i3
+i3blocks
+i3lock
+xss-lock
+picom
+
+# ── Network ───────────────────────────────────────────────────────────────────
+network-manager-gnome
+
+# ── Terminal / launcher / display ─────────────────────────────────────────────
+kitty
+rofi
+feh
+thunar
+firefox
+
+# ── Media / audio ─────────────────────────────────────────────────────────────
+playerctl
+brightnessctl
+alsa-utils
+pulseaudio
+
+# ── X11 ───────────────────────────────────────────────────────────────────────
+x11-xserver-utils
+x11-xkb-utils
+xclip
+
+# ── Screenshot ────────────────────────────────────────────────────────────────
+maim
+imagemagick
+
+# ── Rofi script deps ──────────────────────────────────────────────────────────
+surfraw
+plocate
+xdg-utils
+libnotify-bin
+
+# ── Python (pyright, ruff, debugpy, thefuck) ──────────────────────────────────
+python3
+python3-pip
+python3-venv
+python3-dev
+
+# ── LaTeX (vimtex) ────────────────────────────────────────────────────────────
+texlive-latex-extra
+texlive-fonts-recommended
+latexmk
+
+# ── tmux ──────────────────────────────────────────────────────────────────────
+tmux
+
+# ── C/C++ (apt clangd is more reliable than Mason binary download) ─────────────
+clangd
+
+# ── CLI tools ─────────────────────────────────────────────────────────────────
+fzf
+ripgrep
+fd-find
+bat
+btop
+htop
+jq
+tree
+thefuck
+fontconfig

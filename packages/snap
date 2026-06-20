@@ -1,0 +1,5 @@
+# format: package-name [flags]
+# --classic = full system access (no snap sandbox)
+
+nvim --classic
+go   --classic
