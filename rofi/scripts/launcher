@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+# Unified Raycast-style launcher — used as the script portion of rofi combi mode.
+# Apps come from rofi's native drun mode (merged in by combi).
+# This script provides commands, bangs, and monitor switching.
+#
+# Usage (type directly, press Enter):
+#   !s <query>          DuckDuckGo search
+#   !u <url>            open URL in Firefox
+#   !b <cmd>            run command in terminal
+#   !e <file>           edit file in nvim
+#   !o <path>           xdg-open a path
+#   !calc <expr>        calculator, copies result to clipboard
+#   !note               new timestamped note in nvim
+#   !wifi on|off        toggle WiFi
+#   !br <0-100>         screen brightness
+#   !kbr <0-100>        keyboard backlight
+#   !vol <0-150>|mute   volume
+#   !play !pause !next !prev   media control
+#   monitor <profile>   switch monitor layout
+set -euo pipefail
+
+LOG="$HOME/.cache/rofi-launcher.log"
+mkdir -p "$(dirname "$LOG")"
+log() { echo "$(date '+%F %T'): $*" >> "$LOG"; }
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+open_url() {
+  local url="$1"
+  [[ "$url" =~ ^https?:// ]] || url="https://$url"
+  setsid -f nohup firefox "$url" >/dev/null 2>&1 &
+}
+
+run_in_term() {
+  setsid -f nohup kitty --hold bash -lc "$1" >/dev/null 2>&1 &
+}
+
+urlencode() {
+  python3 -c "import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$1"
+}
+
+# ── initial menu (ROFI_RETV=0) ───────────────────────────────────────────────
+
+if [[ "${ROFI_RETV:-0}" -eq 0 ]]; then
+  # Selectable commands
+  printf 'monitor boston\000info\x1fmonitor:boston\n'
+  printf 'monitor istanbul\000info\x1fmonitor:istanbul\n'
+  printf 'monitor next\000info\x1fmonitor:next\n'
+  printf 'monitor laptop\000info\x1fmonitor:laptop\n'
+  # Bang reference lines — non-selectable, visible as hints while typing
+  printf '!s <query>\000nonselectable\x1ftrue\n'
+  printf '!u <url>\000nonselectable\x1ftrue\n'
+  printf '!b <cmd>\000nonselectable\x1ftrue\n'
+  printf '!e <file>\000nonselectable\x1ftrue\n'
+  printf '!o <path>\000nonselectable\x1ftrue\n'
+  printf '!calc <expr>\000nonselectable\x1ftrue\n'
+  printf '!note\000nonselectable\x1ftrue\n'
+  printf '!wifi on|off\000nonselectable\x1ftrue\n'
+  printf '!br <0-100>\000nonselectable\x1ftrue\n'
+  printf '!kbr <0-100>\000nonselectable\x1ftrue\n'
+  printf '!vol <0-150>|mute\000nonselectable\x1ftrue\n'
+  printf '!play  !pause  !next  !prev\000nonselectable\x1ftrue\n'
+  exit 0
+fi
+
+# ── handle info payload (selectable entry selected from list) ─────────────────
+
+if [[ -n "${ROFI_INFO:-}" ]]; then
+  log "ROFI_INFO='$ROFI_INFO'"
+  case "$ROFI_INFO" in
+    monitor:*) ~/.config/i3/scripts/monitor-setup.sh "${ROFI_INFO#monitor:}" ;;
+  esac
+  exit 0
+fi
+
+# ── handle typed input ────────────────────────────────────────────────────────
+
+INPUT="${*:-}"
+log "RETV=${ROFI_RETV:-?} INPUT='$INPUT'"
+
+[[ -z "${INPUT// /}" ]] && exit 0
+
+case "$INPUT" in
+
+  # Search
+  "!s "*)   open_url "https://duckduckgo.com/?q=$(urlencode "${INPUT#!s }")" ;;
+
+  # Open URL
+  "!u "*)   open_url "${INPUT#!u }" ;;
+
+  # Run in terminal
+  "!b "*)   run_in_term "${INPUT#!b }" ;;
+
+  # Edit in nvim
+  "!e "*)   run_in_term "nvim \"${INPUT#!e }\"" ;;
+
+  # xdg-open
+  "!o "*)   setsid -f nohup xdg-open "${INPUT#!o }" >/dev/null 2>&1 & ;;
+
+  # Calculator
+  "!calc "*)
+    EXPR="${INPUT#!calc }"
+    RES="$(printf '%s\n' "$EXPR" | bc -l 2>/dev/null || true)"
+    if [[ -n "$RES" ]]; then
+      printf '%s' "$RES" | setsid -f nohup xclip -selection clipboard -in -loops 1 >/dev/null 2>&1 &
+      setsid -f nohup notify-send "Calculator" "$RES (copied)" >/dev/null 2>&1 &
+    fi
+    ;;
+
+  # New note
+  "!note")
+    NOTE="$HOME/notes/$(date +%Y%m%d-%H%M%S).md"
+    mkdir -p "$(dirname "$NOTE")"
+    run_in_term "nvim \"$NOTE\""
+    ;;
+
+  # WiFi
+  "!wifi on")
+    nmcli radio wifi on
+    setsid -f nohup notify-send "WiFi" "Enabled" >/dev/null 2>&1 &
+    ;;
+  "!wifi off")
+    nmcli radio wifi off
+    setsid -f nohup notify-send "WiFi" "Disabled" >/dev/null 2>&1 &
+    ;;
+
+  # Screen brightness
+  "!br "*)
+    VAL="${INPUT#!br }"; VAL="${VAL%%%}"
+    if [[ "$VAL" =~ ^[0-9]+$ ]]; then
+      if (( VAL > 100 )); then VAL=100; fi
+      brightnessctl set "${VAL}%"
+      setsid -f nohup notify-send "Brightness" "${VAL}%" >/dev/null 2>&1 &
+    fi
+    ;;
+
+  # Keyboard backlight
+  "!kbr "*)
+    VAL="${INPUT#!kbr }"; VAL="${VAL%%%}"
+    if [[ "$VAL" =~ ^[0-9]+$ ]]; then
+      if (( VAL > 100 )); then VAL=100; fi
+      DEV="$(brightnessctl -l 2>/dev/null | awk -F"'" '/kbd_backlight/{print $2;exit}')"
+      if [[ -n "${DEV:-}" ]]; then
+        brightnessctl -d "$DEV" set "${VAL}%"
+        setsid -f nohup notify-send "Keyboard light" "${VAL}%" >/dev/null 2>&1 &
+      fi
+    fi
+    ;;
+
+  # Volume
+  "!vol "*)
+    ARG="${INPUT#!vol }"
+    if [[ "$ARG" == "mute" ]]; then
+      pactl set-sink-mute @DEFAULT_SINK@ toggle
+    elif [[ "$ARG" =~ ^[0-9]+%?$ ]]; then
+      VAL="${ARG%%%}"
+      if (( VAL > 150 )); then VAL=150; fi
+      pactl set-sink-volume @DEFAULT_SINK@ "${VAL}%"
+      setsid -f nohup notify-send "Volume" "${VAL}%" >/dev/null 2>&1 &
+    fi
+    ;;
+
+  # Media
+  "!play")  playerctl play-pause ;;
+  "!pause") playerctl pause ;;
+  "!next")  playerctl next ;;
+  "!prev")  playerctl previous ;;
+
+  # Monitor presets — also reachable by typing directly
+  "monitor boston")   ~/.config/i3/scripts/monitor-setup.sh boston ;;
+  "monitor istanbul") ~/.config/i3/scripts/monitor-setup.sh istanbul ;;
+  "monitor next")     ~/.config/i3/scripts/monitor-setup.sh next ;;
+  "monitor laptop")   ~/.config/i3/scripts/monitor-setup.sh laptop ;;
+
+  # Fallback: run as shell command
+  *)
+    log "Fallback shell: '$INPUT'"
+    setsid -f nohup bash -lc "$INPUT" >/dev/null 2>&1 &
+    ;;
+esac

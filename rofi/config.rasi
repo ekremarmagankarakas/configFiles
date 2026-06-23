@@ -1,17 +1,15 @@
 configuration {
-  modi: "window,run,drun,bangs:~/.config/rofi/scripts/rofi-bangs";
-  combi-modi: "bangs,drun";
+  modi: "launcher:~/.config/rofi/scripts/launcher,drun,window,run";
 
   run-shell-command: "kitty -e bash -lc '{cmd}'";
 
-  display-run: "Run:";
-  display-drun: "Applications:";
+  display-launcher: "";
+  display-drun: "Apps:";
   display-window: "Windows:";
-  display-bangs: "Bangs:";
+  display-run: "Run:";
 
-  matching: "regex";
-  drun-display-format: "{icon} {name}";
-  /* show-icons: true; */
+  matching: "fuzzy";
+  show-icons: true;
   icon-theme: "Papirus";
 
   /* Vim-style movement */

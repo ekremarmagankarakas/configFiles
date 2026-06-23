@@ -140,11 +140,6 @@ export PATH="$PATH:$HOME/go/bin"
 
 export BROWSER="firefox"
 
-# thefuck
-if command -v thefuck >/dev/null 2>&1; then
-  eval "$(thefuck --alias)"
-fi
-
 # Zsh plugins
 if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
