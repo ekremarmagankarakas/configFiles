@@ -4,11 +4,11 @@ return {
 	----------------------------------------------------------------------
 	{ "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
 	{ "projekt0n/github-nvim-theme", name = "github-theme", lazy = true, priority = 1000 },
-	{ "Mofiqul/dracula.nvim", lazy = true, priority = 1000 },
-	{ "folke/tokyonight.nvim", lazy = true, priority = 1000 },
-	{ "Mofiqul/adwaita.nvim", lazy = true, priority = 1000 },
-	{ "rose-pine/neovim", lazy = true, priority = 1000 },
 	{ "Mofiqul/vscode.nvim", lazy = true, priority = 1000 },
+	-- { "Mofiqul/dracula.nvim", lazy = true, priority = 1000 },
+	-- { "folke/tokyonight.nvim", lazy = true, priority = 1000 },
+	-- { "Mofiqul/adwaita.nvim", lazy = true, priority = 1000 },
+	-- { "rose-pine/neovim", lazy = true, priority = 1000 },
 
 	----------------------------------------------------------------------
 	-- Indent Blankline
