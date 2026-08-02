@@ -102,7 +102,6 @@ A comprehensive completion system with:
 | `tn` | Launch/attach tmux session (via `tmux-cmd` script) | macOS |
 | `grep` | `grep --color=auto` | both |
 | `cxx` | `clang++ -std=c++20 -Wall -Wextra -Wpedantic -g` | both |
-| `mason-pip` | pip inside Mason's Python LSP venv | Linux |
 
 ## Tools
 
@@ -137,7 +136,6 @@ Initialized via `eval "$(zoxide init zsh)"` in `zshrc.mac`.
 | [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) | Fish-like command suggestions |
 | [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) | Syntax coloring in the prompt |
 | [fzf-tab](https://github.com/Aloxaf/fzf-tab) | Replace zsh completion with fzf |
-| [thefuck](https://github.com/nvbn/thefuck) | Auto-correct previous command |
 
 ## Environment Variables
 
@@ -166,7 +164,7 @@ Initialized via `eval "$(zoxide init zsh)"` in `zshrc.mac`.
 | Plugin install | Homebrew | Git clone to `~/.zsh/` |
 | fzf-tab | no | yes |
 | zoxide | yes | no |
-| `stty -ixon` | no | yes (disables Ctrl+S lock for tmux) |
 | alert alias | no | yes (notify-send) |
 | Claude aliases | yes | no |
 | Bun | yes | no |
+| thefuck | yes | installed via apt, but not wired into `zshrc.linux` |

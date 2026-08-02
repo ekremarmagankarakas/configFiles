@@ -158,21 +158,12 @@ Leader: `Space` | Local leader: `\`
 | `<C-y>` | i | Confirm completion |
 | `<C-Space>` | i | Trigger completion |
 
-### Neo-tree (`lua/plugins/file-explorer.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>nn` | n | Reveal current file in Neo-tree |
-| `<leader>nt` | n | Toggle Neo-tree |
-| `O` | n | Open file externally (inside Neo-tree window) |
-
 ### Oil (`lua/plugins/file-explorer.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
 | `-` | n | Open parent directory in Oil |
-| `<leader>no` | n | Open parent directory in Oil |
-| `<leader>nf` | n | Toggle Oil floating window |
+| `<leader>n` | n | Open parent directory in Oil |
 
 ### Telescope (`lua/plugins/telescope.lua`)
 
@@ -180,6 +171,8 @@ Leader: `Space` | Local leader: `\`
 |-----|------|-------------|
 | `<leader>ff` | n | Find files |
 | `<leader>fg` | n | Live grep |
+| `<leader>fF` | n | Find files (current buffer's directory) |
+| `<leader>fG` | n | Live grep (current buffer's directory) |
 | `<leader>fb` | n | Buffers |
 | `<leader>fo` | n | Old files |
 | `<leader>fw` | n | Grep word under cursor |
@@ -239,7 +232,6 @@ Leader: `Space` | Local leader: `\`
 | `<leader>gb` | n | Toggle line blame |
 | `<leader>gT` | n | Toggle git signs |
 | `ih` | o/x | Select hunk text object |
-| `<leader>gg` | n | Open LazyGit |
 | `<leader>gdo` | n | Open Diffview |
 | `<leader>gdc` | n | Close Diffview |
 | `<leader>gdh` | n | Diffview file history (all) |
@@ -316,7 +308,7 @@ Leader: `Space` | Local leader: `\`
 | `<leader>h` | harpoon |
 | `<leader>l` | lsp |
 | `<leader>m` | markdown |
-| `<leader>n` | files (neo-tree + oil) |
+| `<leader>n` | files (oil) — currently a single direct action, not an actual submenu |
 | `<leader>s` | settings |
 | `<leader>w` | windows |
 | `<leader>?` | whichkey |

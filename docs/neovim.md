@@ -17,7 +17,6 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [LuaSnip](https://github.com/L3MON4D3/LuaSnip) + [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippets |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
 | [nvim-lint](https://github.com/mfussenegger/nvim-lint) | Linting |
-| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer sidebar |
 | [oil.nvim](https://github.com/stevearc/oil.nvim) | Edit filesystem as buffer |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) + fzf-native + ui-select | Fuzzy finder |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) + textobjects + autotag | Parsing, highlighting, text objects |
@@ -28,7 +27,6 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [mkdnflow.nvim](https://github.com/jakewvincent/mkdnflow.nvim) | Markdown link/todo workflow |
 | [vimtex](https://github.com/lervag/vimtex) | TeX/LaTeX workflow |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git hunks/signs in buffer |
-| [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) | LazyGit TUI integration |
 | [diffview.nvim](https://github.com/sindrets/diffview.nvim) | Diff and merge UI |
 | [copilot.lua](https://github.com/zbirenbaum/copilot.lua) | Copilot suggestions (auto-trigger off by default) |
 | [CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim) | Copilot chat/actions |
@@ -39,7 +37,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [nvim-dap-lldb](https://github.com/julianolf/nvim-dap-lldb) | C/C++/Rust LLDB adapter |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline |
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indent guides with scope highlight |
-| Theme plugins (7) | catppuccin, github-theme, dracula, tokyonight, adwaita, rose-pine, vscode |
+| Theme plugins (3 active) | catppuccin, github-theme, vscode.nvim (dracula, tokyonight, adwaita, rose-pine present but commented out) |
 
 ## Language Tooling
 
@@ -54,8 +52,12 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | Zig | `zls` | `zig fmt` | - |
 | Bash/sh | `bashls` | `shfmt` | `shellcheck` |
 | Markdown | `marksman` | `prettier` | - |
-| TeX/LaTeX | `ltex` | `latexindent` | - |
+| TeX/LaTeX | `ltex` | `tex-fmt` | - |
 | R | `r_language_server` | `styler` (`r_styler`) | - |
+| PHP | `intelephense` | `prettier` | - |
+| CSS/SCSS/LESS | `cssls` | `prettier` | - |
+| HTML | `html` | `prettier` | - |
+| SQL | `sqls` | `sqlfmt` | - |
 
 ESLint linting is skipped automatically when no ESLint config file is found in the project.
 
@@ -84,7 +86,7 @@ Debug toggles:
 
 ## Theme Picker
 
-7 themes available via `<leader>st`. Selected theme is persisted in `~/.local/share/nvim/theme.txt`.
+`<leader>st` opens a Telescope picker over every colorscheme currently loadable (the 3 active theme plugins plus Neovim's built-in colorschemes). Selected theme is persisted in `~/.local/share/nvim/theme.txt`.
 
 ## Core Options
 

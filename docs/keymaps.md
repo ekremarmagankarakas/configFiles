@@ -69,15 +69,15 @@ Neovim keymaps live here: [`nvim/keymaps.md`](../nvim/keymaps.md).
 | `Alt + Shift + f` | Open Commander One |
 | `Alt + r` | Resize mode |
 
-### i3 (Linux) -- Modifier: `Super`
+### i3 (Linux) -- Modifier: `Alt` (Mod1, not Super — see [`window-management.md`](window-management.md))
 
 | Key | Action |
 |-----|--------|
-| `Super + h/j/k/l` | Focus |
-| `Super + Shift + h/j/k/l` | Move window |
-| `Super + 1-0` | Workspace 1-10 |
-| `Super + Alt + 1-0` | Workspace 11-20 |
-| `Super + f` | Fullscreen |
-| `Super + Return` | Kitty |
-| `Super + d` | Rofi launcher |
-| `Super + r` | Resize mode |
+| `Alt + h/j/k/l` | Focus |
+| `Alt + Shift + h/j/k/l` | Move window |
+| `Alt + 1-0` | Workspace 1-10 |
+| `Alt + f` | Fullscreen |
+| `Alt + Return` | Kitty |
+| `Alt + d` | Rofi: Apps (`drun`) |
+| `Alt + p` | Rofi hub (bangs + monitor switcher) |
+| `Alt + r` | Resize mode |
