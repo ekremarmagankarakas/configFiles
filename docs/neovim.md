@@ -18,6 +18,7 @@ A single Neovim config shared across macOS and Linux, built on [Lazy.nvim](https
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatting |
 | [nvim-lint](https://github.com/mfussenegger/nvim-lint) | Linting |
 | [oil.nvim](https://github.com/stevearc/oil.nvim) | Edit filesystem as buffer |
+| [oil-git-status.nvim](https://github.com/refractalize/oil-git-status.nvim) | Git status signs in Oil listings |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) + fzf-native + ui-select | Fuzzy finder |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) + textobjects + autotag | Parsing, highlighting, text objects |
 | [flash.nvim](https://github.com/folke/flash.nvim) | Motion enhancements |

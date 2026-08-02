@@ -19,6 +19,18 @@ return {
 			view_options = {
 				show_hidden = true,
 			},
+			win_options = {
+				signcolumn = "yes:2",
+			},
 		},
+	},
+
+	----------------------------------------------------------------------
+	-- Oil Git Status (git status signs in Oil listings)
+	----------------------------------------------------------------------
+	{
+		"refractalize/oil-git-status.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+		opts = {},
 	},
 }
