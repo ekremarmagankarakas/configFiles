@@ -12,6 +12,20 @@ return {
 		keys = {
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find: files" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find: live grep" },
+			{
+				"<leader>fF",
+				function()
+					require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") })
+				end,
+				desc = "Find: files (buffer dir)",
+			},
+			{
+				"<leader>fG",
+				function()
+					require("telescope.builtin").live_grep({ cwd = vim.fn.expand("%:p:h") })
+				end,
+				desc = "Find: live grep (buffer dir)",
+			},
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find: buffers" },
 			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Find: oldfiles" },
 			{ "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find: word under cursor" },
