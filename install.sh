@@ -112,10 +112,6 @@ install_mac() {
     # AeroSpace
     link_file "$DOTFILES_DIR/aerospace/aerospace.toml" "$config_dir/aerospace/aerospace.toml"
 
-    # Karabiner
-    link_file "$DOTFILES_DIR/karabiner/karabiner.json" "$config_dir/karabiner/karabiner.json"
-    link_file "$DOTFILES_DIR/karabiner/assets" "$config_dir/karabiner/assets"
-}
 
 install_linux() {
     echo ""

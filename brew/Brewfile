@@ -1,11 +1,10 @@
 tap "anomalyco/tap"
-tap "felixkratz/formulae"
+tap "ekremarmagankarakas/tuig", "https://github.com/ekremarmagankarakas/TUIG.git", trusted: true
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "hashicorp/tap"
 tap "nikitabobko/tap"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
 # Bash Automated Testing System
 brew "bats-core"
 # Generate compilation database for clang tooling
@@ -18,6 +17,8 @@ brew "clang-format"
 brew "cmake"
 # Documentation for CMake
 brew "cmake-docs"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # More intuitive version of du in rust
 brew "dust"
 # Modern, maintained replacement for ls
@@ -144,14 +145,9 @@ brew "zoxide"
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode"
-# Turns macOS input fields into real vim buffers
-brew "felixkratz/formulae/svim"
-# Terraform
-brew "hashicorp/tap/terraform"
-# AeroSpace is an i3-like tiling window manager for macOS
-cask "nikitabobko/tap/aerospace"
+# Terminal UI Games launcher with chess and Turkish draughts
+brew "ekremarmagankarakas/tuig/tuig"
+cask "aerospace"
 # Display management tool
 cask "betterdisplay"
 # Web browser focusing on privacy
@@ -182,16 +178,12 @@ cask "gimp"
 cask "google-chrome"
 # Speech to text application
 cask "handy"
-# Keyboard customiser
-cask "karabiner-elements"
 # GPU-based terminal emulator
 cask "kitty"
 # Free cross-platform office suite, fresh version
 cask "libreoffice"
 # Sandbox construction video game
 cask "minecraft"
-# Mouse control with the keyboard
-cask "mouseless"
 # Neovim Client
 cask "neovide-app"
 # Knowledge base that works on top of a local folder of plain text Markdown files
@@ -210,8 +202,6 @@ cask "proton-mail-bridge"
 cask "proton-pass"
 # VPN client focusing on security
 cask "protonvpn"
-# Control your tools with a few keystrokes
-cask "raycast"
 # Data science software focusing on R and Python
 cask "rstudio"
 # Tool to reverse the direction of scrolling
@@ -234,6 +224,8 @@ cask "visual-studio-code"
 cask "vlc"
 # Remote desktop application focusing on security
 cask "vnc-viewer"
+# Menu bar toolkit with keep-awake, system monitor and volume mixer
+cask "vorssaint"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 # Video communication and virtual meeting platform

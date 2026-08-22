@@ -13,7 +13,6 @@ Cross-platform configuration files for macOS and Linux. Built around a consisten
 | **Kitty** (alternative) | [config](kitty) | [config](kitty) | [docs/terminal.md](docs/terminal.md) |
 | **AeroSpace** (tiling WM) | [config](aerospace/aerospace.toml) | - | [docs/window-management.md](docs/window-management.md) |
 | **i3** (tiling WM) | - | [config](i3) | [docs/window-management.md](docs/window-management.md) |
-| **Karabiner** (key remap) | [config](karabiner) | - | - |
 | **Rofi** (launcher) | - | [config](rofi) | [docs/window-management.md](docs/window-management.md) |
 
 Full keybinding reference: [docs/keymaps.md](docs/keymaps.md)

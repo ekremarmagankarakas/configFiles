@@ -169,18 +169,3 @@ Rofi is used as the primary launcher on Linux, replacing dmenu. It has vi-style 
 - `monitor <boston|istanbul|next|laptop>` -- Switch monitor layout (also reachable as one of the selectable list entries)
 
 Anything not matching a bang falls back to running as a shell command.
-
----
-
-## Karabiner-Elements (macOS)
-
-Config: [`karabiner/karabiner.json`](../karabiner/karabiner.json)
-
-Key remappings:
-
-| From | To |
-|------|----|
-| Caps Lock (tap) | Escape |
-| Caps Lock (hold) | Caps Lock |
-| Fn | Left Control |
-| Left Control | Fn |
