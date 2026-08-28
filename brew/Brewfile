@@ -152,8 +152,6 @@ cask "aerospace"
 cask "betterdisplay"
 # Web browser focusing on privacy
 cask "brave-browser"
-# Utility that prevents the system from going to sleep
-cask "caffeine"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -178,14 +176,10 @@ cask "gimp"
 cask "google-chrome"
 # Speech to text application
 cask "handy"
-# GPU-based terminal emulator
-cask "kitty"
 # Free cross-platform office suite, fresh version
 cask "libreoffice"
 # Sandbox construction video game
 cask "minecraft"
-# Neovim Client
-cask "neovide-app"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Image editor
@@ -204,8 +198,6 @@ cask "proton-pass"
 cask "protonvpn"
 # Data science software focusing on R and Python
 cask "rstudio"
-# Tool to reverse the direction of scrolling
-cask "scroll-reverser"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
